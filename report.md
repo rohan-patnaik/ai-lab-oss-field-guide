@@ -8,9 +8,11 @@ Build the portfolio around **fixing failures in agent execution, evaluation and 
 
 The revised six primary objectives use **LM Evaluation Harness, SWE-ReX, MCP Python SDK, OpenHands SDK and DeepMind MuJoCo**. The first two are small correctness/workflow fixes; the middle two address authentication and resource cleanup; the last two address native state preservation and agent recovery. They replace generic documentation/tests and speculative feature/refactor objectives. Work on at most two implementation PRs at once and settle the required approval gates first.
 
-**81 code surfaces remain across 32 groups; 31 issue leads remain across 21 repositories.** The original audit covered 96 surfaces; 15 content/example repositories were removed. A repository without a suitable verified issue is **DISCOVERY ONLY**, even if its external merged share looks attractive. **ISSUE LEAD** means a relevant failure report exists, not that the bug is independently reproduced or its fix approved. **AVOID** marks a documented intake/maintenance blocker. Do not pad a lab to three suggestions. The additional constraints and exact exclusions appear below.
+**30 established company/project groups · 89 screened code repositories · 93 issue leads across 40 repos.** Your clarified request is **six choices per company across its three repositories: two LOW, two MEDIUM and two HIGH**. Five groups have that full mix; 87 of the 180 requested issue slots remain unfilled after filtering. Unsloth has two retained implementation repos rather than a notebook collection as a third. The coverage table shows every shortfall. These are screened surfaces and conditional investigation options, not 89 unconditional repository recommendations or 93 ready-to-open PRs. **ISSUE LEAD** means a relevant report survived visible competition screening; **DISCOVERY ONLY** means none did. Popularity is an editorial filter applied to companies/established projects, not a claim inferred from every repo's star count.
 
 For direct OpenAI work, keep [OpenAI Agents Python](https://github.com/openai/openai-agents-python) under investigation; no unclaimed, defensible primary/fallback pair survived this pass. MCP provides a conditional Python route, but its assignment/help-wanted rule must be satisfied. A direct logo is not a reason to invent a defect, hand-edit generated files, or revive a rejected design.
+
+**LOC estimates:** each company table gives a separate failure explanation, proposed fix boundary and approximate changed lines (additions + deletions, including tests; excluding generated/lockfile/vendor churn). These are planning ranges, not measured patch sizes or proxies for importance.
 
 **Availability expires within hours.** Each retained lead was open, unassigned and had no PullRequest reference in its completely paginated issue timeline at the recorded check. That does not rule out informal claims or unlinked branches. Re-check all discussion, current source and competing PRs before commenting or coding. Reported, source-confirmed, locally reproduced and approved are different states; they are stated separately throughout this guide.
 
@@ -69,24 +71,24 @@ Your history supports Python, Go and TypeScript maintenance work. Existing merge
 
 ## The six-PR portfolio
 
-**Six proposed objectives, not six approved or reserved issues.** All twelve primary/fallback records were individually checked, their reference timelines fully paginated, and numeric PR-body search matches inspected. None was assigned or linked to a PR at its recorded check. No upstream messages, issues or PRs were posted. The estimates assume implementation after reproduction and scope acceptance; maintainer waiting time is separate.
+**This is a starter portfolio, separate from the six-option menu for every company. Six proposed objectives, not six approved or reserved issues.** All twelve primary/fallback records were individually checked, their reference timelines fully paginated, and numeric PR-body search matches inspected. None was assigned or linked to a PR at its recorded check. No upstream messages, issues or PRs were posted. The estimates assume implementation after reproduction and scope acceptance; maintainer waiting time is separate.
 
-| Slot | Importance | Primary | Fallback in the same repo | Failure and proposed boundary | Effort estimate |
-|---|---|---|---|---|---|
-| 1 | LOW | [Harness #2614: MGSM tag collision](https://github.com/EleutherAI/lm-evaluation-harness/issues/2614) | [#2289: None seed type contract](https://github.com/EleutherAI/lm-evaluation-harness/issues/2289) | English/native task templates share the native tag. Correct the generator template and regenerate affected configs; verify distinct task selections. Fallback corrects annotations for documented, supported None seeds. | 4–8 h |
-| 2 | LOW | [SWE-ReX #241: Modal test requires credentials](https://github.com/SWE-agent/SWE-ReX/issues/241) | [#279: parser error obscured by TypeError](https://github.com/SWE-agent/SWE-ReX/issues/279) | Restore credential-free unit factory testing by isolating the Modal lookup, preserving explicit integration coverage. Confirm the intended test boundary first. Fallback concerns exception propagation and is MEDIUM until minimized. | 4–8 h primary |
-| 3 | MEDIUM | [MCP Python #3545: Basic-authenticated OAuth request rejected](https://github.com/modelcontextprotocol/python-sdk/issues/3545) | [#3544: Windows snapshot failures](https://github.com/modelcontextprotocol/python-sdk/issues/3544) | Resolve body client_id handling for client_secret_basic without weakening authentication. Fallback diagnoses alias handling in 14 failing tests; do not change wire _meta semantics just to satisfy snapshots. | 10–18 h |
-| 4 | MEDIUM | [OpenHands SDK #4670: silent WebSocket worker leaks](https://github.com/OpenHands/software-agent-sdk/issues/4670) | [#4731: TypeScript WebSocket bundling](https://github.com/OpenHands/software-agent-sdk/issues/4731) | Ensure stop terminates or accurately retains ownership of the live worker. Fallback requires a supported browser/Node reproducer and confirmation that the SDK repo still owns this client. | 10–18 h |
-| 5 | HIGH | [DeepMind MuJoCo #3596: actuator control remapping](https://github.com/google-deepmind/mujoco/issues/3596) | [#3585: integration state lost on recompile](https://github.com/google-deepmind/mujoco/issues/3585) | Preserve controls by agreed actuator/control-block identity and width across recompilation. Fallback addresses a separate preserved-state contract. Native runtime validation is mandatory for this plan. | 20–35 h |
-| 6 | HIGH | [OpenHands SDK #5074: orphaned child tasks after restart](https://github.com/OpenHands/software-agent-sdk/issues/5074) | [#4990: pause reports completion while tools run](https://github.com/OpenHands/software-agent-sdk/issues/4990) | Restore a truthful terminal/recovery state for persisted child tasks after process death. Agree on minimal interrupted/error handling before considering durable recovery. Fallback makes PAUSED consistent with actual ACP execution. | 20–35 h |
+| Slot | Importance | Primary | Fallback in the same repo | Failure and proposed boundary | Effort estimate | Approx. changed LOC (primary) |
+|---|---|---|---|---|---|---|
+| 1 | LOW | [Harness #2614: MGSM tag collision](https://github.com/EleutherAI/lm-evaluation-harness/issues/2614) | [#2289: None seed type contract](https://github.com/EleutherAI/lm-evaluation-harness/issues/2289) | English/native task templates share the native tag. Correct the generator template and regenerate affected configs; verify distinct task selections. Fallback corrects annotations for documented, supported None seeds. | 4–8 h | 10–50 |
+| 2 | LOW | [SWE-ReX #241: Modal test requires credentials](https://github.com/SWE-agent/SWE-ReX/issues/241) | [#279: parser error obscured by TypeError](https://github.com/SWE-agent/SWE-ReX/issues/279) | Restore credential-free unit factory testing by isolating the Modal lookup, preserving explicit integration coverage. Confirm the intended test boundary first. Fallback concerns exception propagation and is MEDIUM until minimized. | 4–8 h primary | 30–100 |
+| 3 | MEDIUM | [MCP Python #3545: Basic-authenticated OAuth request rejected](https://github.com/modelcontextprotocol/python-sdk/issues/3545) | [#3544: Windows snapshot failures](https://github.com/modelcontextprotocol/python-sdk/issues/3544) | Resolve body client_id handling for client_secret_basic without weakening authentication. Fallback diagnoses alias handling in 14 failing tests; do not change wire _meta semantics just to satisfy snapshots. | 10–18 h | 80–200 |
+| 4 | MEDIUM | [OpenHands SDK #4670: silent WebSocket worker leaks](https://github.com/OpenHands/software-agent-sdk/issues/4670) | [#4731: TypeScript WebSocket bundling](https://github.com/OpenHands/software-agent-sdk/issues/4731) | Ensure stop terminates or accurately retains ownership of the live worker. Fallback requires a supported browser/Node reproducer and confirmation that the SDK repo still owns this client. | 10–18 h | 100–240 |
+| 5 | HIGH | [DeepMind MuJoCo #3596: actuator control remapping](https://github.com/google-deepmind/mujoco/issues/3596) | [#3585: integration state lost on recompile](https://github.com/google-deepmind/mujoco/issues/3585) | Preserve controls by agreed actuator/control-block identity and width across recompilation. Fallback addresses a separate preserved-state contract. Native runtime validation is mandatory for this plan. | 20–35 h | 180–450 |
+| 6 | HIGH | [OpenHands SDK #5074: orphaned child tasks after restart](https://github.com/OpenHands/software-agent-sdk/issues/5074) | [#4990: pause reports completion while tools run](https://github.com/OpenHands/software-agent-sdk/issues/4990) | Restore a truthful terminal/recovery state for persisted child tasks after process death. Agree on minimal interrupted/error handling before considering durable recovery. Fallback makes PAUSED consistent with actual ACP execution. | 20–35 h | 220–500 |
 
 **Why these six.** Harness offers the clearest small, source-confirmed correctness discrepancy and explicit maintainer acknowledgement. SWE-ReX addresses a reported contributor/test failure rather than generic coverage. MCP uses your Python/API skills on a concrete authentication report with lab-adjacent relevance. OpenHands shutdown and recovery demonstrate resource ownership and state-machine reasoning. MuJoCo adds a direct DeepMind-owned contribution and a C++ correctness stretch. Two SDK objectives deliberately build depth in one codebase; the second remains contingent on the first collaboration and maintainer capacity. These are editorial judgments, not hiring or acceptance probabilities.
 
 **Evidence and go/no-go gates:**
 
 - **Slot 1:** Both current MGSM templates still specify `mgsm_cot_native`; the [maintainer's comment](https://github.com/EleutherAI/lm-evaluation-harness/issues/2614#issuecomment-2582446512) says they should differ. Renew ownership/scope before working on this older issue. Verify generator output and task discovery without a model run. For the fallback, current `None` handling/docstrings and `int` annotations disagree; confirm the supported public contract and type-check a representative caller.
-- **Slot 2:** The current factory test constructs `ModalDeployment`, whose constructor calls `modal.App.lookup`. That call path was inspected; no cloud operation or credential-free test run was executed. Reproduce in a clean isolated environment and agree whether the test is unit or integration before mocking. The fallback's traceback indicates exception construction hides the parser error; obtain the smallest shell input and test its transport path. **This fallback is MEDIUM, so using it changes the two-LOW mix: re-plan one LOW objective rather than relabeling it.** No second clean LOW issue in SWE-ReX was established.
-- **Slot 3:** Both failures are reporter-provided, not locally reproduced. MCP requires a linked issue assigned to you or labeled help wanted before opening the PR. Test valid/invalid Basic credentials and other supported client-auth methods. The fallback needs a Windows run and an owning-layer diagnosis; if Windows access is unavailable, it is not executable by you yet.
+- **Slot 2:** The current factory test constructs `ModalDeployment`, whose constructor calls `modal.App.lookup`. That call path was inspected; no cloud operation or credential-free test run was executed. Reproduce in a clean isolated environment and agree whether the test is unit or integration before mocking. The fallback's traceback indicates exception construction hides the parser error; obtain the smallest shell input and test its transport path. **This fallback is MEDIUM, so using it changes the two-LOW mix: re-plan one LOW objective rather than relabeling it.** SWE-ReX #175 is a new conditional LOW option in the company table, but its rare decoding failure must first be minimized; it is not a guaranteed replacement.
+- **Slot 3:** Both failures are reporter-provided, not locally reproduced. MCP requires a linked issue assigned to you or labeled help wanted before opening the PR. Test valid/invalid Basic credentials and other supported client-auth methods. The fallback is classified LOW in the company menu after narrowing it to snapshot representation, so substituting it changes the portfolio mix. It needs a Windows run and an owning-layer diagnosis; if Windows access is unavailable, it is not executable by you yet.
 - **Slot 4:** The source snapshot contains the reported join/worker-reference behavior, but the silent-peer failure was not executed here. Use a local WebSocket peer to test immediate stop, idle stop, repeated cycles and timeouts. Both issues need readiness triage; a bot label alone is not human design approval. The TypeScript fallback is only usable if its current owning implementation is still in this repository—otherwise discard it and re-audit a same-repo fallback.
 - **Slot 5:** The reported control-indexing defect is a strong investigation target, not a completed native reproduction. Build the changed library and test zero-, one- and multi-input actuators, no-op recompile and changed topology, plus relevant sanitizers. Agree exactly which integration state must survive for the fallback. Your earlier Firefox rejection makes runtime validation a firm selection gate.
 - **Slot 6:** The primary includes a TestLLM/process-restart reproduction; it was not executed here. Reproduce server death locally, establish the intended recovery contract, then verify child terminal state and parent results without duplicate delivery. For the fallback, use a deterministic local ACP peer to test running work, pause/cancel, resume and status reporting. Both need issue-readiness and semantic agreement first.
@@ -98,7 +100,7 @@ All issue links are re-checkable, not reservations. The source files and exact l
 1. **Pass intake before implementation.** Read the current guide, template, CI and the most recent similar external merge. Record the approval/assignment rule in your issue note. PEFT requires explicit approval; MCP Python needs assignment/help wanted; Goose needs Ready; Gemini excludes maintainer-only work. Your OSV closures show this is a real failure mode, not paperwork.
 2. **Check ownership in four places.** Inspect assignees, the issue's full discussion/timeline, open PRs and current source. “Unassigned” does not override “I have a patch ready.” Do not compete with an active contributor. PEFT's [guide](https://github.com/huggingface/peft/blob/main/docs/source/developer_guides/contributing.md) explicitly covers declared intent.
 3. **Agree on behavior, then implementation.** In 4–6 sentences, give exact version/commit, minimal reproduction, expected outcome, proposed boundary and a test plan. Ask about an uncertain behavior decision. The Playwright decoding and Azure experimental-status closures show why code can be correct yet unwanted.
-4. **Find the editable source.** Trace generated SDK resources, protocol schemas, docs and release files. Stainless/Fern/Speakeasy do not mean every contribution is forbidden, but the owner may need to port it through generation. Google ADK's Copybara route can close a successful PR instead of marking it merged. The per-repo generation notes identify these cases.
+4. **Find the editable source.** Trace generated SDK resources, protocol schemas, docs and release files. Stainless/Fern/Speakeasy/Castiron generation does not mean every contribution is forbidden, but the owner may need to port it through generation. Google ADK's Copybara route can close a successful PR instead of marking it merged. The per-repo generation notes identify these cases.
 5. **Choose validation you can complete.** Use CPU/tiny models/local peers for initial tasks. If native, GPU or cloud execution is essential, secure access before promising a fix. State exactly what ran, what failed and what was not run. Your Firefox closure is the model example.
 6. **Make one behavior easy to review.** Explain trigger → current result → desired result; keep unrelated formatting, dependencies and cleanup out. For performance, report baseline and changed results under identical conditions, including the common/no-op case. The Docusaurus and gogcli discussions show the cost of unnecessary scope.
 7. **Own AI-assisted work.** Read every changed line and verify every claim, reference and command. Disclose assistance where the repository asks; never have an agent mass-file issues or comments. Follow the repo's own rule rather than a universal disclosure template. [MCP Python guidance](https://github.com/modelcontextprotocol/python-sdk/blob/main/CONTRIBUTING.md), [smolagents guidance](https://github.com/huggingface/smolagents/blob/main/CONTRIBUTING.md).
@@ -118,12 +120,12 @@ Assume **8–12 focused hours per week alongside your job**, local CPU/Docker ac
 
 | Week | Main work | Review / decision checkpoint |
 |---|---|---|
-| 1 | Re-check all twelve issues and current guides/templates. Inspect your existing open PRs for actionable reviews. Reproduce the two LOW failures; confirm generator/test boundaries. Start MCP assignment and MuJoCo scope discussions with technical evidence. | Confirm repository-local identity, Google CLA status and applicable employer contribution rights. Expect the harness first-PR CLA bot. Do not treat a pending assignment request as approval. |
-| 2 | Open harness #2614's fix after current-source/task-discovery validation and ownership check. Minimize SWE-ReX #241 in a clean credential-free environment. | Address review quickly; agree unit versus integration behavior before mocking. If #2614 is taken, audit #2289 anew. |
-| 3 | Open the SWE-ReX fix after the intended test boundary is agreed. Reproduce MCP #3545 with a minimal OAuth client/server fixture. | Finish the first review where possible. Obtain MCP assignment/help-wanted and test auth failures as well as success. |
-| 4 | Open the MCP fix only after its intake gate and authentication regressions pass. Reproduce OpenHands #4670 with a silent local peer and give triage the exact command/acceptance criteria. | Keep at most two implementation PRs active; settle readiness before another SDK patch. A blocked slot moves later without replacing it with speculative work. |
-| 5 | Implement and open the WebSocket fix when capacity and readiness allow. Validate repeated start/stop and cleanup races. | Close review requests on slots 2–3 first. Confirm whether any fallback still belongs to its listed repository. |
-| 6 | Build MuJoCo, reproduce the current native cases and add failing regressions. Begin the child-task restart reproducer in parallel only if time allows. | Stop the MuJoCo slot if the modified native artifact cannot be executed. Agree control identity/state preservation before changing code. |
+| 1 | Re-check all twelve issues and current guides/templates. Inspect your existing open PRs for actionable reviews. Reproduce the two LOW failures; confirm generator/test boundaries. Start MCP assignment and MuJoCo scope discussions with technical evidence. | Confirm repository-local identity, Google CLA status and applicable employer contribution rights. Expect the harness first-PR CLA bot. Do not treat a pending assignment request as approval. | 10–50 |
+| 2 | Open harness #2614's fix after current-source/task-discovery validation and ownership check. Minimize SWE-ReX #241 in a clean credential-free environment. | Address review quickly; agree unit versus integration behavior before mocking. If #2614 is taken, audit #2289 anew. | 30–100 |
+| 3 | Open the SWE-ReX fix after the intended test boundary is agreed. Reproduce MCP #3545 with a minimal OAuth client/server fixture. | Finish the first review where possible. Obtain MCP assignment/help-wanted and test auth failures as well as success. | 80–200 |
+| 4 | Open the MCP fix only after its intake gate and authentication regressions pass. Reproduce OpenHands #4670 with a silent local peer and give triage the exact command/acceptance criteria. | Keep at most two implementation PRs active; settle readiness before another SDK patch. A blocked slot moves later without replacing it with speculative work. | 100–240 |
+| 5 | Implement and open the WebSocket fix when capacity and readiness allow. Validate repeated start/stop and cleanup races. | Close review requests on slots 2–3 first. Confirm whether any fallback still belongs to its listed repository. | 180–450 |
+| 6 | Build MuJoCo, reproduce the current native cases and add failing regressions. Begin the child-task restart reproducer in parallel only if time allows. | Stop the MuJoCo slot if the modified native artifact cannot be executed. Agree control identity/state preservation before changing code. | 220–500 |
 | 7 | Implement the bounded MuJoCo fix and run relevant normal/sanitizer tests. | Share concrete findings through the existing issue as permitted; avoid a surprise redesign. |
 | 8 | Open MuJoCo with exact native commands/results. Agree the OpenHands restart recovery boundary and satisfy issue readiness. | Start the second SDK implementation only after earlier feedback is addressed and a maintainer accepts the intended recovery semantics. |
 | 9 | Implement minimal restart recovery; test process death, persisted child state and parent completion exactly once. | Do not turn an interrupted-task fix into a durable orchestration framework. Use local TestLLM fixtures where faithful. |
@@ -144,6 +146,7 @@ Assume **8–12 focused hours per week alongside your job**, local CPU/Docker ac
 | [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) | [CONTRIBUTING](https://github.com/deepseek-ai/deepseek-harness/blob/main/CONTRIBUTING.md) says external PRs are not currently accepted. |
 | [Google Gen AI Python SDK](https://github.com/googleapis/python-genai) | Its [guide](https://github.com/googleapis/python-genai/blob/main/CONTRIBUTING.md) says contributions will be accepted in the future. Do not treat it as open intake now. |
 | [Mistral Vibe](https://github.com/mistralai/mistral-vibe) | [Code contribution section](https://github.com/mistralai/mistral-vibe/blob/main/CONTRIBUTING.md#code-contributions) still says code contributions are not accepted. Recent apparent outsider merges do not override the written policy; ask if it has changed. |
+| [Mistral TypeScript SDK](https://github.com/mistralai/client-ts) | [CONTRIBUTING](https://github.com/mistralai/client-ts/blob/main/CONTRIBUTING.md) explicitly refuses direct changes/pull requests. Screened and excluded; Mistral Evals is the third inspected code surface instead. |
 | [Continue core](https://github.com/continuedev/continue) | [README](https://github.com/continuedev/continue/blob/main/README.md) says no longer actively maintained/read-only. |
 | [torchtune](https://github.com/meta-pytorch/torchtune), [Mistral Inference](https://github.com/mistralai/mistral-inference), [Cohere Toolkit](https://github.com/cohere-ai/cohere-toolkit), [Nous Atropos](https://github.com/NousResearch/atropos), [OpenHands CLI](https://github.com/OpenHands/OpenHands-CLI) | Archived or explicitly no longer maintained in the captured metadata/README. Prefer active successor surfaces; do not assume old CONTRIBUTING text is still an invitation. |
 | [Claude Code](https://github.com/anthropics/claude-code), [Claude Agent SDK TypeScript](https://github.com/anthropics/claude-agent-sdk-typescript), [Cursor tracker](https://github.com/cursor/cursor) | Public tracker/distribution repositories are not proof that the underlying product implementation is available for external code work. Inspect the specific editable surface; inspect an editable SDK implementation for a concrete route. Cookbook/catalog surfaces are excluded from this portfolio. No blanket external-code ban is inferred merely from the missing implementation. |
@@ -177,19 +180,77 @@ These exclusions follow your portfolio preference, not a claim that documentatio
 | [continuedev/checks](https://github.com/continuedev/checks) | Reusable checks/skill collection |
 | [continuedev/amplified.dev](https://github.com/continuedev/amplified.dev) | Editorial essay/supporter site |
 
+## Company coverage and selection rules
+
+Popularity is an editorial scope filter: recognizable AI vendors/labs, established specialist ML organizations, and the ecosystem projects you explicitly included. It is not a measured hiring signal. A smaller repo can qualify under an established owner; stars and ownership URLs are provided for your own judgment. Microsoft/NVIDIA are broad AI-adjacent vendors, not exclusively research labs. Project rows are not presented as company subsidiaries.
+
+Agentica/DeepSWE is outside this narrower editorial shortlist. Continue is recognized but its screened core is read-only/no longer maintained; it remains in the avoid section. Unsloth has two retained implementation repos: a notebook catalog was not used to manufacture a third.
+
+| Company / project | Category | Repos | LOW / 2 | MEDIUM / 2 | HIGH / 2 | Total / 6 |
+|---|---|---|---|---|---|---|
+| [OpenAI](#company-1) | Popular AI company/lab | 3/3 | 0 | 0 | 0 | **0** |
+| [Anthropic](#company-2) | Popular AI company/lab | 3/3 | 0 | 1 | 1 | **2** |
+| [Model Context Protocol](#company-3) | Established ecosystem | 3/3 | 2 | 2 | 1 | **5** |
+| [Google DeepMind / Gemini](#company-4) | Popular AI company/lab | 3/3 | 1 | 2 | 2 | **5** |
+| [xAI](#company-5) | Popular AI company/lab | 3/3 | 0 | 0 | 0 | **0** |
+| [Cognition / Devin](#company-6) | Popular AI company/lab | 3/3 | 0 | 2 | 0 | **2** |
+| [Cursor / Anysphere](#company-7) | Popular AI company/lab | 3/3 | 0 | 0 | 0 | **0** |
+| [Together AI](#company-8) | Popular AI company/lab | 3/3 | 1 | 1 | 0 | **2** |
+| [Prime Intellect](#company-9) | Established specialist | 3/3 | 0 | 2 | 1 | **3** |
+| [Meta AI / FAIR / PyTorch](#company-10) | Established ecosystem | 3/3 | 1 | 2 | 2 | **5** |
+| [Microsoft AI](#company-11) | Popular AI company/lab | 3/3 | 1 | 1 | 1 | **3** |
+| [Mistral](#company-12) | Popular AI company/lab | 3/3 | 1 | 1 | 2 | **4** |
+| [Hugging Face](#company-13) | Popular AI company/lab | 3/3 | 0 | 0 | 1 | **1** |
+| [Cohere](#company-14) | Popular AI company/lab | 3/3 | 0 | 0 | 0 | **0** |
+| [Ai2](#company-15) | Established specialist | 3/3 | 0 | 2 | 0 | **2** |
+| [EleutherAI](#company-16) | Established specialist | 3/3 | 2 | 2 | 2 | **6** |
+| [DeepSeek](#company-17) | Popular AI company/lab | 3/3 | 0 | 1 | 1 | **2** |
+| [Qwen](#company-18) | Popular AI company/lab | 3/3 | 1 | 2 | 1 | **4** |
+| [Unsloth](#company-19) | Established specialist | 2/3 | 0 | 2 | 2 | **4** |
+| [Sakana AI](#company-20) | Established specialist | 3/3 | 0 | 1 | 0 | **1** |
+| [Perplexity](#company-21) | Popular AI company/lab | 3/3 | 0 | 0 | 0 | **0** |
+| [Nous Research](#company-22) | Established specialist | 3/3 | 2 | 2 | 1 | **5** |
+| [NVIDIA](#company-23) | Popular AI company/lab | 3/3 | 0 | 2 | 2 | **4** |
+| [vLLM](#company-24) | Established ecosystem | 3/3 | 1 | 1 | 1 | **3** |
+| [SGLang](#company-25) | Established ecosystem | 3/3 | 0 | 0 | 2 | **2** |
+| [OpenHands](#company-26) | Established ecosystem | 3/3 | 2 | 2 | 2 | **6** |
+| [Goose](#company-27) | Established ecosystem | 3/3 | 2 | 2 | 2 | **6** |
+| [Aider](#company-28) | Established ecosystem | 3/3 | 2 | 2 | 0 | **4** |
+| [Cline](#company-29) | Established ecosystem | 3/3 | 2 | 2 | 2 | **6** |
+| [SWE-agent](#company-30) | Established ecosystem | 3/3 | 2 | 2 | 2 | **6** |
+
+**An unfilled slot is intentional.** These are reported, unassigned leads screened for visible competing work, not confirmed current bugs or approved PR scopes. No group has six guaranteed merges. See each remaining reproduction/ownership/approval gate before choosing. [Structured choices and audit records](issues.json).
+
 ## Repository field guide
 
-The 81 retained code surfaces cover all 32 original groups, with at most three rows per group. A row is a screened surface; only a specific failure with evidence and satisfied intake gates can become a PR target. Empty buckets are explicit gaps. **LOW / MEDIUM / HIGH measure proposed scope and engineering importance, not likelihood of review.** Issues can move categories after reproduction.
+The current shortlist contains 89 screened implementation surfaces across 30 established company/project groups. Request: three repos and six issues per group, **two LOW / two MEDIUM / two HIGH across all three repos**. Empty slots are explicit research/availability gaps. LOW / MEDIUM / HIGH measure proposed scope and engineering importance, not likelihood of review. Source and test changes can grow after reproduction.
 
 
 ### OpenAI
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [openai/openai-agents-python](https://github.com/openai/openai-agents-python) · **DISCOVERY ONLY** | 29,550 · Python | 42/82 = 51.2% | 1.63 d | [59](https://github.com/openai/openai-agents-python/pulls) · [22 d](https://github.com/openai/openai-agents-python/pull/4716) | CLA/DCO not established in inspected files. Focused agreed scope; regression tests; root AGENTS.md supplies verification tiers. No mandatory assignment rule found in the fetched guide. **Fit:** Python agent orchestration, tool lifecycle and deterministic regressions match your ML/backend work. |
 | [openai/openai-agents-js](https://github.com/openai/openai-agents-js) · **DISCOVERY ONLY** | 3,830 · TypeScript | 14/93 = 15.1% | 3.62 d | [18](https://github.com/openai/openai-agents-js/pulls) · [22 d](https://github.com/openai/openai-agents-js/pull/1763) | CLA/DCO not established in inspected files. pnpm workspace; full tests/build/type checks; changeset for package changes including internal fixes/tests. Template also asks for example tests. **Fit:** TypeScript agent state, cancellation and interoperability. |
+| [openai/openai-python](https://github.com/openai/openai-python) · **DISCOVERY ONLY** | 31,643 · Python | 31/76 = 40.8% | 118.71 d | [177](https://github.com/openai/openai-python/pulls) · [582 d](https://github.com/openai/openai-python/pull/2115) | CLA/DCO not established in inspected files. Template warns generated PRs may not merge. CONTRIBUTING allows persisted modifications with a Castiron custom-code budget; obtain the correct spec/custom-source route. scripts/lint, scripts/build, scripts/test and Pydantic compatibility checks. **Fit:** Python transport/custom SDK code fits well, but generated ownership limits the route. |
+
+**Six issue slots across this group:** LOW 0/2, MEDIUM 0/2, HIGH 0/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| HIGH | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+No PR option survived this pass. This is a queue/ownership/policy finding within the inspected evidence, not proof that future contributions are impossible. Start with the repo issue links and current intake rules below; do not spend an implementation week here without an accepted problem.
 
 #### openai/openai-agents-python
 
@@ -203,9 +264,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### openai/openai-agents-js
 
@@ -219,18 +278,55 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
+
+#### openai/openai-python
+
+**Sample:** N=100, bots=24, human/unresolved=76, candidate external=31; merges 2026-08-21 to 2026-09-18. Exact most-recent cohort recovered. Snapshot 2026-09-18T15:06:31 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
+**Recent candidate-external examples:** [#3861: fix(responses): skip structured parsing for commentary](https://github.com/openai/openai-python/pull/3861); [#3593: fix(azure): preserve deployment routing across copy/with_options](https://github.com/openai/openai-python/pull/3593); [#3535: docs: fix Realtime docstring wording](https://github.com/openai/openai-python/pull/3535).
+**Oldest observed external queue entries:** [#2115](https://github.com/openai/openai-python/pull/2115) (582 d; opened 2025-02-12); [#2157](https://github.com/openai/openai-python/pull/2157) (565 d; opened 2025-03-02); [#2216](https://github.com/openai/openai-python/pull/2216) (548 d; opened 2025-03-18).
+
+**Policy sources at pinned commit:** [.github/CODEOWNERS](https://github.com/openai/openai-python/blob/dcbd6b8f5c26bc09899a584158729b5b67ba7dc6/.github/CODEOWNERS); [.github/pull_request_template.md](https://github.com/openai/openai-python/blob/dcbd6b8f5c26bc09899a584158729b5b67ba7dc6/.github/pull_request_template.md); [CONTRIBUTING.md](https://github.com/openai/openai-python/blob/dcbd6b8f5c26bc09899a584158729b5b67ba7dc6/CONTRIBUTING.md); [README.md](https://github.com/openai/openai-python/blob/dcbd6b8f5c26bc09899a584158729b5b67ba7dc6/README.md).
+**CI inspected:** [.github/workflows/castiron-custom-code-comment.yml](https://github.com/openai/openai-python/blob/dcbd6b8f5c26bc09899a584158729b5b67ba7dc6/.github/workflows/castiron-custom-code-comment.yml); [.github/workflows/castiron-custom-code.yml](https://github.com/openai/openai-python/blob/dcbd6b8f5c26bc09899a584158729b5b67ba7dc6/.github/workflows/castiron-custom-code.yml); [.github/workflows/ci.yml](https://github.com/openai/openai-python/blob/dcbd6b8f5c26bc09899a584158729b5b67ba7dc6/.github/workflows/ci.yml); [.github/workflows/codeql.yml](https://github.com/openai/openai-python/blob/dcbd6b8f5c26bc09899a584158729b5b67ba7dc6/.github/workflows/codeql.yml); [.github/workflows/create-releases.yml](https://github.com/openai/openai-python/blob/dcbd6b8f5c26bc09899a584158729b5b67ba7dc6/.github/workflows/create-releases.yml); [.github/workflows/detect-breaking-changes.yml](https://github.com/openai/openai-python/blob/dcbd6b8f5c26bc09899a584158729b5b67ba7dc6/.github/workflows/detect-breaking-changes.yml); [.github/workflows/publish-pypi.yml](https://github.com/openai/openai-python/blob/dcbd6b8f5c26bc09899a584158729b5b67ba7dc6/.github/workflows/publish-pypi.yml); [.github/workflows/python-version-review.yml](https://github.com/openai/openai-python/blob/dcbd6b8f5c26bc09899a584158729b5b67ba7dc6/.github/workflows/python-version-review.yml).
+**Affiliation adjustments:** [jbeckwith-oai](https://github.com/jbeckwith-oai) — public company: OpenAI; [markstuart-oai](https://github.com/markstuart-oai) — public company: OpenAI; [marcuswood-oai](https://github.com/marcuswood-oai) — OpenAI-style account suffix; employment unverified; [apcha-oai](https://github.com/apcha-oai) — public company: OpenAI; [HAYDEN-OAI](https://github.com/HAYDEN-OAI) — OpenAI-style account suffix; employment unverified. Evidence is public profile/core-role information at collection time, not proof of employment when each PR merged.
+
+**Issue candidates — re-check within hours:**
+
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 ### Anthropic
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [anthropics/claude-agent-sdk-python](https://github.com/anthropics/claude-agent-sdk-python) · **DISCOVERY ONLY** | 8,128 · Python | 15/100 = 15.0% | 5.92 d | [270](https://github.com/anthropics/claude-agent-sdk-python/pulls) · [451 d](https://github.com/anthropics/claude-agent-sdk-python/pull/39) | CLA/DCO not established in inspected files. SDK wrapper is editable; the bundled Claude Code executable is a different contribution surface. No repo-local CONTRIBUTING file found; ask about the precise Python-layer bug first. **Fit:** Python subprocess lifecycle and typed message parsing; direct Anthropic ownership. |
-| [anthropics/anthropic-sdk-python](https://github.com/anthropics/anthropic-sdk-python) · **DISCOVERY ONLY** | 3,903 · Python | 19/24 = 79.2% | 6.88 d | [123](https://github.com/anthropics/anthropic-sdk-python/pulls) · [399 d](https://github.com/anthropics/anthropic-sdk-python/pull/1015) | CLA/DCO not established in inspected files. Stainless generation appears in CI. Check generator ownership before editing generated resources; ask maintainers whether a patch can survive regeneration. **Fit:** Python transport, retries, tests and custom SDK behavior. |
+| [anthropics/claude-code-action](https://github.com/anthropics/claude-code-action) · **DISCOVERY ONLY** | 8,903 · TypeScript | 72/100 = 72.0% | 6.93 d | [327](https://github.com/anthropics/claude-code-action/pulls) · [486 d](https://github.com/anthropics/claude-code-action/pull/11) | CLA/DCO not established in inspected files. Contributions welcomed; Bun tests, formatting and type checks. Fork integration/OIDC checks require maintainer context. base-action edits belong in the source here, not a published mirror. No CLA/DCO established in inspected files. **Fit:** TypeScript GitHub automation has real editable implementation and external PR intake. |
+| [anthropics/sandbox-runtime](https://github.com/anthropics/sandbox-runtime) · **ISSUE LEAD** | 5,269 · TypeScript | 2/100 = 2.0% | 0.89 d | [109](https://github.com/anthropics/sandbox-runtime/pulls) · [312 d](https://github.com/anthropics/sandbox-runtime/pull/32) | CLA/DCO not established in inspected files. No repository-local CONTRIBUTING/template found. Inspect integration/release workflows and the vendored binary build boundary. Confirm scope before OS-specific work; use actual Linux/Windows/macOS validation. **Fit:** TypeScript/Rust/Linux process isolation is useful agent-infrastructure stretch work. |
+
+**Six issue slots across this group:** LOW 0/2, MEDIUM 1/2, HIGH 1/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | [anthropics/sandbox-runtime](https://github.com/anthropics/sandbox-runtime) | [#451 — srt-win.exe dynamically links VCRUNTIME140.dll — silent loader death (0xC0000135) on machines without the VC++ Redistributable](https://github.com/anthropics/sandbox-runtime/issues/451) | The Windows sandbox binary fails to load when the VC++ runtime DLL is absent. | Correct the binary packaging/runtime dependency and surface loader errors. | **60–180** | Clean Windows VM required; establish ownership of the vendored Rust build before changing it. |
+| MEDIUM | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| HIGH | [anthropics/sandbox-runtime](https://github.com/anthropics/sandbox-runtime) | [#429 — apply-seccomp aborts on Ubuntu: AppArmor denies CAP_SYS_ADMIN to bwrap children, so no sandboxed command can run](https://github.com/anthropics/sandbox-runtime/issues/429) | Ubuntu AppArmor prevents apply-seccomp from obtaining the required capability, aborting sandbox startup. | Repair the supported capability/user-namespace setup with a Linux regression matrix. | **180–450** | Needs affected Ubuntu/AppArmor reproduction and maintainer design approval; preserve isolation guarantees. |
+| HIGH | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [anthropics/claude-code-action #1845](https://github.com/anthropics/claude-code-action/issues/1845): Reporter intends to send the fix after five competing sanitizer PRs settle; avoid a sixth conflicting patch.
+- [anthropics/claude-agent-sdk-python #1153](https://github.com/anthropics/claude-agent-sdk-python/issues/1153): A contributor already prototyped a fix and another offered the test slice.
+- [anthropics/claude-code-action #1319](https://github.com/anthropics/claude-code-action/issues/1319): Follow-up checks could not reproduce the failure on current code; related fix already exists.
+- [anthropics/sandbox-runtime #125](https://github.com/anthropics/sandbox-runtime/issues/125): The requested trustd allowance is already configurable; not an unresolved implementation defect.
+- [anthropics/sandbox-runtime #487](https://github.com/anthropics/sandbox-runtime/issues/487): Reporter explicitly has a five-file candidate patch ready.
 
 #### anthropics/claude-agent-sdk-python
 
@@ -246,36 +342,76 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
-#### anthropics/anthropic-sdk-python
+#### anthropics/claude-code-action
 
-**Sample:** N=100, bots=76, human/unresolved=24, candidate external=19; merges 2025-11-11 to 2026-09-15. Exact most-recent cohort recovered. Snapshot 2026-09-18T15:11:37 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
-**Recent candidate-external examples:** [#1884: fix(docs): correct link for long requests error](https://github.com/anthropics/anthropic-sdk-python/pull/1884); [#1795: docs: fix fulfillment typos in session runner](https://github.com/anthropics/anthropic-sdk-python/pull/1795); [#1519: chore(examples): update messages_stream.py shebang from rye to uv](https://github.com/anthropics/anthropic-sdk-python/pull/1519).
-**Oldest observed external queue entries:** [#1015](https://github.com/anthropics/anthropic-sdk-python/pull/1015) (399 d; opened 2025-08-15); [#1043](https://github.com/anthropics/anthropic-sdk-python/pull/1043) (339 d; opened 2025-10-14); [#1057](https://github.com/anthropics/anthropic-sdk-python/pull/1057) (322 d; opened 2025-10-31).
+**Sample:** N=100, bots=0, human/unresolved=100, candidate external=72; merges 2026-04-28 to 2026-08-25. Exact most-recent cohort recovered. Snapshot 2026-09-18T19:53:42 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
+**Recent candidate-external examples:** [#1713: fix: encode branch names in GitHub links](https://github.com/anthropics/claude-code-action/pull/1713); [#1719: fix: bound download_job_log against a stalled log fetch](https://github.com/anthropics/claude-code-action/pull/1719); [#1710: fix: allow parentheses in valid branch names](https://github.com/anthropics/claude-code-action/pull/1710).
+**Oldest observed external queue entries:** [#11](https://github.com/anthropics/claude-code-action/pull/11) (486 d; opened 2025-05-20); [#16](https://github.com/anthropics/claude-code-action/pull/16) (485 d; opened 2025-05-21); [#48](https://github.com/anthropics/claude-code-action/pull/48) (480 d; opened 2025-05-25).
 
-**Policy sources at pinned commit:** [.github/CODEOWNERS](https://github.com/anthropics/anthropic-sdk-python/blob/7e5ca5c94126a6d7de159a169ff43eb9b1cac57f/.github/CODEOWNERS); [CONTRIBUTING.md](https://github.com/anthropics/anthropic-sdk-python/blob/7e5ca5c94126a6d7de159a169ff43eb9b1cac57f/CONTRIBUTING.md); [README.md](https://github.com/anthropics/anthropic-sdk-python/blob/7e5ca5c94126a6d7de159a169ff43eb9b1cac57f/README.md).
+**Policy sources at pinned commit:** [CONTRIBUTING.md](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/CONTRIBUTING.md); [README.md](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/README.md); [base-action/CONTRIBUTING.md](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/base-action/CONTRIBUTING.md).
 No repository-local PR template found; inherited organization templates were not fully audited.
-**CI inspected:** [.github/workflows/ci.yml](https://github.com/anthropics/anthropic-sdk-python/blob/7e5ca5c94126a6d7de159a169ff43eb9b1cac57f/.github/workflows/ci.yml); [.github/workflows/create-releases.yml](https://github.com/anthropics/anthropic-sdk-python/blob/7e5ca5c94126a6d7de159a169ff43eb9b1cac57f/.github/workflows/create-releases.yml); [.github/workflows/publish-pypi.yml](https://github.com/anthropics/anthropic-sdk-python/blob/7e5ca5c94126a6d7de159a169ff43eb9b1cac57f/.github/workflows/publish-pypi.yml).
-**Affiliation adjustments:** [tomer-ant](https://github.com/tomer-ant) — public company: @anthropics; [maxisbey](https://github.com/maxisbey) — public company: @anthropics; [qing-ant](https://github.com/qing-ant) — Anthropic-style account suffix/prefix; employment unverified; [benlehrburger-ant](https://github.com/benlehrburger-ant) — Anthropic-style account suffix/prefix; employment unverified; [RobertCraigie](https://github.com/RobertCraigie) — public company: @anthropics @glide-browser. Evidence is public profile/core-role information at collection time, not proof of employment when each PR merged.
+**CI inspected:** [.github/workflows/ci-all.yml](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/.github/workflows/ci-all.yml); [.github/workflows/ci.yml](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/.github/workflows/ci.yml); [.github/workflows/claude-review.yml](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/.github/workflows/claude-review.yml); [.github/workflows/claude.yml](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/.github/workflows/claude.yml); [.github/workflows/issue-triage.yml](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/.github/workflows/issue-triage.yml); [.github/workflows/non-write-users-check.yml](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/.github/workflows/non-write-users-check.yml); [.github/workflows/release.yml](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/.github/workflows/release.yml); [.github/workflows/sync-base-action.yml](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/.github/workflows/sync-base-action.yml); [.github/workflows/test-base-action.yml](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/.github/workflows/test-base-action.yml); [.github/workflows/test-custom-executables.yml](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/.github/workflows/test-custom-executables.yml); [.github/workflows/test-mcp-servers.yml](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/.github/workflows/test-mcp-servers.yml); [.github/workflows/test-settings.yml](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/.github/workflows/test-settings.yml); [.github/workflows/test-structured-output.yml](https://github.com/anthropics/claude-code-action/blob/4036a180cf690f49529f5d8c79c998855287f590/.github/workflows/test-structured-output.yml).
+**Affiliation adjustments:** [ashwin-ant](https://github.com/ashwin-ant) — public company: Anthropic; [chsmc-ant](https://github.com/chsmc-ant) — Anthropic-style account suffix/prefix; employment unverified; [ant-kurt](https://github.com/ant-kurt) — Anthropic-style account suffix/prefix; employment unverified; [JustinBis](https://github.com/JustinBis) — public company: Anthropic. Evidence is public profile/core-role information at collection time, not proof of employment when each PR merged.
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
+
+#### anthropics/sandbox-runtime
+
+**Sample:** N=100, bots=0, human/unresolved=100, candidate external=2; merges 2026-07-01 to 2026-09-18. Exact most-recent cohort recovered. Snapshot 2026-09-18T19:52:27 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
+**Recent candidate-external examples:** [#550: perf: resolve the global npm root off the event loop](https://github.com/anthropics/sandbox-runtime/pull/550); [#423: proxy: survive client aborts and keep abort semantics end-to-end](https://github.com/anthropics/sandbox-runtime/pull/423).
+**Oldest observed external queue entries:** [#32](https://github.com/anthropics/sandbox-runtime/pull/32) (312 d; opened 2025-11-10); [#47](https://github.com/anthropics/sandbox-runtime/pull/47) (298 d; opened 2025-11-24); [#77](https://github.com/anthropics/sandbox-runtime/pull/77) (270 d; opened 2025-12-22).
+
+**Policy sources at pinned commit:** [README.md](https://github.com/anthropics/sandbox-runtime/blob/28e4dc95c1a0738d804a36b384a90b48d4e8861c/README.md).
+No CONTRIBUTING file found in the inspected tree; missing policy is not permission.
+No repository-local PR template found; inherited organization templates were not fully audited.
+**CI inspected:** [.github/workflows/integration-tests.yml](https://github.com/anthropics/sandbox-runtime/blob/28e4dc95c1a0738d804a36b384a90b48d4e8861c/.github/workflows/integration-tests.yml); [.github/workflows/release.yml](https://github.com/anthropics/sandbox-runtime/blob/28e4dc95c1a0738d804a36b384a90b48d4e8861c/.github/workflows/release.yml).
+**Affiliation adjustments:** [dylan-conway](https://github.com/dylan-conway) — public company: @anthropics; [ronleizrowice-ant](https://github.com/ronleizrowice-ant) — Anthropic-style account suffix/prefix; employment unverified; [ig-ant](https://github.com/ig-ant) — Anthropic-style account suffix/prefix; employment unverified; [MarshallOfSound](https://github.com/MarshallOfSound) — public company: @anthropics; [ant-kurt](https://github.com/ant-kurt) — Anthropic-style account suffix/prefix; employment unverified; [elhajjj](https://github.com/elhajjj) — public company: Anthropic; [seanyeoh-ant](https://github.com/seanyeoh-ant) — Anthropic-style account suffix/prefix; employment unverified. Evidence is public profile/core-role information at collection time, not proof of employment when each PR merged.
+
+**Issue candidates — re-check within hours:**
+
+- [#451](https://github.com/anthropics/sandbox-runtime/issues/451): checked 2026-09-18T19:57:43 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#429](https://github.com/anthropics/sandbox-runtime/issues/429): checked 2026-09-18T19:57:44 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 2 comments fetched (maximum 100).
 
 ### Model Context Protocol
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [modelcontextprotocol/python-sdk](https://github.com/modelcontextprotocol/python-sdk) · **ISSUE LEAD** | 24,329 · Python | 4/98 = 4.1% | 7.01 d | [194](https://github.com/modelcontextprotocol/python-sdk/pulls) · [463 d](https://github.com/modelcontextprotocol/python-sdk/pull/946) | CLA/DCO not established in inspected files. Outside PRs need a linked closing issue plus assignment or help wanted; otherwise auto-closed. Do not post assignment-only messages. Generated translations must be fixed at their source. **Fit:** Python protocol implementation and async cancellation fit strongly. |
-| [modelcontextprotocol/typescript-sdk](https://github.com/modelcontextprotocol/typescript-sdk) · **DISCOVERY ONLY** | 13,421 · TypeScript | 11/89 = 12.4% | 17.39 d | [321](https://github.com/modelcontextprotocol/typescript-sdk/pulls) · [316 d](https://github.com/modelcontextprotocol/typescript-sdk/pull/1083) | CLA/DCO not established in inspected files. Discuss significant changes; comment for assignment. Tiny tested bug fixes have an exception. ready for work is a maintainer label, not an invitation. main is v2; v1 fixes target v1.x. **Fit:** TypeScript protocol/transport reliability. |
+| [modelcontextprotocol/typescript-sdk](https://github.com/modelcontextprotocol/typescript-sdk) · **ISSUE LEAD** | 13,421 · TypeScript | 11/89 = 12.4% | 17.39 d | [321](https://github.com/modelcontextprotocol/typescript-sdk/pulls) · [316 d](https://github.com/modelcontextprotocol/typescript-sdk/pull/1083) | CLA/DCO not established in inspected files. Discuss significant changes; comment for assignment. Tiny tested bug fixes have an exception. ready for work is a maintainer label, not an invitation. main is v2; v1 fixes target v1.x. **Fit:** TypeScript protocol/transport reliability. |
 | [modelcontextprotocol/go-sdk](https://github.com/modelcontextprotocol/go-sdk) · **ISSUE LEAD** | 5,118 · Go | 42/86 = 48.8% | 1.81 d | [52](https://github.com/modelcontextprotocol/go-sdk/pulls) · [366 d](https://github.com/modelcontextprotocol/go-sdk/pull/480) | CLA/DCO not established in inspected files. Comment on help-wanted work; ask and wait on other issues. New public APIs/dependencies require a proposal. README and CONTRIBUTING are generated from internal/readme sources. **Fit:** Best Go fit: HTTP/SSE, cancellation, protocol conformance. |
+
+**Six issue slots across this group:** LOW 2/2, MEDIUM 2/2, HIGH 1/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | [modelcontextprotocol/python-sdk](https://github.com/modelcontextprotocol/python-sdk) | [#3544 — tests/client/test_client.py: 14 failures on Windows — AttributeError: '...Result' object has no attribute '_meta'](https://github.com/modelcontextprotocol/python-sdk/issues/3544) | Snapshot tests use the _meta wire alias as a Python attribute and fail on Windows. | Fix the snapshot representation/adapter and cover the alias consistently. | **30–100** | Reproduce with locked dependencies on Windows; obtain assignment or help wanted before PR. |
+| LOW | [modelcontextprotocol/typescript-sdk](https://github.com/modelcontextprotocol/typescript-sdk) | [#2515 — [v2] Multiple connect per server](https://github.com/modelcontextprotocol/typescript-sdk/issues/2515) | The one-connect-per-server lifecycle is not apparent to a user, causing expensive repeated registration. | Clarify the supported lifecycle in API documentation inside the SDK, with a minimal contract check. | **20–70** | Confirm the documented v2 lifecycle with maintainers; do not redesign server reuse under a docs PR. |
+| MEDIUM | [modelcontextprotocol/python-sdk](https://github.com/modelcontextprotocol/python-sdk) | [#3545 — Server ClientAuthenticator requires client_id in token body, rejecting valid client_secret_basic requests (RFC 6749 §2.3.1)](https://github.com/modelcontextprotocol/python-sdk/issues/3545) | Valid HTTP Basic OAuth clients are rejected when client_id is absent from the form body. | Read identity from the chosen authentication method; test Basic, form, mismatch and malformed credentials. | **80–200** | Assignment/help-wanted gate; agree on precedence and error behavior before coding. |
+| MEDIUM | [modelcontextprotocol/python-sdk](https://github.com/modelcontextprotocol/python-sdk) | [#3492 — Streamable HTTP stateless servers hang clients on the listen-mode GET (_handle_get_request opens a hold-open SSE stream)](https://github.com/modelcontextprotocol/python-sdk/issues/3492) | Stateless HTTP servers open a silent SSE GET stream that leaves clients hanging. | Return the protocol-appropriate unsupported-listen response for the stateless mode. | **70–180** | Determine supported release branch and protocol version; assignment/help-wanted gate; HTTP integration test. |
+| HIGH | [modelcontextprotocol/go-sdk](https://github.com/modelcontextprotocol/go-sdk) | [#1263 — mcp: a server cannot send the notifications/cancelled that 2026-07-28 requires when it tears down a subscriptions/listen stream](https://github.com/modelcontextprotocol/go-sdk/issues/1263) | A server cannot send the cancellation notification required when ending a modern subscription. | Implement an approved cancellation API with stream/request identity and conformance tests. | **180–400** | Public API proposal and maintainer acceptance first; test legacy and modern wire behavior. |
+| HIGH | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [modelcontextprotocol/go-sdk #1265](https://github.com/modelcontextprotocol/go-sdk/issues/1265): Reporter has offered to implement either API shape once maintainers decide; coordinate rather than compete.
+- [modelcontextprotocol/python-sdk #3483](https://github.com/modelcontextprotocol/python-sdk/issues/3483): Another contributor reproduced it and explicitly asked to work on the fix.
+- [modelcontextprotocol/python-sdk #3493](https://github.com/modelcontextprotocol/python-sdk/issues/3493): Reporter discussion identifies it as a duplicate of #3357, with existing intent-to-work.
+- [modelcontextprotocol/typescript-sdk #2704](https://github.com/modelcontextprotocol/typescript-sdk/issues/2704): Discussion identifies an existing PR #1995 addressing the reported path.
+- [modelcontextprotocol/typescript-sdk #2705](https://github.com/modelcontextprotocol/typescript-sdk/issues/2705): Another contributor has explicitly claimed the investigation/fix.
+- [modelcontextprotocol/go-sdk #1177](https://github.com/modelcontextprotocol/go-sdk/issues/1177): Discussion points to existing PR #1127.
+- [modelcontextprotocol/go-sdk #1188](https://github.com/modelcontextprotocol/go-sdk/issues/1188): Another contributor has asked to implement the compatibility fix.
 
 #### modelcontextprotocol/python-sdk
 
@@ -289,10 +425,9 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** [#3545 — Server ClientAuthenticator requires client_id in token body, rejecting valid client_secret_basic requests (RFC 6749 §2.3.1)](https://github.com/modelcontextprotocol/python-sdk/issues/3545). **Failure:** Server rejects a Basic-authenticated OAuth request without client_id in its body. **Evidence:** REPORTED: concrete protocol/authentication failure; no local execution. **Before proposing a PR:** Test a legitimate client_secret_basic request, invalid credentials and supported alternative methods. Obtain assignment/help-wanted before a PR. Checked 2026-09-18T19:29:54 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: v2, v1. Scope and maintainer acceptance still need confirmation.
-- **MEDIUM:** [#3544 — tests/client/test_client.py: 14 failures on Windows — AttributeError: '...Result' object has no attribute '_meta'](https://github.com/modelcontextprotocol/python-sdk/issues/3544). **Failure:** Fourteen client snapshot tests fail on Windows because _meta is a wire alias. **Evidence:** REPORTED: locked dependency versions and Windows commands supplied; not reproduced on Windows here. **Before proposing a PR:** Trace inline_snapshot/Pydantic alias ownership; run the affected suite on Windows and another OS. Fix the owning layer, not production wire semantics to appease a test. Checked 2026-09-18T19:30:58 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#3544](https://github.com/modelcontextprotocol/python-sdk/issues/3544): checked 2026-09-18T19:57:45 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#3545](https://github.com/modelcontextprotocol/python-sdk/issues/3545): checked 2026-09-18T19:57:45 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: v2, v1. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#3492](https://github.com/modelcontextprotocol/python-sdk/issues/3492): checked 2026-09-18T19:57:45 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: v2, v1. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
 
 #### modelcontextprotocol/typescript-sdk
 
@@ -307,9 +442,7 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#2515](https://github.com/modelcontextprotocol/typescript-sdk/issues/2515): checked 2026-09-18T19:57:46 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: v2, v1. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 #### modelcontextprotocol/go-sdk
 
@@ -323,19 +456,39 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** [#1263 — mcp: a server cannot send the notifications/cancelled that 2026-07-28 requires when it tears down a subscriptions/listen stream](https://github.com/modelcontextprotocol/go-sdk/issues/1263). **Failure:** Server cannot emit the required subscription-teardown cancellation notification. **Evidence:** REPORTED with protocol citations and a reproducer; new exported API requires proposal approval. **Before proposing a PR:** Prove current wire behavior, agree on teardown ownership/API, and test cancellation/completion ordering and legacy protocol compatibility. Checked 2026-09-18T19:29:54 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
+- [#1263](https://github.com/modelcontextprotocol/go-sdk/issues/1263): checked 2026-09-18T19:57:47 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 ### Google DeepMind / Gemini
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [google-gemini/gemini-cli](https://github.com/google-gemini/gemini-cli) · **DISCOVERY ONLY** | 107,060 · TypeScript | 69/100 = 69.0% | 2.93 d | [267](https://github.com/google-gemini/gemini-cli/pulls) · [216 d](https://github.com/google-gemini/gemini-cli/pull/19013) | [CLA/agreement documented](https://github.com/google-gemini/gemini-cli/blob/09e048fd61bc56df18676211f65703e7f0075f3a/CONTRIBUTING.md). Google CLA. Issue first, linked PR, approval for features. Maintainer-only issues are excluded; use documented /assign when eligible; maximum three assignments. npm run preflight. **Fit:** TypeScript agent CLI with broad adoption. |
-| [google-deepmind/chex](https://github.com/google-deepmind/chex) · **DISCOVERY ONLY** | 958 · Python | 6/7 = 85.7% | 3.4 d | [47](https://github.com/google-deepmind/chex/pulls) · [999 d](https://github.com/google-deepmind/chex/pull/327) | [CLA/agreement documented](https://github.com/google-deepmind/chex/blob/3a437d240643e072f8b15aa7cafdd280b23befcc/CONTRIBUTING.md). Google CLA; use the local contribution guide and test workflow. Confirm active demand on older issues before coding. **Fit:** Small Python/JAX testing library; approachable correctness work. |
+| [google-deepmind/chex](https://github.com/google-deepmind/chex) · **ISSUE LEAD** | 958 · Python | 6/7 = 85.7% | 3.4 d | [47](https://github.com/google-deepmind/chex/pulls) · [999 d](https://github.com/google-deepmind/chex/pull/327) | [CLA/agreement documented](https://github.com/google-deepmind/chex/blob/3a437d240643e072f8b15aa7cafdd280b23befcc/CONTRIBUTING.md). Google CLA; use the local contribution guide and test workflow. Confirm active demand on older issues before coding. **Fit:** Small Python/JAX testing library; approachable correctness work. |
 | [google-deepmind/mujoco](https://github.com/google-deepmind/mujoco) · **ISSUE LEAD** | 15,214 · C++ | 73/96 = 76.0% | 9.79 d | [168](https://github.com/google-deepmind/mujoco/pulls) · [1186 d](https://github.com/google-deepmind/mujoco/pull/937) | [CLA/agreement documented](https://github.com/google-deepmind/mujoco/blob/8be5fa36b2f7ee5e21f3e605a791db67b753ef8a/CONTRIBUTING.md). Google CLA; small tested PRs. Build and execute the changed native code, not just Python tests or syntax checks. **Fit:** Direct DeepMind signal; CPU-runnable simulation correctness, with a C++ learning cost. |
+
+**Six issue slots across this group:** LOW 1/2, MEDIUM 2/2, HIGH 2/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | [google-deepmind/chex](https://github.com/google-deepmind/chex) | [#115 — chex.variants(with_pmap=True) ignores `static_argnames`](https://github.com/google-deepmind/chex/issues/115) | with_pmap silently ignores static_argnames, obscuring why a named-argument test fails. | Add the specific diagnostic discussed by maintainers, with variant tests. | **30–90** | Old volunteer explicitly stepped aside; re-confirm demand. Do not implement unsupported pmap keyword semantics. Google CLA. |
+| LOW | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | [google-deepmind/chex](https://github.com/google-deepmind/chex) | [#296 — Mypy index type error with `chex.dataclass`](https://github.com/google-deepmind/chex/issues/296) | mypy rejects documented indexing on chex.dataclass objects. | Agree on a small typing/documentation contract that represents Mapping behavior; add a type-check fixture. | **80–220** | The desired typing solution is unresolved; do not build a plugin without agreement. Google CLA. |
+| MEDIUM | [google-deepmind/chex](https://github.com/google-deepmind/chex) | [#188 — Dill pickling chex.dataclass blows the stack](https://github.com/google-deepmind/chex/issues/188) | dill serialization of a chex.dataclass raises RecursionError while pickle succeeds. | Find the recursive serialization hook and add a round-trip regression. | **80–220** | Reproduce against current Chex/dill/JAX; confirm supported serialization contract. Google CLA. |
+| HIGH | [google-deepmind/mujoco](https://github.com/google-deepmind/mujoco) | [#3596 — mj_recompile preserves actuator controls by actuator index instead of control-block identity](https://github.com/google-deepmind/mujoco/issues/3596) | Recompile preserves actuator controls by index rather than the identity of a control block. | Map preserved controls by the correct block identity and test reordering and size changes. | **180–450** | Build and run native tests, including sanitizer checks; Google CLA. |
+| HIGH | [google-deepmind/mujoco](https://github.com/google-deepmind/mujoco) | [#3597 — Delayed multi-input actuators use uninitialized control slots](https://github.com/google-deepmind/mujoco/issues/3597) | Delayed multi-input actuators consume uninitialized control slots. | Initialize and index delayed control history correctly, with multi-input deterministic regressions. | **180–450** | Requires native build, memory sanitizer/ASan where appropriate, and agreement on delay semantics. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [google-gemini/gemini-cli #29298](https://github.com/google-gemini/gemini-cli/issues/29298): A contributor confirmed the missing loop and says they are sending the one-line PR.
+- [google-deepmind/chex #355](https://github.com/google-deepmind/chex/issues/355): Maintainer says the traceback does not import Chex; repository ownership is unestablished.
 
 #### google-gemini/gemini-cli
 
@@ -349,9 +502,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### google-deepmind/chex
 
@@ -366,9 +517,9 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#115](https://github.com/google-deepmind/chex/issues/115): checked 2026-09-18T19:57:49 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 9 comments fetched (maximum 100).
+- [#296](https://github.com/google-deepmind/chex/issues/296): checked 2026-09-18T19:57:48 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#188](https://github.com/google-deepmind/chex/issues/188): checked 2026-09-18T19:57:49 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 #### google-deepmind/mujoco
 
@@ -383,18 +534,34 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** [#3596 — mj_recompile preserves actuator controls by actuator index instead of control-block identity](https://github.com/google-deepmind/mujoco/issues/3596). **Failure:** Recompile preserves controls by actuator ordinal instead of control-block identity. **Evidence:** REPORTED with native reproduction; prior source inspection supports investigation, not a completed runtime verification. **Before proposing a PR:** Build current native library; test zero-, one- and multi-input actuators, remapping and no-op recompile, including sanitizers. Checked 2026-09-18T19:29:54 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: bug. Scope and maintainer acceptance still need confirmation.
-- **HIGH:** [#3585 — mj_recompile resets documented integration-state fields on a no-op recompile](https://github.com/google-deepmind/mujoco/issues/3585). **Failure:** No-op recompile resets documented integration-state fields. **Evidence:** REPORTED with state-preservation cases; native suite not executed here. **Before proposing a PR:** Agree on the exact preserved-state contract; compare before/after state on the changed native build, including topology changes. Checked 2026-09-18T19:29:55 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: bug. Scope and maintainer acceptance still need confirmation.
+- [#3596](https://github.com/google-deepmind/mujoco/issues/3596): checked 2026-09-18T19:57:49 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: bug. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#3597](https://github.com/google-deepmind/mujoco/issues/3597): checked 2026-09-18T19:57:49 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: bug. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 ### xAI
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [xai-org/xai-sdk-python](https://github.com/xai-org/xai-sdk-python) · **DISCOVERY ONLY** | 575 · Python | 31/100 = 31.0% | 0.18 d | [31](https://github.com/xai-org/xai-sdk-python/pulls) · [260 d](https://github.com/xai-org/xai-sdk-python/pull/79) | [CLA/agreement documented](https://github.com/xai-org/xai-sdk-python/blob/4dab6a449736890a70d20bc886221a4219ff6ae7/.github/PULL_REQUEST_TEMPLATE.md). xAI CLA; PR template asks for an approved issue except minor changes. Ruff, typing and pytest checks. Release/version management belongs to maintainers. **Fit:** Python client reliability is accessible without GPU kernels. |
+| [xai-org/x-algorithm](https://github.com/xai-org/x-algorithm) · **DISCOVERY ONLY** | 33,240 · Rust | 1/1 = 100.0% | 1.72 d | [74](https://github.com/xai-org/x-algorithm/pulls) · [35 d](https://github.com/xai-org/x-algorithm/pull/7) | CLA/DCO not established in inspected files. No contribution guide or GitHub Actions CI established in the inspected tree. A tiny merge sample cannot establish a reliable external route; user feed complaints may be hosted-product behavior. **Fit:** Python/Rust ranking and ML systems code, but release visibility is stronger than outsider-intake evidence. |
+| [xai-org/grok-build-plugin-cc](https://github.com/xai-org/grok-build-plugin-cc) · **DISCOVERY ONLY** | 249 · JavaScript | 3/3 = 100.0% | 5.49 d | [14](https://github.com/xai-org/grok-build-plugin-cc/pulls) · [51 d](https://github.com/xai-org/grok-build-plugin-cc/pull/10) | CLA/DCO not established in inspected files. README documents executable bridge behavior, not merely a skill catalog. No explicit external-code intake commitment found. Most screened complaints concern the upstream CLI; only bridge-owned defects qualify. **Fit:** Editable bridge process/session logic is distinct from the proprietary Grok executable. |
+
+**Six issue slots across this group:** LOW 0/2, MEDIUM 0/2, HIGH 0/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| HIGH | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+No PR option survived this pass. This is a queue/ownership/policy finding within the inspected evidence, not proof that future contributions are impossible. Start with the repo issue links and current intake rules below; do not spend an implementation week here without an accepted problem.
 
 #### xai-org/xai-sdk-python
 
@@ -408,19 +575,67 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
+
+#### xai-org/x-algorithm
+
+**Sample:** N=1, bots=0, human/unresolved=1, candidate external=1; merges 2026-09-03 to 2026-09-03. Exact most-recent cohort recovered. Snapshot 2026-09-18T19:52:23 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
+**Recent candidate-external examples:** [#88: Deduplicate in_network_ids before VF lookup](https://github.com/xai-org/x-algorithm/pull/88).
+**Oldest observed external queue entries:** [#7](https://github.com/xai-org/x-algorithm/pull/7) (35 d; opened 2026-08-13); [#9](https://github.com/xai-org/x-algorithm/pull/9) (35 d; opened 2026-08-13); [#10](https://github.com/xai-org/x-algorithm/pull/10) (35 d; opened 2026-08-13).
+
+**Policy sources at pinned commit:** [README.md](https://github.com/xai-org/x-algorithm/blob/c279172eb8a992170f077d4c1d441923ef215d2e/README.md).
+No CONTRIBUTING file found in the inspected tree; missing policy is not permission.
+No repository-local PR template found; inherited organization templates were not fully audited.
+**CI inspected:** No GitHub Actions workflow found in the inspected tree; other/private CI is unverified..
+
+**Issue candidates — re-check within hours:**
+
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
+
+#### xai-org/grok-build-plugin-cc
+
+**Sample:** N=3, bots=0, human/unresolved=3, candidate external=3; merges 2026-08-04 to 2026-08-04. Exact most-recent cohort recovered. Snapshot 2026-09-18T19:52:22 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
+**Recent candidate-external examples:** [#12: fix: headless read-only runs can't auto-approve within their own sandbox](https://github.com/xai-org/grok-build-plugin-cc/pull/12); [#13: fix: disable shell for git commands on Windows (EXSECRE-1190)](https://github.com/xai-org/grok-build-plugin-cc/pull/13); [#8: Document GitHub marketplace install in README](https://github.com/xai-org/grok-build-plugin-cc/pull/8).
+**Oldest observed external queue entries:** [#10](https://github.com/xai-org/grok-build-plugin-cc/pull/10) (51 d; opened 2026-07-29); [#11](https://github.com/xai-org/grok-build-plugin-cc/pull/11) (51 d; opened 2026-07-29); [#15](https://github.com/xai-org/grok-build-plugin-cc/pull/15) (43 d; opened 2026-08-05).
+
+**Policy sources at pinned commit:** [README.md](https://github.com/xai-org/grok-build-plugin-cc/blob/92b76a670713335229644e94add15ab40c80e547/README.md).
+No CONTRIBUTING file found in the inspected tree; missing policy is not permission.
+No repository-local PR template found; inherited organization templates were not fully audited.
+**CI inspected:** No GitHub Actions workflow found in the inspected tree; other/private CI is unverified..
+
+**Issue candidates — re-check within hours:**
+
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 ### Cognition / Devin
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [CognitionAI/terraform-provider-devin](https://github.com/CognitionAI/terraform-provider-devin) · **DISCOVERY ONLY** | 7 · Go | N/A (no human sample) | N/A | [2](https://github.com/CognitionAI/terraform-provider-devin/pulls) · [67 d](https://github.com/CognitionAI/terraform-provider-devin/pull/2) | CLA/DCO not established in inspected files. Provider resource code is handwritten; models.gen.go and Terraform docs are generated. No merged sample or convincing outsider intake path found. **Fit:** Go CRUD/schema code is a good language fit. |
-| [CognitionAI/metabase-mcp-server](https://github.com/CognitionAI/metabase-mcp-server) · **DISCOVERY ONLY** | 63 · TypeScript | 5/5 = 100.0% | 0.24 d | [16](https://github.com/CognitionAI/metabase-mcp-server/pulls) · [258 d](https://github.com/CognitionAI/metabase-mcp-server/pull/14) | CLA/DCO not established in inspected files. Sparse merge history and no clear repo-local contribution policy. Five apparent outsider merges are too few to establish a reliable route. **Fit:** Small TypeScript integration surface. |
+| [CognitionAI/metabase-mcp-server](https://github.com/CognitionAI/metabase-mcp-server) · **ISSUE LEAD** | 63 · TypeScript | 5/5 = 100.0% | 0.24 d | [16](https://github.com/CognitionAI/metabase-mcp-server/pulls) · [258 d](https://github.com/CognitionAI/metabase-mcp-server/pull/14) | CLA/DCO not established in inspected files. Sparse merge history and no clear repo-local contribution policy. Five apparent outsider merges are too few to establish a reliable route. **Fit:** Small TypeScript integration surface. |
 | [CognitionAI/devin-cli](https://github.com/CognitionAI/devin-cli) · **DISCOVERY ONLY** | 3 · Python | 0/1 = 0.0% | N/A | [0](https://github.com/CognitionAI/devin-cli/pulls) · none identified in scanned set | CLA/DCO not established in inspected files. Tiny merge sample; public issues do not establish access to the underlying Devin implementation. No reliable external-code route verified. **Fit:** Python-facing entry point, but limited visible development. |
+
+**Six issue slots across this group:** LOW 0/2, MEDIUM 2/2, HIGH 0/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | [CognitionAI/metabase-mcp-server](https://github.com/CognitionAI/metabase-mcp-server) | [#22 — `--read` mode removed and `--write` semantics changed between npm v1.0.14 and GitHub HEAD](https://github.com/CognitionAI/metabase-mcp-server/issues/22) | Published and source versions disagree on --read and --write filtering; documented flags fall through. | Align the agreed CLI contract, flag parsing and tool-filter tests. | **70–180** | Confirm intended v2 behavior and current release ownership before implementing; sparse review evidence. |
+| MEDIUM | [CognitionAI/metabase-mcp-server](https://github.com/CognitionAI/metabase-mcp-server) | [#17 — update_table doesn't work](https://github.com/CognitionAI/metabase-mcp-server/issues/17) | update_table reports success but does not update a description; direct API calls work for the reporter. | Reproduce the outgoing request and correct only the actual header/body difference. | **50–150** | The suggested Axios replacement is not proven necessary; use a real supported Metabase instance and mock request assertions. |
+| HIGH | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [CognitionAI/metabase-mcp-server #28](https://github.com/CognitionAI/metabase-mcp-server/issues/28): Source already contains the fix; the remaining npm release is maintainer work.
+- [CognitionAI/metabase-mcp-server #26](https://github.com/CognitionAI/metabase-mcp-server/issues/26): Likely overlaps the fixed source/published-package mismatch; needs release verification.
 
 #### CognitionAI/terraform-provider-devin
 
@@ -434,9 +649,7 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### CognitionAI/metabase-mcp-server
 
@@ -451,9 +664,8 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#22](https://github.com/CognitionAI/metabase-mcp-server/issues/22): checked 2026-09-18T19:57:51 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#17](https://github.com/CognitionAI/metabase-mcp-server/issues/17): checked 2026-09-18T19:57:51 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 #### CognitionAI/devin-cli
 
@@ -466,17 +678,33 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 ### Cursor / Anysphere
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [anysphere/priompt](https://github.com/anysphere/priompt) · **DISCOVERY ONLY** | 2,854 · TypeScript | 5/5 = 100.0% | 0.14 d | [5](https://github.com/anysphere/priompt/pulls) · [658 d](https://github.com/anysphere/priompt/pull/20) | CLA/DCO not established in inspected files. README welcomes contributions; very small historical sample and old queued work. Verify maintainer availability. **Fit:** TypeScript prompt construction; some Rust tooling. |
+| [cursor/minisqlite](https://github.com/cursor/minisqlite) · **DISCOVERY ONLY** | 279 · Rust | N/A (no human sample) | N/A | [0](https://github.com/cursor/minisqlite/pulls) · none identified in scanned set | CLA/DCO not established in inspected files. README documents cargo test --workspace. No contribution guide/PR template found; no human merged sample. No unclaimed actionable bug verified; do not infer acceptance from public source. **Fit:** Rust storage-engine correctness is a stretch from your strongest languages. |
+| [cursor/mixture-of-kittens](https://github.com/cursor/mixture-of-kittens) · **DISCOVERY ONLY** | 588 · Python | 1/1 = 100.0% | 1.17 d | [5](https://github.com/cursor/mixture-of-kittens/pulls) · [44 d](https://github.com/cursor/mixture-of-kittens/pull/2) | [DCO/sign-off documented](https://github.com/cursor/mixture-of-kittens/blob/22fc95ae6e331a738c4a58a227a8b03cac586e12/CONTRIBUTING.md). CONTRIBUTING welcomes PRs and requires DCO sign-off on every commit. NVL72 kernel validation is a substantial hardware gate. No suitable open issue verified. **Fit:** C++/CUDA kernel work provides deep systems signal but needs specialist hardware. |
+
+**Six issue slots across this group:** LOW 0/2, MEDIUM 0/2, HIGH 0/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| HIGH | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+No PR option survived this pass. This is a queue/ownership/policy finding within the inspected evidence, not proof that future contributions are impossible. Start with the repo issue links and current intake rules below; do not spend an implementation week here without an accepted problem.
 
 #### anysphere/priompt
 
@@ -491,88 +719,91 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
-### Agentica / DeepSWE
+#### cursor/minisqlite
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+**Sample:** N=0, bots=0, human/unresolved=0, candidate external=0; merges N/A to N/A. Exact most-recent cohort recovered. Snapshot 2026-09-18T19:52:22 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
 
-| Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
-|---|---|---|---|---|---|
-| [agentica-project/rllm](https://github.com/agentica-project/rllm) · **DISCOVERY ONLY** | 413 · Jupyter Notebook | N/A (no human sample) | N/A | [0](https://github.com/agentica-project/rllm/pulls) · none identified in scanned set | CLA/DCO not established in inspected files. Contributing guide exists, but no merged PR sample here. Check README upstream links before choosing a development home; do not equate DeepSWE research visibility with open review capacity. **Fit:** Python RL/agent experimentation fits the role. |
-| [agentica-project/R2E-Gym](https://github.com/agentica-project/R2E-Gym) · **DISCOVERY ONLY** | 23 · Python | 6/7 = 85.7% | 3.23 d | [0](https://github.com/agentica-project/R2E-Gym/pulls) · none identified in scanned set | CLA/DCO not established in inspected files. Few merges and no strong intake policy; a reproducible environment fix is more realistic than changing the research recipe. **Fit:** Python software-engineering training/evaluation environments. |
-| [agentica-project/verl-pipeline](https://github.com/agentica-project/verl-pipeline) · **DISCOVERY ONLY** | 123 · Python | N/A (no human sample) | N/A | [0](https://github.com/agentica-project/verl-pipeline/pulls) · none identified in scanned set | CLA/DCO not established in inspected files. README contribution links point to upstream verl. No merges in this repository; confirm the correct upstream. **Fit:** Python RL pipeline work, with compute requirements. |
-
-#### agentica-project/rllm
-
-**Sample:** N=0, bots=0, human/unresolved=0, candidate external=0; merges N/A to N/A. Exact most-recent cohort recovered. Snapshot 2026-09-18T15:03:46 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
-
-**Policy sources at pinned commit:** [README.md](https://github.com/agentica-project/rllm/blob/7b47687f6a9ef1bf5cbd56dd1af61fff08c4b0e4/README.md); [docs/contributing.md](https://github.com/agentica-project/rllm/blob/7b47687f6a9ef1bf5cbd56dd1af61fff08c4b0e4/docs/contributing.md).
-No repository-local PR template found; inherited organization templates were not fully audited.
-**CI inspected:** [.github/workflows/pre-commit.yml](https://github.com/agentica-project/rllm/blob/7b47687f6a9ef1bf5cbd56dd1af61fff08c4b0e4/.github/workflows/pre-commit.yml).
-
-**Issue candidates — re-check within hours:**
-
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-
-#### agentica-project/R2E-Gym
-
-**Sample:** N=7, bots=0, human/unresolved=7, candidate external=6; merges 2025-05-08 to 2025-07-01. Exact most-recent cohort recovered. Snapshot 2026-09-18T15:03:47 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
-**Recent candidate-external examples:** [#11: Clean Up](https://github.com/agentica-project/R2E-Gym/pull/11); [#7: Swe Smith Docker Integration](https://github.com/agentica-project/R2E-Gym/pull/7); [#5: Swesmith-mergable](https://github.com/agentica-project/R2E-Gym/pull/5).
-
-**Policy sources at pinned commit:** [README.md](https://github.com/agentica-project/R2E-Gym/blob/353348a0ff690f2592025eff41b3fef4201a4d8b/README.md).
+**Policy sources at pinned commit:** [README.md](https://github.com/cursor/minisqlite/blob/4a5c1341fdde38beaf438e0241c9f45833c4b870/README.md).
 No CONTRIBUTING file found in the inspected tree; missing policy is not permission.
 No repository-local PR template found; inherited organization templates were not fully audited.
 **CI inspected:** No GitHub Actions workflow found in the inspected tree; other/private CI is unverified..
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
-#### agentica-project/verl-pipeline
+#### cursor/mixture-of-kittens
 
-**Sample:** N=0, bots=0, human/unresolved=0, candidate external=0; merges N/A to N/A. Exact most-recent cohort recovered. Snapshot 2026-09-18T15:03:47 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
+**Sample:** N=1, bots=0, human/unresolved=1, candidate external=1; merges 2026-08-10 to 2026-08-10. Exact most-recent cohort recovered. Snapshot 2026-09-18T19:52:24 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
+**Recent candidate-external examples:** [#11: Support DSV4-style clamped SwiGLU in the megakernel](https://github.com/cursor/mixture-of-kittens/pull/11).
+**Oldest observed external queue entries:** [#2](https://github.com/cursor/mixture-of-kittens/pull/2) (44 d; opened 2026-08-04); [#4](https://github.com/cursor/mixture-of-kittens/pull/4) (44 d; opened 2026-08-04); [#8](https://github.com/cursor/mixture-of-kittens/pull/8) (43 d; opened 2026-08-06).
 
-**Policy sources at pinned commit:** [README.md](https://github.com/agentica-project/verl-pipeline/blob/97c326f5bb97044eb6f7ae8fed135cd4a12bac12/README.md).
-No CONTRIBUTING file found in the inspected tree; missing policy is not permission.
+**Policy sources at pinned commit:** [CONTRIBUTING.md](https://github.com/cursor/mixture-of-kittens/blob/22fc95ae6e331a738c4a58a227a8b03cac586e12/CONTRIBUTING.md); [README.md](https://github.com/cursor/mixture-of-kittens/blob/22fc95ae6e331a738c4a58a227a8b03cac586e12/README.md).
 No repository-local PR template found; inherited organization templates were not fully audited.
 **CI inspected:** No GitHub Actions workflow found in the inspected tree; other/private CI is unverified..
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 ### Together AI
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
-| [togethercomputer/together-python](https://github.com/togethercomputer/together-python) · **DISCOVERY ONLY** | 81 · Python | 71/95 = 74.7% | 0.8 d | [0](https://github.com/togethercomputer/together-python/pulls) · none identified in scanned set | CLA/DCO not established in inspected files. README says v1 is in maintenance mode and new work belongs in v2. Do not interpret historical merges as permission for new features here. **Fit:** Python client work, but this is the older SDK line. |
-| [togethercomputer/RedPajama-Data](https://github.com/togethercomputer/RedPajama-Data) · **DISCOVERY ONLY** | 4,983 · Python | 9/16 = 56.2% | 0.05 d | [7](https://github.com/togethercomputer/RedPajama-Data/pulls) · [1239 d](https://github.com/togethercomputer/RedPajama-Data/pull/29) | CLA/DCO not established in inspected files. Historical small sample, very old queued PRs; confirm current maintenance before beginning. **Fit:** Python data quality and deduplication are relevant ML infrastructure. |
+| [togethercomputer/together-py](https://github.com/togethercomputer/together-py) · **DISCOVERY ONLY** | 10 · Python | 6/31 = 19.4% | 4.13 d | [20](https://github.com/togethercomputer/together-py/pulls) · [120 d](https://github.com/togethercomputer/together-py/pull/380) | CLA/DCO not established in inspected files. Stainless generated; docs say manual modifications can persist but may conflict. src/together/lib is the explicit non-generated custom surface. Confirm generator ownership and run documented lint/tests. **Fit:** Current Python SDK/custom helpers fit better than the older maintenance SDK. |
+| [togethercomputer/together-typescript](https://github.com/togethercomputer/together-typescript) · **DISCOVERY ONLY** | 71 · TypeScript | 2/12 = 16.7% | 47.45 d | [6](https://github.com/togethercomputer/together-typescript/pulls) · [700 d](https://github.com/togethercomputer/together-typescript/pull/66) | CLA/DCO not established in inspected files. Stainless generated; src/lib is the custom-code route. Use the documented package toolchain and tests; do not treat generated API shapes as freely hand-editable. **Fit:** TypeScript SDK/runtime integration matches your skills. |
+| [togethercomputer/RedPajama-Data](https://github.com/togethercomputer/RedPajama-Data) · **ISSUE LEAD** | 4,983 · Python | 9/16 = 56.2% | 0.05 d | [7](https://github.com/togethercomputer/RedPajama-Data/pulls) · [1239 d](https://github.com/togethercomputer/RedPajama-Data/pull/29) | CLA/DCO not established in inspected files. Historical small sample, very old queued PRs; confirm current maintenance before beginning. **Fit:** Python data quality and deduplication are relevant ML infrastructure. |
 
-#### togethercomputer/together-python
+**Six issue slots across this group:** LOW 1/2, MEDIUM 1/2, HIGH 0/2.
 
-**Sample:** N=100, bots=5, human/unresolved=95, candidate external=71; merges 2025-02-13 to 2026-03-19. Exact most-recent cohort recovered. Snapshot 2026-09-18T15:03:48 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
-**Recent candidate-external examples:** [#436: Fix sse handling for speech models](https://github.com/togethercomputer/together-python/pull/436); [#419: deprecate prompt cache in sdk/cli](https://github.com/togethercomputer/together-python/pull/419); [#415: Fix progress bar estimation for FT Jobs ](https://github.com/togethercomputer/together-python/pull/415).
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
 
-**Policy sources at pinned commit:** [.github/PULL_REQUEST_TEMPLATE.md](https://github.com/togethercomputer/together-python/blob/cc9f25369987e73bcd037be955833c37ac8a9109/.github/PULL_REQUEST_TEMPLATE.md); [CONTRIBUTING.md](https://github.com/togethercomputer/together-python/blob/cc9f25369987e73bcd037be955833c37ac8a9109/CONTRIBUTING.md); [README.md](https://github.com/togethercomputer/together-python/blob/cc9f25369987e73bcd037be955833c37ac8a9109/README.md).
-**CI inspected:** [.github/workflows/_integration_tests.yml](https://github.com/togethercomputer/together-python/blob/cc9f25369987e73bcd037be955833c37ac8a9109/.github/workflows/_integration_tests.yml); [.github/workflows/_tests.yml](https://github.com/togethercomputer/together-python/blob/cc9f25369987e73bcd037be955833c37ac8a9109/.github/workflows/_tests.yml); [.github/workflows/check_code_quality.yml](https://github.com/togethercomputer/together-python/blob/cc9f25369987e73bcd037be955833c37ac8a9109/.github/workflows/check_code_quality.yml); [.github/workflows/upload-to-pypi.yml](https://github.com/togethercomputer/together-python/blob/cc9f25369987e73bcd037be955833c37ac8a9109/.github/workflows/upload-to-pypi.yml).
-**Affiliation adjustments:** [blainekasten](https://github.com/blainekasten) — public company: @togetherai; [atihkin](https://github.com/atihkin) — public company: @togethercomputer; [newokaerinasai](https://github.com/newokaerinasai) — public company: Together AI. Evidence is public profile/core-role information at collection time, not proof of employment when each PR merged.
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | [togethercomputer/RedPajama-Data](https://github.com/togethercomputer/RedPajama-Data) | [#107 — Step 2) "Invalid option: ---input_base_uri"](https://github.com/togethercomputer/RedPajama-Data/issues/107) | A documented artifact-processing command supplies flags the script rejects. | Correct the command/config contract at its source. | **10–40** | Maintainer explained that these values belong in the config; first verify current docs still contain the mismatch and that maintenance is active. |
+| LOW | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | [togethercomputer/RedPajama-Data](https://github.com/togethercomputer/RedPajama-Data) | [#110 — Spanish artifact building error](https://github.com/togethercomputer/RedPajama-Data/issues/110) | Spanish artifact preparation fails in the Wikipedia fallback loader. | Repair supported snapshot selection and loader arguments with a tiny fixture. | **60–160** | Old report has a user workaround; re-establish current failure and supported datasets API before a PR. |
+| MEDIUM | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| HIGH | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+
+#### togethercomputer/together-py
+
+**Sample:** N=100, bots=69, human/unresolved=31, candidate external=6; merges 2026-07-18 to 2026-09-17. Exact most-recent cohort recovered. Snapshot 2026-09-18T19:52:25 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
+**Recent candidate-external examples:** [#558: Fix oversized Parquet file validation](https://github.com/togethercomputer/together-py/pull/558); [#530: fix(Endpoints CLI): Rename models output label 'Inference Name' to 'Endpoint string'](https://github.com/togethercomputer/together-py/pull/530); [#509: DX-881: pass language at session start via the connection URL](https://github.com/togethercomputer/together-py/pull/509).
+**Oldest observed external queue entries:** [#380](https://github.com/togethercomputer/together-py/pull/380) (120 d; opened 2026-05-21); [#516](https://github.com/togethercomputer/together-py/pull/516) (42 d; opened 2026-08-07); [#556](https://github.com/togethercomputer/together-py/pull/556) (15 d; opened 2026-09-03).
+
+**Policy sources at pinned commit:** [CONTRIBUTING.md](https://github.com/togethercomputer/together-py/blob/b0c7f91e283a4b674c82be7558e69ddcadc46487/CONTRIBUTING.md); [README.md](https://github.com/togethercomputer/together-py/blob/b0c7f91e283a4b674c82be7558e69ddcadc46487/README.md).
+No repository-local PR template found; inherited organization templates were not fully audited.
+**CI inspected:** [.github/workflows/ci.yml](https://github.com/togethercomputer/together-py/blob/b0c7f91e283a4b674c82be7558e69ddcadc46487/.github/workflows/ci.yml); [.github/workflows/linear_pr_checker.yml](https://github.com/togethercomputer/together-py/blob/b0c7f91e283a4b674c82be7558e69ddcadc46487/.github/workflows/linear_pr_checker.yml); [.github/workflows/publish-pypi.yml](https://github.com/togethercomputer/together-py/blob/b0c7f91e283a4b674c82be7558e69ddcadc46487/.github/workflows/publish-pypi.yml); [.github/workflows/release-doctor.yml](https://github.com/togethercomputer/together-py/blob/b0c7f91e283a4b674c82be7558e69ddcadc46487/.github/workflows/release-doctor.yml); [.github/workflows/release-please.yml](https://github.com/togethercomputer/together-py/blob/b0c7f91e283a4b674c82be7558e69ddcadc46487/.github/workflows/release-please.yml); [.github/workflows/stlc-promote.yml](https://github.com/togethercomputer/together-py/blob/b0c7f91e283a4b674c82be7558e69ddcadc46487/.github/workflows/stlc-promote.yml); [.github/workflows/stlc-sync.yml](https://github.com/togethercomputer/together-py/blob/b0c7f91e283a4b674c82be7558e69ddcadc46487/.github/workflows/stlc-sync.yml); [.github/workflows/trunk-sync-lock.yml](https://github.com/togethercomputer/together-py/blob/b0c7f91e283a4b674c82be7558e69ddcadc46487/.github/workflows/trunk-sync-lock.yml).
+**Affiliation adjustments:** [blainekasten](https://github.com/blainekasten) — public company: @togetherai; [fredred375](https://github.com/fredred375) — current-work profile: SWE at @togethercomputer ; [narasul](https://github.com/narasul) — public company: Together AI. Evidence is public profile/core-role information at collection time, not proof of employment when each PR merged.
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
+
+#### togethercomputer/together-typescript
+
+**Sample:** N=100, bots=88, human/unresolved=12, candidate external=2; merges 2025-02-18 to 2026-09-17. Exact most-recent cohort recovered. Snapshot 2026-09-18T19:52:25 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
+**Recent candidate-external examples:** [#223: Add npm support metadata](https://github.com/togethercomputer/together-typescript/pull/223); [#130: when uploading file to signed url, content-length is required unless …](https://github.com/togethercomputer/together-typescript/pull/130).
+**Oldest observed external queue entries:** [#66](https://github.com/togethercomputer/together-typescript/pull/66) (700 d; opened 2024-10-17); [#105](https://github.com/togethercomputer/together-typescript/pull/105) (647 d; opened 2024-12-09); [#248](https://github.com/togethercomputer/together-typescript/pull/248) (2 d; opened 2026-09-15).
+
+**Policy sources at pinned commit:** [CONTRIBUTING.md](https://github.com/togethercomputer/together-typescript/blob/1c96d542aebe74fa865125b4d8e8948b53ae97a7/CONTRIBUTING.md); [README.md](https://github.com/togethercomputer/together-typescript/blob/1c96d542aebe74fa865125b4d8e8948b53ae97a7/README.md).
+No repository-local PR template found; inherited organization templates were not fully audited.
+**CI inspected:** [.github/workflows/ci.yml](https://github.com/togethercomputer/together-typescript/blob/1c96d542aebe74fa865125b4d8e8948b53ae97a7/.github/workflows/ci.yml); [.github/workflows/publish-npm.yml](https://github.com/togethercomputer/together-typescript/blob/1c96d542aebe74fa865125b4d8e8948b53ae97a7/.github/workflows/publish-npm.yml); [.github/workflows/release-doctor.yml](https://github.com/togethercomputer/together-typescript/blob/1c96d542aebe74fa865125b4d8e8948b53ae97a7/.github/workflows/release-doctor.yml); [.github/workflows/release-please.yml](https://github.com/togethercomputer/together-typescript/blob/1c96d542aebe74fa865125b4d8e8948b53ae97a7/.github/workflows/release-please.yml); [.github/workflows/stlc-promote.yml](https://github.com/togethercomputer/together-typescript/blob/1c96d542aebe74fa865125b4d8e8948b53ae97a7/.github/workflows/stlc-promote.yml); [.github/workflows/stlc-sync.yml](https://github.com/togethercomputer/together-typescript/blob/1c96d542aebe74fa865125b4d8e8948b53ae97a7/.github/workflows/stlc-sync.yml); [.github/workflows/trunk-sync-lock.yml](https://github.com/togethercomputer/together-typescript/blob/1c96d542aebe74fa865125b4d8e8948b53ae97a7/.github/workflows/trunk-sync-lock.yml).
+**Affiliation adjustments:** [blainekasten](https://github.com/blainekasten) — public company: @togetherai. Evidence is public profile/core-role information at collection time, not proof of employment when each PR merged.
+
+**Issue candidates — re-check within hours:**
+
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### togethercomputer/RedPajama-Data
 
@@ -588,19 +819,39 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#107](https://github.com/togethercomputer/RedPajama-Data/issues/107): checked 2026-09-18T19:57:53 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+- [#110](https://github.com/togethercomputer/RedPajama-Data/issues/110): checked 2026-09-18T19:57:53 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 2 comments fetched (maximum 100).
 
 ### Prime Intellect
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
-| [PrimeIntellect-ai/verifiers](https://github.com/PrimeIntellect-ai/verifiers) · **DISCOVERY ONLY** | 4,631 · Python | 11/99 = 11.1% | 1.23 d | [158](https://github.com/PrimeIntellect-ai/verifiers/pulls) · [395 d](https://github.com/PrimeIntellect-ai/verifiers/pull/214) | CLA/DCO not established in inspected files. Inspect current v1 scope and issue design. Small outsider share and substantial queue; avoid broad RL changes without agreement. **Fit:** Python environment/reward interfaces; strong RL systems signal. |
-| [PrimeIntellect-ai/prime-rl](https://github.com/PrimeIntellect-ai/prime-rl) · **DISCOVERY ONLY** | 2,051 · Python | 21/100 = 21.0% | 0.59 d | [194](https://github.com/PrimeIntellect-ai/prime-rl/pulls) · [165 d](https://github.com/PrimeIntellect-ai/prime-rl/pull/2202) | CLA/DCO not established in inspected files. README welcomes PRs and issues; CPU tests, GPU tests and training benchmarks are separate. Exclude internal-only issues and budget real hardware validation for performance claims. **Fit:** Python RL training/orchestration, deeper ML signal. |
+| [PrimeIntellect-ai/verifiers](https://github.com/PrimeIntellect-ai/verifiers) · **ISSUE LEAD** | 4,631 · Python | 11/99 = 11.1% | 1.23 d | [158](https://github.com/PrimeIntellect-ai/verifiers/pulls) · [395 d](https://github.com/PrimeIntellect-ai/verifiers/pull/214) | CLA/DCO not established in inspected files. Inspect current v1 scope and issue design. Small outsider share and substantial queue; avoid broad RL changes without agreement. **Fit:** Python environment/reward interfaces; strong RL systems signal. |
+| [PrimeIntellect-ai/prime-rl](https://github.com/PrimeIntellect-ai/prime-rl) · **ISSUE LEAD** | 2,051 · Python | 21/100 = 21.0% | 0.59 d | [194](https://github.com/PrimeIntellect-ai/prime-rl/pulls) · [165 d](https://github.com/PrimeIntellect-ai/prime-rl/pull/2202) | CLA/DCO not established in inspected files. README welcomes PRs and issues; CPU tests, GPU tests and training benchmarks are separate. Exclude internal-only issues and budget real hardware validation for performance claims. **Fit:** Python RL training/orchestration, deeper ML signal. |
 | [PrimeIntellect-ai/prime](https://github.com/PrimeIntellect-ai/prime) · **ISSUE LEAD** | 327 · Python | 37/100 = 37.0% | 0.12 d | [31](https://github.com/PrimeIntellect-ai/prime/pulls) · [149 d](https://github.com/PrimeIntellect-ai/prime/pull/549) | CLA/DCO not established in inspected files. Smaller practical surface than training kernels. Clarify whether an error is client-side or hosted-service authorization before patching. **Fit:** Python CLI and environment workflow reliability. |
+
+**Six issue slots across this group:** LOW 0/2, MEDIUM 2/2, HIGH 1/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | [PrimeIntellect-ai/prime](https://github.com/PrimeIntellect-ai/prime) | [#876 — prime eval push fails with 403 'You are not a member of this team' for user-owned environments](https://github.com/PrimeIntellect-ai/prime/issues/876) | Evaluation uploads for user-owned environments fail with team authorization errors; exception classes also differ. | Fix client owner lookup and exception handling with user/team/error fixtures. | **100–250** | Prove the client-side boundary before touching the hosted API; do not bypass server authorization. |
+| MEDIUM | [PrimeIntellect-ai/prime-rl](https://github.com/PrimeIntellect-ai/prime-rl) | [#3566 — solve_rates assumes binary rewards; expose a correctness threshold?](https://github.com/PrimeIntellect-ai/prime-rl/issues/3566) | Solve-rate metrics give misleading buckets for continuous rewards. | Agree on non-binary reward semantics, then validate or compute metrics consistently. | **90–230** | Maintainer decision on threshold versus unsupported metric is required; preserve binary-reward results. |
+| HIGH | [PrimeIntellect-ai/verifiers](https://github.com/PrimeIntellect-ai/verifiers) | [#2194 — v1: enforce artifact bounds during transfer and validate restore archives](https://github.com/PrimeIntellect-ai/verifiers/issues/2194) | Artifact size checks can race the transfer, and restore does not validate archive members against the root. | Bound the actual read and validate the archive before restore, with adversarial fixtures. | **180–400** | Coordinate with artifact redesign #2189 and follow the security process; avoid broad transport rewrites. |
+| HIGH | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [PrimeIntellect-ai/prime #795](https://github.com/PrimeIntellect-ai/prime/issues/795): A contributor has offered the mapping patch and banner after confirming the initializer contract.
+- [PrimeIntellect-ai/prime-rl #3532](https://github.com/PrimeIntellect-ai/prime-rl/issues/3532): Discussion says the renderer control is train-only and eval validation differs; a contributor offered docs/warning work. No agreed eval implementation scope.
 
 #### PrimeIntellect-ai/verifiers
 
@@ -616,9 +867,7 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#2194](https://github.com/PrimeIntellect-ai/verifiers/issues/2194): checked 2026-09-18T19:57:53 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 #### PrimeIntellect-ai/prime-rl
 
@@ -634,9 +883,7 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#3566](https://github.com/PrimeIntellect-ai/prime-rl/issues/3566): checked 2026-09-18T19:57:54 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 #### PrimeIntellect-ai/prime
 
@@ -652,19 +899,42 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** [#876 — prime eval push fails with 403 'You are not a member of this team' for user-owned environments](https://github.com/PrimeIntellect-ai/prime/issues/876). **Failure:** User-owned environment eval push fails with a team-membership 403; APIError classes differ. **Evidence:** REPORTED with request/response evidence; client/backend boundary not independently reproduced. **Before proposing a PR:** Confirm lookup contract and error-class ownership; test user/team owners and authorization failures with a stub, followed by an allowed account integration check. Checked 2026-09-18T19:29:55 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#876](https://github.com/PrimeIntellect-ai/prime/issues/876): checked 2026-09-18T19:57:54 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 ### Meta AI / FAIR / PyTorch
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
-| [pytorch/torchtitan](https://github.com/pytorch/torchtitan) · **ISSUE LEAD** | 5,746 · Python | 62/100 = 62.0% | 0.89 d | [500](https://github.com/pytorch/torchtitan/pulls) · [838 d](https://github.com/pytorch/torchtitan/pull/379) | [CLA/agreement documented](https://github.com/pytorch/torchtitan/blob/1e4d33de4b02f6a6f2ea8d58e65f4d3ce33f1df8/CONTRIBUTING.md). Meta CLA; performance evidence required for optimization. CLI options are frozen; config additions need the documented placement/suppression rules. **Fit:** Python distributed training, high-value but expensive validation. |
+| [pytorch/torchtitan](https://github.com/pytorch/torchtitan) · **DISCOVERY ONLY** | 5,746 · Python | 62/100 = 62.0% | 0.89 d | [500](https://github.com/pytorch/torchtitan/pulls) · [838 d](https://github.com/pytorch/torchtitan/pull/379) | [CLA/agreement documented](https://github.com/pytorch/torchtitan/blob/1e4d33de4b02f6a6f2ea8d58e65f4d3ce33f1df8/CONTRIBUTING.md). Meta CLA; performance evidence required for optimization. CLI options are frozen; config additions need the documented placement/suppression rules. **Fit:** Python distributed training, high-value but expensive validation. |
 | [pytorch/ao](https://github.com/pytorch/ao) · **ISSUE LEAD** | 2,980 · Python | 29/100 = 29.0% | 5.08 d | [485](https://github.com/pytorch/ao/pulls) · [1020 d](https://github.com/pytorch/ao/pull/19) | [CLA/agreement documented](https://github.com/pytorch/ao/blob/17120be402c8bfdac70315031322ffc5682ed7b5/CONTRIBUTING.md). Follow repository-specific tests and accelerator requirements. Small CPU-testable cases are a better first step than new quantized kernels. **Fit:** Python quantization correctness and deployment. |
-| [pytorch/pytorch](https://github.com/pytorch/pytorch) · **DISCOVERY ONLY** | 103,080 · Python | 6/89 = 6.7% | 3.64 d | [3,595](https://github.com/pytorch/pytorch/pulls) · [1417 d](https://github.com/pytorch/pytorch/pull/88106) | [CLA/agreement documented](https://github.com/pytorch/pytorch/blob/f2be4ec90b457d2d505d3590cbcba11f9cf1c9cc/.github/workflows/hardened-pr-review.yml). New contributors generally need an actionable issue before a code PR; docs/typos and preapproved templates have exceptions. Follow AI_POLICY.md; avoid unsolicited new APIs. **Fit:** Strong infrastructure signal across Python/C++; very large review queue. |
+| [pytorch/pytorch](https://github.com/pytorch/pytorch) · **ISSUE LEAD** | 103,080 · Python | 6/89 = 6.7% | 3.64 d | [3,595](https://github.com/pytorch/pytorch/pulls) · [1417 d](https://github.com/pytorch/pytorch/pull/88106) | [CLA/agreement documented](https://github.com/pytorch/pytorch/blob/f2be4ec90b457d2d505d3590cbcba11f9cf1c9cc/.github/workflows/hardened-pr-review.yml). New contributors generally need an actionable issue before a code PR; docs/typos and preapproved templates have exceptions. Follow AI_POLICY.md; avoid unsolicited new APIs. **Fit:** Strong infrastructure signal across Python/C++; very large review queue. |
+
+**Six issue slots across this group:** LOW 1/2, MEDIUM 2/2, HIGH 2/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | [pytorch/ao](https://github.com/pytorch/ao) | [#4904 — aarch64 regression tests (macos-14): ExecuTorch shared_kernels build fails — 'executorch/extension/threadpool/threadpool.h' file not found](https://github.com/pytorch/ao/issues/4904) | The macOS ARM regression build cannot find an ExecuTorch threadpool header. | Correct the compatible dependency/build include contract and rerun the failing build. | **30–100** | Dependency issue, not the triggering commit; verify the installed wheel and supported ExecuTorch version. |
+| LOW | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | [pytorch/pytorch](https://github.com/pytorch/pytorch) | [#197586 — [torch.compile] `torch.angle` returns to return 0 instead of π when receiving complex(-0.0, 0.0)](https://github.com/pytorch/pytorch/issues/197586) | Compiled torch.angle loses the sign of complex negative zero and returns 0 instead of pi. | Preserve signed-zero semantics through the affected lowering; add eager/compiled comparisons. | **80–220** | Reproduce on current supported builds and follow the actionable-issue and AI policy. |
+| MEDIUM | [pytorch/pytorch](https://github.com/pytorch/pytorch) | [#197095 — [inductor] `F.interpolate` on a zero-size spatial dim returns uninitialised data (NaN) from an out-of-bounds read instead of raising; output size 0 is accepted silently](https://github.com/pytorch/pytorch/issues/197095) | Compiled interpolation bypasses eager validation for empty spatial dimensions and can read an empty buffer. | Restore the validation at the approved decomposition/lowering boundary. | **90–250** | Coordinate with umbrella #197554; test CPU and CUDA behavior without hiding invalid input. |
+| HIGH | [pytorch/ao](https://github.com/pytorch/ao) | [#4300 — [FSDP2+Float8] Training loss diverges when `enable_fsdp_float8_all_gather=True` vs `False` on H20 with Qwen3-8B](https://github.com/pytorch/ao/issues/4300) | Float8 all-gather changes training convergence in a reported two-H20 Qwen run. | Isolate the numeric/distributed discrepancy and fix it with controlled training evidence. | **200–600** | Two matching GPUs required; a precision difference is not automatically a bug. Reproduction and scope approval precede implementation. |
+| HIGH | [pytorch/pytorch](https://github.com/pytorch/pytorch) | [#197085 — [dynamo] random.shuffle / random.sample inside a compiled function return the same permutation on every call (eager advances the RNG)](https://github.com/pytorch/pytorch/issues/197085) | Compiled Python shuffle/sample reuses the traced result instead of advancing RNG state. | Preserve per-call randomness and eager-compatible RNG state with compiled regressions. | **160–380** | Reproduce on current Dynamo eager and Inductor backends; agree support/graph-break semantics before implementation. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [pytorch/torchtitan #4783](https://github.com/pytorch/torchtitan/issues/4783): Reporter explicitly has the fix and regression tests ready.
+- [pytorch/torchtitan #2574](https://github.com/pytorch/torchtitan/issues/2574): Maintainers already requested the reporter's PR; not an unclaimed beginner slot.
+- [pytorch/ao #4438](https://github.com/pytorch/ao/issues/4438): Already fixed on main; discussion concerns release timing.
+- [pytorch/ao #4566](https://github.com/pytorch/ao/issues/4566): A contributor narrowed it to a documented configuration and offered the docs patch.
+- [pytorch/ao #4163](https://github.com/pytorch/ao/issues/4163): Maintainer points to a replacement kernel implementation already in flight.
 
 #### pytorch/torchtitan
 
@@ -679,9 +949,7 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** [#4783 — [transformers_modeling_backend]Regression of #3775: rotary inv_freq is left uninitialized after `to_empty()`](https://github.com/pytorch/torchtitan/issues/4783). **Failure:** Rotary inv_freq is uninitialized after to_empty, regressing a prior fix. **Evidence:** REPORTED training correctness defect; no training run performed. **Before proposing a PR:** Reproduce initialization on the supported backend; compare deterministic rotary values before running the required training/GPU checks. Checked 2026-09-18T19:29:55 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### pytorch/ao
 
@@ -696,9 +964,8 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** [#4904 — aarch64 regression tests (macos-14): ExecuTorch shared_kernels build fails — 'executorch/extension/threadpool/threadpool.h' file not found](https://github.com/pytorch/ao/issues/4904). **Failure:** aarch64 regression CI cannot find an ExecuTorch threadpool header. **Evidence:** REPORTED CI failure; source dependency/build ownership requires confirmation. **Before proposing a PR:** Recreate the pinned macOS/arm64 build and fix include/dependency wiring in the owning project; show the same CI target passes. Checked 2026-09-18T19:29:55 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: ci-failure. Scope and maintainer acceptance still need confirmation.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#4904](https://github.com/pytorch/ao/issues/4904): checked 2026-09-18T19:57:56 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: ci-failure. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 6 comments fetched (maximum 100).
+- [#4300](https://github.com/pytorch/ao/issues/4300): checked 2026-09-18T19:57:57 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 #### pytorch/pytorch
 
@@ -712,19 +979,41 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#197586](https://github.com/pytorch/pytorch/issues/197586): checked 2026-09-18T19:57:57 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: triage review, module: complex, module: correctness (silent), oncall: pt2, module: decompositions, bot-triaged, release triage. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#197095](https://github.com/pytorch/pytorch/issues/197095): checked 2026-09-18T19:57:59 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: triage review, module: correctness (silent), oncall: pt2, module: decompositions, module: inductor, module: empty tensor, bot-triaged, release triage. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+- [#197085](https://github.com/pytorch/pytorch/issues/197085): checked 2026-09-18T19:57:59 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: triaged, module: correctness (silent), oncall: pt2, module: dynamo, bot-triaged, release triage, dynamo-triaged. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 ### Microsoft AI
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [microsoft/autogen](https://github.com/microsoft/autogen) · **DISCOVERY ONLY** | 61,044 · Python | 75/85 = 88.2% | 0.13 d | [522](https://github.com/microsoft/autogen/pulls) · [671 d](https://github.com/microsoft/autogen/pull/4226) | [CLA/agreement documented](https://github.com/microsoft/autogen/blob/027ecf0a379bcc1d09956d46d12d44a3ad9cee14/CONTRIBUTING.md). Microsoft CLA. Use contribution/roadmap guidance and confirm current ownership of the component; do not infer all Microsoft repos represent the Microsoft AI lab. **Fit:** Python multi-agent runtime and regression testing. |
 | [microsoft/agent-framework](https://github.com/microsoft/agent-framework) · **DISCOVERY ONLY** | 13,579 · Python | 36/86 = 41.9% | 3.35 d | [119](https://github.com/microsoft/agent-framework/pulls) · [291 d](https://github.com/microsoft/agent-framework/pull/2553) | CLA/DCO not established in inspected files. CLA/DCO not established in fetched repo-local material; linked issue and no competing open PR required by template. Discuss APIs/features, keep compatibility. Go SDK is a separate repository linked in README. **Fit:** Python agent state, adapters and workflow contracts. |
-| [microsoft/markitdown](https://github.com/microsoft/markitdown) · **DISCOVERY ONLY** | 185,343 · Python | 67/97 = 69.1% | 19.62 d | [362](https://github.com/microsoft/markitdown/pulls) · [623 d](https://github.com/microsoft/markitdown/pull/251) | [CLA/agreement documented](https://github.com/microsoft/markitdown/blob/945314a45ddbe02935f2fd287b797dc0ba4a01e4/README.md). Microsoft contribution/CLA guidance; validate actual documents and optional format dependencies. Large backlog and longer observed external latency. **Fit:** Python ingestion and conversion; good production ML utility. |
+| [microsoft/markitdown](https://github.com/microsoft/markitdown) · **ISSUE LEAD** | 185,343 · Python | 67/97 = 69.1% | 19.62 d | [362](https://github.com/microsoft/markitdown/pulls) · [623 d](https://github.com/microsoft/markitdown/pull/251) | [CLA/agreement documented](https://github.com/microsoft/markitdown/blob/945314a45ddbe02935f2fd287b797dc0ba4a01e4/README.md). Microsoft contribution/CLA guidance; validate actual documents and optional format dependencies. Large backlog and longer observed external latency. **Fit:** Python ingestion and conversion; good production ML utility. |
+
+**Six issue slots across this group:** LOW 1/2, MEDIUM 1/2, HIGH 1/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | [microsoft/markitdown](https://github.com/microsoft/markitdown) | [#1489 — cloned repo and pip install fails](https://github.com/microsoft/markitdown/issues/1489) | An editable installation fails while preparing package metadata. | Correct a demonstrated build-system dependency/configuration mismatch and test a clean editable install. | **20–80** | Root cause is disputed in comments; verify the supported subpackage command first. No PR if upgrading the environment resolves it. |
+| LOW | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | [microsoft/markitdown](https://github.com/microsoft/markitdown) | [#2288 — MarkItDown 解析旧版 .doc 存在原生崩溃 Bug](https://github.com/microsoft/markitdown/issues/2288) | Legacy DOC content is misidentified as XLS and sent to the wrong parser. | Disambiguate OLE document types and add small DOC/XLS fixtures. | **80–200** | Report used an old release; reproduce on current code before investing. Microsoft CLA route. |
+| MEDIUM | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| HIGH | [microsoft/markitdown](https://github.com/microsoft/markitdown) | [#2336 — Improve Arabic/RTL PDF text extraction: logical reading order and table column associations are not preserved](https://github.com/microsoft/markitdown/issues/2336) | Arabic PDF extraction reverses reading order and loses table header/value relationships. | Fix one agreed layout/RTL failure using document fixtures and structure-aware extraction. | **250–650** | Determine whether the defect belongs in MarkItDown or its PDF dependency; avoid a global string reversal. |
+| HIGH | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [microsoft/markitdown #2114](https://github.com/microsoft/markitdown/issues/2114): The issue body names PR #2113 despite no linked timeline reference.
+- [microsoft/markitdown #2468](https://github.com/microsoft/markitdown/issues/2468): Explicitly deferred upstream urllib limitation; issue does not request custom URL-resolution code.
 
 #### microsoft/autogen
 
@@ -738,9 +1027,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### microsoft/agent-framework
 
@@ -754,9 +1041,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### microsoft/markitdown
 
@@ -772,18 +1057,37 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#1489](https://github.com/microsoft/markitdown/issues/1489): checked 2026-09-18T19:58:01 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 2 comments fetched (maximum 100).
+- [#2288](https://github.com/microsoft/markitdown/issues/2288): checked 2026-09-18T19:58:00 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#2336](https://github.com/microsoft/markitdown/issues/2336): checked 2026-09-18T19:58:00 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
 
 ### Mistral
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [mistralai/mistral-common](https://github.com/mistralai/mistral-common) · **DISCOVERY ONLY** | 946 · Python | 22/100 = 22.0% | 1.89 d | [17](https://github.com/mistralai/mistral-common/pulls) · [94 d](https://github.com/mistralai/mistral-common/pull/246) | CLA/DCO not established in inspected files. Open an issue before starting. Meaningful tests plus Ruff, mypy and pytest; AGENTS.md is the implementation guide. All screened issue slots were occupied or required upstream discussion. **Fit:** Python tokenization, serialization and model-input contracts. |
 | [mistralai/client-python](https://github.com/mistralai/client-python) · **ISSUE LEAD** | 768 · Python | 42/85 = 49.4% | 0.14 d | [3](https://github.com/mistralai/client-python/pulls) · [56 d](https://github.com/mistralai/client-python/pull/597) | CLA/DCO not established in inspected files. Speakeasy workflows generate the SDK. Work in documented custom surfaces or generator/spec sources with maintainer agreement; avoid hand edits to generated files. **Fit:** Python custom hooks and client behavior. |
+| [mistralai/mistral-evals](https://github.com/mistralai/mistral-evals) · **DISCOVERY ONLY** | 92 · Python | 6/6 = 100.0% | 1.05 d | [7](https://github.com/mistralai/mistral-evals/pulls) · [199 d](https://github.com/mistralai/mistral-evals/pull/14) | CLA/DCO not established in inspected files. Small historical merge sample and no inspected CONTRIBUTING/template/Actions CI; README describes evaluation runners and model interface. No suitable unclaimed issue verified. **Fit:** Python evaluation implementation, not a cookbook. |
+
+**Six issue slots across this group:** LOW 1/2, MEDIUM 1/2, HIGH 2/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | [mistralai/client-python](https://github.com/mistralai/client-python) | [#614 — OTEL spans do not report cached prompt tokens (gen_ai.usage.cache_read.input_tokens)](https://github.com/mistralai/client-python/issues/614) | Tracing omits reported cached-input tokens, making downstream usage accounting inaccurate. | Record the cache-read usage field in the custom observability hook, with span tests. | **40–100** | Previous PR #452 is closed; confirm current demand and the editable custom-code path. Preserve API-key redaction. |
+| LOW | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | [mistralai/client-python](https://github.com/mistralai/client-python) | [#625 — [BUG CLIENT]: Unhandled transient network errors crash long-running BatchClient.wait() polling loops](https://github.com/mistralai/client-python/issues/625) | A transient transport failure aborts a long-running BatchClient.wait polling loop. | Apply bounded retry to safe status polling while preserving the overall deadline and cancellation. | **100–240** | Confirm ownership of extra.batch; mock network failures and terminal API errors. |
+| MEDIUM | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| HIGH | [mistralai/client-python](https://github.com/mistralai/client-python) | [#624 — [BUG CLIENT]: Severe event loop stall and ThreadPoolExecutor thread explosion per SSE line in WorkflowEncodingHook](https://github.com/mistralai/client-python/issues/624) | Workflow SSE decryption blocks the event loop and creates a thread pool per line. | Keep decryption asynchronous and reuse bounded resources; add concurrency and cancellation regressions. | **180–450** | Confirm hook ownership under Speakeasy generation; benchmark the actual encrypted stream path. |
+| HIGH | [mistralai/client-python](https://github.com/mistralai/client-python) | [#626 — [BUG CLIENT]: Eager dual-client instantiation and asymmetric __exit__/__aexit__ leaks unclosed HTTP clients](https://github.com/mistralai/client-python/issues/626) | Sync/async context managers leave the other eagerly-created HTTP client open. | Establish ownership-aware cleanup or lazy initialization and test both lifecycle modes. | **180–400** | Likely generated lifecycle code: obtain a generator/customization route before coding; distinguish externally supplied clients. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
 
 #### mistralai/mistral-common
 
@@ -797,9 +1101,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### mistralai/client-python
 
@@ -814,19 +1116,58 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** [#625 — [BUG CLIENT]: Unhandled transient network errors crash long-running BatchClient.wait() polling loops](https://github.com/mistralai/client-python/issues/625). **Failure:** Transient network failures abort BatchClient.wait polling. **Evidence:** REPORTED; Speakeasy generation means editable-source route must be agreed. **Before proposing a PR:** Use a controlled transport failure between successful polls; bound retries/cancellation and preserve terminal errors. Work in the approved custom/generator source. Checked 2026-09-18T19:29:56 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#614](https://github.com/mistralai/client-python/issues/614): checked 2026-09-18T19:58:02 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#625](https://github.com/mistralai/client-python/issues/625): checked 2026-09-18T19:58:01 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#624](https://github.com/mistralai/client-python/issues/624): checked 2026-09-18T19:58:01 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#626](https://github.com/mistralai/client-python/issues/626): checked 2026-09-18T19:58:01 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+
+#### mistralai/mistral-evals
+
+**Sample:** N=6, bots=0, human/unresolved=6, candidate external=6; merges 2024-09-19 to 2025-08-20. Exact most-recent cohort recovered. Snapshot 2026-09-18T19:54:22 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
+**Recent candidate-external examples:** [#13: [feat] Save raw output from model evaluation](https://github.com/mistralai/mistral-evals/pull/13); [#9: Update README.md](https://github.com/mistralai/mistral-evals/pull/9); [#4: Fix `eval.mm_mt_bench` -> `eval.run` example in README](https://github.com/mistralai/mistral-evals/pull/4).
+**Oldest observed external queue entries:** [#14](https://github.com/mistralai/mistral-evals/pull/14) (199 d; opened 2026-03-03); [#15](https://github.com/mistralai/mistral-evals/pull/15) (199 d; opened 2026-03-03); [#16](https://github.com/mistralai/mistral-evals/pull/16) (199 d; opened 2026-03-03).
+
+**Policy sources at pinned commit:** [README.md](https://github.com/mistralai/mistral-evals/blob/d61811fcd34b7802109538bacc28e70d8633f261/README.md).
+No CONTRIBUTING file found in the inspected tree; missing policy is not permission.
+No repository-local PR template found; inherited organization templates were not fully audited.
+**CI inspected:** No GitHub Actions workflow found in the inspected tree; other/private CI is unverified..
+
+**Issue candidates — re-check within hours:**
+
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 ### Hugging Face
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [huggingface/peft](https://github.com/huggingface/peft) · **DISCOVERY ONLY** | 21,694 · Python | 56/91 = 61.5% | 3.97 d | [38](https://github.com/huggingface/peft/pulls) · [326 d](https://github.com/huggingface/peft/pull/2872) | CLA/DCO not established in inspected files. Explicit maintainer approval on an open issue before even a draft PR. Respect existing intent-to-work. Automated issue gate; no ping before two weeks. No clean unclaimed issue survived this snapshot. **Fit:** Excellent deeper-ML fit: adapter correctness and small CPU regressions. |
 | [huggingface/transformers](https://github.com/huggingface/transformers) · **ISSUE LEAD** | 166,289 · Python | 39/94 = 41.5% | 3.98 d | [1,609](https://github.com/huggingface/transformers/pulls) · [1817 d](https://github.com/huggingface/transformers/pull/13752) | CLA/DCO not established in inspected files. Contribution guide, tests and model policy matter; enormous queue. Prefer an accepted narrow bug over a new model architecture. **Fit:** Python model integration and correctness; wide hardware matrix. |
 | [huggingface/smolagents](https://github.com/huggingface/smolagents) · **DISCOVERY ONLY** | 29,382 · Python | 47/98 = 48.0% | 13.63 d | [500](https://github.com/huggingface/smolagents/pulls) · [604 d](https://github.com/huggingface/smolagents/pull/301) | CLA/DCO not established in inspected files. Issue must get status:accepted except typos/broken links; one open PR until first merge; disclose AI assistance. External product wrappers generally out of scope. **Fit:** Python tool/agent runtime fits your background. |
+
+**Six issue slots across this group:** LOW 0/2, MEDIUM 0/2, HIGH 1/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| HIGH | [huggingface/transformers](https://github.com/huggingface/transformers) | [#48887 — gemma 4 can not load audio file and produce  Audio features and audio tokens do not match, tokens: 31, features: 468480](https://github.com/huggingface/transformers/issues/48887) | Gemma audio features and token counts disagree, preventing generation on the supplied audio. | Reduce the supplied sample and repair the confirmed processor/model alignment boundary. | **200–500** | Current main reproduction and audio fixture required; model-owner coordination and GPU validation. |
+| HIGH | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [huggingface/peft #3731](https://github.com/huggingface/peft/issues/3731): Reporter says a branch is ready and awaits approval to open the PR.
+- [huggingface/peft #3761](https://github.com/huggingface/peft/issues/3761): Reporter says the fix and tests are ready and awaits approval.
+- [huggingface/peft #3628](https://github.com/huggingface/peft/issues/3628): Maintainer explicitly says they are already working on it and no PR is needed.
+- [huggingface/smolagents #2799](https://github.com/huggingface/smolagents/issues/2799): A contributor has asked for acceptance/assignment for the same focused fix.
+- [huggingface/transformers #43873](https://github.com/huggingface/transformers/issues/43873): PR-body search found existing fix PR #46799.
 
 #### huggingface/peft
 
@@ -840,9 +1181,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### huggingface/transformers
 
@@ -856,9 +1195,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** [#48887 — gemma 4 can not load audio file and produce  Audio features and audio tokens do not match, tokens: 31, features: 468480](https://github.com/huggingface/transformers/issues/48887). **Failure:** Gemma audio processing reports mismatched audio features and tokens. **Evidence:** REPORTED with supplied audio; maintainers are investigating the model/input path. **Before proposing a PR:** Reproduce with the attached audio and current main, resolve xgrammar/input configuration, and coordinate with the named maintainers before coding. Checked 2026-09-18T19:29:56 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: bug. Scope and maintainer acceptance still need confirmation.
+- [#48887](https://github.com/huggingface/transformers/issues/48887): checked 2026-09-18T19:58:03 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: bug. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 4 comments fetched (maximum 100).
 
 #### huggingface/smolagents
 
@@ -873,18 +1210,33 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 ### Cohere
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [cohere-ai/north-mcp-python-sdk](https://github.com/cohere-ai/north-mcp-python-sdk) · **DISCOVERY ONLY** | 14 · Python | 29/40 = 72.5% | 0.2 d | [9](https://github.com/cohere-ai/north-mcp-python-sdk/pulls) · [450 d](https://github.com/cohere-ai/north-mcp-python-sdk/pull/13) | CLA/DCO not established in inspected files. Limited issue pool and no strong contribution policy found. Confirm maintainers want a change. **Fit:** Python MCP integration, but small ecosystem. |
 | [cohere-ai/cohere-python](https://github.com/cohere-ai/cohere-python) · **DISCOVERY ONLY** | 400 · Python | 28/38 = 73.7% | 0.17 d | [18](https://github.com/cohere-ai/cohere-python/pulls) · [565 d](https://github.com/cohere-ai/cohere-python/pull/655) | CLA/DCO not established in inspected files. Fern-generated. README says direct additions cannot merge as-is; discuss generator/custom code first. CONTRIBUTING describes .fernignore/customization routes. **Fit:** Python SDK, mainly generator/customization work. |
+| [cohere-ai/cohere-typescript](https://github.com/cohere-ai/cohere-typescript) · **DISCOVERY ONLY** | 171 · TypeScript | 25/51 = 49.0% | 0.07 d | [13](https://github.com/cohere-ai/cohere-typescript/pulls) · [167 d](https://github.com/cohere-ai/cohere-typescript/pull/286) | CLA/DCO not established in inspected files. Fern generates src/api and src/serialization. Custom files need .fernignore or changes to generator sources; direct generated edits are not a reliable route. pnpm/Node toolchain and tests. **Fit:** TypeScript client/custom transport is a possible fit. |
+
+**Six issue slots across this group:** LOW 0/2, MEDIUM 0/2, HIGH 0/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| HIGH | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+No PR option survived this pass. This is a queue/ownership/policy finding within the inspected evidence, not proof that future contributions are impossible. Start with the repo issue links and current intake rules below; do not spend an implementation week here without an accepted problem.
 
 #### cohere-ai/north-mcp-python-sdk
 
@@ -900,9 +1252,7 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### cohere-ai/cohere-python
 
@@ -917,19 +1267,48 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
+
+#### cohere-ai/cohere-typescript
+
+**Sample:** N=100, bots=49, human/unresolved=51, candidate external=25; merges 2022-08-24 to 2026-08-26. Exact most-recent cohort recovered. Snapshot 2026-09-18T19:52:27 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
+**Recent candidate-external examples:** [#242: aws-sdk -> smithy](https://github.com/cohere-ai/cohere-typescript/pull/242); [#224: Add V2 AWS clients](https://github.com/cohere-ai/cohere-typescript/pull/224); [#208: Support rerank on aws](https://github.com/cohere-ai/cohere-typescript/pull/208).
+**Oldest observed external queue entries:** [#286](https://github.com/cohere-ai/cohere-typescript/pull/286) (167 d; opened 2026-04-04); [#287](https://github.com/cohere-ai/cohere-typescript/pull/287) (167 d; opened 2026-04-04); [#289](https://github.com/cohere-ai/cohere-typescript/pull/289) (167 d; opened 2026-04-04).
+
+**Policy sources at pinned commit:** [CONTRIBUTING.md](https://github.com/cohere-ai/cohere-typescript/blob/3126c6c026ba482591ad512dd506d36c9b74574c/CONTRIBUTING.md); [README.md](https://github.com/cohere-ai/cohere-typescript/blob/3126c6c026ba482591ad512dd506d36c9b74574c/README.md).
+No repository-local PR template found; inherited organization templates were not fully audited.
+**CI inspected:** [.github/workflows/ci.yml](https://github.com/cohere-ai/cohere-typescript/blob/3126c6c026ba482591ad512dd506d36c9b74574c/.github/workflows/ci.yml); [.github/workflows/test.yml](https://github.com/cohere-ai/cohere-typescript/blob/3126c6c026ba482591ad512dd506d36c9b74574c/.github/workflows/test.yml).
+**Affiliation adjustments:** [tomtobac](https://github.com/tomtobac) — public company: @cohere-ai; [abdullahkady](https://github.com/abdullahkady) — public company: @cohere-ai; [robertkozin](https://github.com/robertkozin) — public company: @cohere-ai . Evidence is public profile/core-role information at collection time, not proof of employment when each PR merged.
+
+**Issue candidates — re-check within hours:**
+
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 ### Ai2
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
-| [allenai/OLMo-core](https://github.com/allenai/OLMo-core) · **DISCOVERY ONLY** | 1,538 · Python | 13/100 = 13.0% | 7.82 d | [86](https://github.com/allenai/OLMo-core/pulls) · [693 d](https://github.com/allenai/OLMo-core/pull/72) | CLA/DCO not established in inspected files. Public company profiles show substantial internal authorship despite CONTRIBUTOR labels. Validate training changes with the required hardware. **Fit:** Python training correctness; direct research-lab relevance. |
-| [allenai/open-instruct](https://github.com/allenai/open-instruct) · **ISSUE LEAD** | 3,872 · Python | 66/100 = 66.0% | 2.16 d | [81](https://github.com/allenai/open-instruct/pulls) · [225 d](https://github.com/allenai/open-instruct/pull/1462) | CLA/DCO not established in inspected files. Discuss reproducibility fixes; training results need controlled experiments. Current company profiles cannot reconstruct every author affiliation at historical merge time. **Fit:** Python post-training and evaluation; strong ML relevance. |
+| [allenai/OLMo-core](https://github.com/allenai/OLMo-core) · **ISSUE LEAD** | 1,538 · Python | 13/100 = 13.0% | 7.82 d | [86](https://github.com/allenai/OLMo-core/pulls) · [693 d](https://github.com/allenai/OLMo-core/pull/72) | CLA/DCO not established in inspected files. Public company profiles show substantial internal authorship despite CONTRIBUTOR labels. Validate training changes with the required hardware. **Fit:** Python training correctness; direct research-lab relevance. |
+| [allenai/open-instruct](https://github.com/allenai/open-instruct) · **DISCOVERY ONLY** | 3,872 · Python | 66/100 = 66.0% | 2.16 d | [81](https://github.com/allenai/open-instruct/pulls) · [225 d](https://github.com/allenai/open-instruct/pull/1462) | CLA/DCO not established in inspected files. Discuss reproducibility fixes; training results need controlled experiments. Current company profiles cannot reconstruct every author affiliation at historical merge time. **Fit:** Python post-training and evaluation; strong ML relevance. |
 | [allenai/dolma](https://github.com/allenai/dolma) · **DISCOVERY ONLY** | 1,545 · Python | 90/93 = 96.8% | 0.17 d | [19](https://github.com/allenai/dolma/pulls) · [860 d](https://github.com/allenai/dolma/pull/160) | CLA/DCO not established in inspected files. Small operational surface but old queue. Historical lab alumni may now list other employers, so affiliation confidence is lower. **Fit:** Python data pipelines and deduplication. |
+
+**Six issue slots across this group:** LOW 0/2, MEDIUM 2/2, HIGH 0/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | [allenai/OLMo-core](https://github.com/allenai/OLMo-core) | [#846 — vision: Molmo2-Stage2.py smoke recipe OOMs on the step-0 pre-train checkpoint with HF init](https://github.com/allenai/OLMo-core/issues/846) | The documented vision smoke run OOMs before step 1 while saving the initial optimizer state. | Correct the intended smoke/checkpoint initialization setting with a regression for HF init. | **70–180** | Vision branch owner must approve; an 80GB H100 run is required to validate the reported memory outcome. |
+| MEDIUM | [allenai/OLMo-core](https://github.com/allenai/OLMo-core) | [#847 — vision: FlexAttention in eager mode (compile_model=false) OOMs at seq 16384 — Molmo2-Stage2.py smoke recipe](https://github.com/allenai/OLMo-core/issues/847) | Uncompiled FlexAttention makes the documented long-sequence smoke run OOM. | Align the smoke configuration with the supported attention backend and add an early compatibility check. | **60–180** | Confirm relationship with #846 and existing vision integration work; benchmark on the required H100 setup. |
+| HIGH | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
 
 #### allenai/OLMo-core
 
@@ -944,9 +1323,8 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#846](https://github.com/allenai/OLMo-core/issues/846): checked 2026-09-18T19:58:05 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#847](https://github.com/allenai/OLMo-core/issues/847): checked 2026-09-18T19:58:04 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 #### allenai/open-instruct
 
@@ -961,9 +1339,7 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** [#1899 — Mismatch between allenai/Olmo-3-7B-RL-Zero-Code chat_template.jinja and the training template displayed in commit 70b0472af73bd6428e14c5d73abebbabaaeb4997](https://github.com/allenai/open-instruct/issues/1899). **Failure:** Published model chat template differs from the recorded training template. **Evidence:** REPORTED artifact mismatch; the correct model-artifact/code owner is unresolved. **Before proposing a PR:** Compare tokenized fixtures and training configuration; obtain the intended inference template and submit to the actual owning repository. Checked 2026-09-18T19:29:56 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### allenai/dolma
 
@@ -979,19 +1355,39 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 ### EleutherAI
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [EleutherAI/lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) · **ISSUE LEAD** | 14,016 · Python | 89/100 = 89.0% | 15.73 d | [401](https://github.com/EleutherAI/lm-evaluation-harness/pulls) · [1067 d](https://github.com/EleutherAI/lm-evaluation-harness/pull/925) | [CLA/agreement documented](https://github.com/EleutherAI/lm-evaluation-harness/blob/d6de81643928d653435c431bae19945d41d32520/docs/CONTRIBUTING.md). EleutherAI CLA via bot; Ruff/pre-commit and pytest. New tasks should be checked against reference results; old open issues may already be fixed. **Fit:** Best evaluation-engineering anchor: Python tests, task semantics and reproducibility. |
 | [EleutherAI/gpt-neox](https://github.com/EleutherAI/gpt-neox) · **DISCOVERY ONLY** | 7,461 · Python | 70/99 = 70.7% | 11.46 d | [49](https://github.com/EleutherAI/gpt-neox/pulls) · [1645 d](https://github.com/EleutherAI/gpt-neox/pull/592) | [CLA/agreement documented](https://github.com/EleutherAI/gpt-neox/blob/cf40e42142694e40aab158b6c81ff3f1d4fc921a/CONTRIBUTING.md). CLA; feature issue and design acceptance before implementation. Generated argument docs must come from Python definitions. **Fit:** Python distributed training, strong signal but hardware-heavy. |
 | [EleutherAI/sae](https://github.com/EleutherAI/sparsify) · **ISSUE LEAD** | 740 · Python | 13/60 = 21.7% | 7.93 d | [5](https://github.com/EleutherAI/sparsify/pulls) · [26 d](https://github.com/EleutherAI/sparsify/pull/141) | CLA/DCO not established in inspected files. Repository redirects to EleutherAI/sparsify. Small sample and issue pool; choose numerical correctness over cosmetic work. **Fit:** Sparse autoencoder training/evaluation in Python. |
+
+**Six issue slots across this group:** LOW 2/2, MEDIUM 2/2, HIGH 2/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | [EleutherAI/lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) | [#2614 — Tag for mgsm_cot_native and mgsm_cot_en same?](https://github.com/EleutherAI/lm-evaluation-harness/issues/2614) | English and native-language MGSM CoT configurations share the same tag. | Separate the intended tags and test task selection. | **10–50** | Current template discrepancy confirmed locally; maintainer acknowledged it. Full task-manager test and CLA remain. |
+| LOW | [EleutherAI/lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) | [#2289 — A little typing issue](https://github.com/EleutherAI/lm-evaluation-harness/issues/2289) | Seed annotations exclude None even though the documented API accepts it. | Align annotations and the documented no-seed contract. | **10–50** | Re-check the current signature before coding; keep this a specific reported contract fix. CLA. |
+| MEDIUM | [EleutherAI/lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) | [#2371 — regex filter strips whitespace](https://github.com/EleutherAI/lm-evaluation-harness/issues/2371) | Regex extraction strips leading whitespace needed by Python code-generation answers. | Preserve whitespace through an agreed compatibility option/contract, with indentation regressions. | **60–160** | Isolated current-class failure reproduced locally; maintainer requested end-to-end metric impact, still required. |
+| MEDIUM | [EleutherAI/lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) | [#3120 — FileNotFoundError: Unable to find package root within 3 upwardsof](https://github.com/EleutherAI/lm-evaluation-harness/issues/3120) | --check_integrity cannot find the package root in a reported installation layout. | Resolve packaged task tests/resources reliably across supported install layouts. | **70–180** | Reproduce from a clean wheel and editable install; verify whether test assets are intended to ship. |
+| HIGH | [EleutherAI/lm-evaluation-harness](https://github.com/EleutherAI/lm-evaluation-harness) | [#4158 — GGUF backend's echo=true handling doesn't work against current llama-server — every loglikelihood request fails](https://github.com/EleutherAI/lm-evaluation-harness/issues/4158) | GGUF loglikelihood expects an older llama-server echo/logprobs response and fails on current responses. | Implement a version-aware compatible response path or a clear unsupported-contract error. | **180–420** | Validate real llama-server token offsets/loglikelihood, not only mocked JSON; agree compatibility support. |
+| HIGH | [EleutherAI/sae](https://github.com/EleutherAI/sae) | [#130 — FVU discrepancies training/eval](https://github.com/EleutherAI/sparsify/issues/130) | Offline SAE fraction-of-variance-unexplained differs drastically from the training metric. | Align a confirmed normalization/activation/evaluation mismatch with a shared numerical regression. | **180–450** | First rule out misuse of activations and train/eval settings; numeric cause remains unverified. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [EleutherAI/lm-evaluation-harness #3966](https://github.com/EleutherAI/lm-evaluation-harness/issues/3966): Reporter traced the zeros to frozen leaderboard data; current harness path is already correct.
+- [EleutherAI/gpt-neox #1248](https://github.com/EleutherAI/gpt-neox/issues/1248): Maintainers attribute this to shared storage/cluster behavior, not a library defect.
 
 #### EleutherAI/lm-evaluation-harness
 
@@ -1005,11 +1401,11 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** [#2614 — Tag for mgsm_cot_native and mgsm_cot_en same?](https://github.com/EleutherAI/lm-evaluation-harness/issues/2614). **Failure:** MGSM English/native template tags collide. **Evidence:** SOURCE CONFIRMED: both current templates say mgsm_cot_native; maintainer comment agrees they should differ. **Before proposing a PR:** Change the source template and regenerate affected task configs; assert English/native selections are distinct without loading a model. Checked 2026-09-18T19:29:56 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **LOW:** [#2289 — A little typing issue](https://github.com/EleutherAI/lm-evaluation-harness/issues/2289). **Failure:** Documented None seeds conflict with int-only API annotations. **Evidence:** SOURCE CONFIRMED: current signature and None-handling/docstrings disagree. **Before proposing a PR:** Correct the declared accepted inputs; type-check a documented None call and verify seed-setting behavior is unchanged. Checked 2026-09-18T19:29:56 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **MEDIUM:** [#2371 — regex filter strips whitespace](https://github.com/EleutherAI/lm-evaluation-harness/issues/2371). **Failure:** Regex extraction strips indentation needed by generated Python. **Evidence:** ISOLATED REPRODUCTION: current RegexFilter turns four leading spaces plus return 1 into return 1; full evaluation impact remains unverified. **Before proposing a PR:** Supply the end-to-end code-generation example the maintainer requested; agree on compatibility-preserving behavior before changing strip defaults. Checked 2026-09-18T19:29:56 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **MEDIUM:** [#3120 — FileNotFoundError: Unable to find package root within 3 upwardsof](https://github.com/EleutherAI/lm-evaluation-harness/issues/3120). **Failure:** --check_integrity cannot locate test root in the reported installation. **Evidence:** REPORTED: current helper still searches a bounded parent path; installation-specific failure not reproduced. **Before proposing a PR:** Recreate source and wheel installations; determine whether tests are packaged/supported before changing discovery or the error message. Checked 2026-09-18T19:29:56 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#2614](https://github.com/EleutherAI/lm-evaluation-harness/issues/2614): checked 2026-09-18T19:58:05 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+- [#2289](https://github.com/EleutherAI/lm-evaluation-harness/issues/2289): checked 2026-09-18T19:58:06 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#2371](https://github.com/EleutherAI/lm-evaluation-harness/issues/2371): checked 2026-09-18T19:58:06 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+- [#3120](https://github.com/EleutherAI/lm-evaluation-harness/issues/3120): checked 2026-09-18T19:58:06 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#4158](https://github.com/EleutherAI/lm-evaluation-harness/issues/4158): checked 2026-09-18T19:58:06 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 #### EleutherAI/gpt-neox
 
@@ -1023,9 +1419,7 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### EleutherAI/sae
 
@@ -1043,19 +1437,40 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** [#130 — FVU discrepancies training/eval](https://github.com/EleutherAI/sparsify/issues/130). **Failure:** FVU differs between training and evaluation. **Evidence:** REPORTED metric discrepancy; data/normalization cause not established. **Before proposing a PR:** Evaluate one fixed batch with identical centering/normalization; locate the difference before altering metric definitions. Checked 2026-09-18T19:29:56 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#130](https://github.com/EleutherAI/sparsify/issues/130): checked 2026-09-18T19:58:08 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 ### DeepSeek
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [deepseek-ai/smallpond](https://github.com/deepseek-ai/smallpond) · **DISCOVERY ONLY** | 5,012 · Python | 0/1 = 0.0% | N/A | [11](https://github.com/deepseek-ai/smallpond/pulls) · [566 d](https://github.com/deepseek-ai/smallpond/pull/8) | CLA/DCO not established in inspected files. Only one merged PR in the available history and no candidate outsider merges. Open source here is not evidence of a functioning external review channel. **Fit:** Python data processing matches your strengths. |
-| [deepseek-ai/DeepEP](https://github.com/deepseek-ai/DeepEP) · **DISCOVERY ONLY** | 10,164 · Cuda | 53/100 = 53.0% | 3.59 d | [114](https://github.com/deepseek-ai/DeepEP/pulls) · [458 d](https://github.com/deepseek-ai/DeepEP/pull/218) | CLA/DCO not established in inspected files. High hardware cost; need matching GPU/network topology and reproducible benchmarks. Defer until you can execute the exact path. **Fit:** Expert CUDA/C++ distributed communication signal. |
+| [deepseek-ai/DeepEP](https://github.com/deepseek-ai/DeepEP) · **ISSUE LEAD** | 10,164 · Cuda | 53/100 = 53.0% | 3.59 d | [114](https://github.com/deepseek-ai/DeepEP/pulls) · [458 d](https://github.com/deepseek-ai/DeepEP/pull/218) | CLA/DCO not established in inspected files. High hardware cost; need matching GPU/network topology and reproducible benchmarks. Defer until you can execute the exact path. **Fit:** Expert CUDA/C++ distributed communication signal. |
 | [deepseek-ai/DeepGEMM](https://github.com/deepseek-ai/DeepGEMM) · **DISCOVERY ONLY** | 7,845 · Cuda | 51/94 = 54.3% | 1.17 d | [74](https://github.com/deepseek-ai/DeepGEMM/pulls) · [381 d](https://github.com/deepseek-ai/DeepGEMM/pull/182) | CLA/DCO not established in inspected files. GPU-specific benchmark/correctness evidence is essential; weaker near-term fit than Python/Go given your stated experience. **Fit:** CUDA matrix-kernel performance; high research-engineering relevance. |
+
+**Six issue slots across this group:** LOW 0/2, MEDIUM 1/2, HIGH 1/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | [deepseek-ai/DeepEP](https://github.com/deepseek-ai/DeepEP) | [#656 — [DeepEPv2] test_agrs.py failed due to CUDA_ERROR_NOT_SUPPORTED, operation not supported](https://github.com/deepseek-ai/DeepEP/issues/656) | AGRS session teardown raises CUDA_ERROR_NOT_SUPPORTED on reported H20 hardware. | Fix the supported driver-resource teardown path or validate compatibility before allocation. | **100–260** | H20 and matching driver required; establish supported API capability before claiming a code defect. |
+| MEDIUM | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| HIGH | [deepseek-ai/DeepEP](https://github.com/deepseek-ai/DeepEP) | [#622 — CUDA illegal memory access in internode_ll::dispatch+0x1050 on B300/RoCE (Blackwell SM100, 16 ranks, hidden=7168)](https://github.com/deepseek-ai/DeepEP/issues/622) | Internode dispatch reports an illegal memory access on a two-node B300/RoCE setup. | Reduce the pointer/indexing failure and repair it with sanitizer and multi-rank tests. | **220–650** | Requires B300/RoCE infrastructure; compare with existing driver/kernel fixes and measure communication correctness. |
+| HIGH | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [deepseek-ai/smallpond #25](https://github.com/deepseek-ai/smallpond/issues/25): Maintainer states only Linux is supported; report is Windows/NUMA.
+- [deepseek-ai/DeepGEMM #405](https://github.com/deepseek-ai/DeepGEMM/issues/405): Discussion confirms the failure is fixed on current main.
+- [deepseek-ai/DeepGEMM #425](https://github.com/deepseek-ai/DeepGEMM/issues/425): Discussion says the fix exists on the development branch and no external PR is needed.
+- [deepseek-ai/DeepGEMM #443](https://github.com/deepseek-ai/DeepGEMM/issues/443): Related JIT replacement branch removes the failing path; coordinate existing work rather than duplicate it.
 
 #### deepseek-ai/smallpond
 
@@ -1069,9 +1484,7 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### deepseek-ai/DeepEP
 
@@ -1087,9 +1500,8 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#656](https://github.com/deepseek-ai/DeepEP/issues/656): checked 2026-09-18T19:58:09 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+- [#622](https://github.com/deepseek-ai/DeepEP/issues/622): checked 2026-09-18T19:58:10 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
 
 #### deepseek-ai/DeepGEMM
 
@@ -1105,18 +1517,40 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 ### Qwen
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [QwenLM/Qwen-Agent](https://github.com/QwenLM/Qwen-Agent) · **DISCOVERY ONLY** | 17,104 · Python | 24/26 = 92.3% | 0.34 d | [113](https://github.com/QwenLM/Qwen-Agent/pulls) · [640 d](https://github.com/QwenLM/Qwen-Agent/pull/416) | CLA/DCO not established in inspected files. Small merge sample relative to backlog; distinguish hosted product issues from library bugs. Discuss new integrations first. **Fit:** Python tool invocation and agent integration. |
-| [QwenLM/qwen-code](https://github.com/QwenLM/qwen-code) · **DISCOVERY ONLY** | 27,957 · TypeScript | 12/97 = 12.4% | 3.48 d | [295](https://github.com/QwenLM/qwen-code/pulls) · [227 d](https://github.com/QwenLM/qwen-code/pull/1704) | CLA/DCO not established in inspected files. Issue first; approved feature proposal; preflight checks. Reviewer test plan matters. Design docs require aligned English/Chinese versions under current guide. **Fit:** TypeScript coding-agent reliability. |
+| [QwenLM/qwen-code](https://github.com/QwenLM/qwen-code) · **ISSUE LEAD** | 27,957 · TypeScript | 12/97 = 12.4% | 3.48 d | [295](https://github.com/QwenLM/qwen-code/pulls) · [227 d](https://github.com/QwenLM/qwen-code/pull/1704) | CLA/DCO not established in inspected files. Issue first; approved feature proposal; preflight checks. Reviewer test plan matters. Design docs require aligned English/Chinese versions under current guide. **Fit:** TypeScript coding-agent reliability. |
+| [QwenLM/Qwen3-TTS](https://github.com/QwenLM/Qwen3-TTS) · **DISCOVERY ONLY** | 13,448 · Python | 1/1 = 100.0% | 0.97 d | [40](https://github.com/QwenLM/Qwen3-TTS/pulls) · [238 d](https://github.com/QwenLM/Qwen3-TTS/pull/8) | CLA/DCO not established in inspected files. No repository-local contribution guide or PR template found. Inspected Actions are issue lifecycle/translation, not a code-test guarantee. Confirm maintenance, scope and hardware before coding. **Fit:** Python speech-model loading/training, with GPU and audio validation requirements. |
+
+**Six issue slots across this group:** LOW 1/2, MEDIUM 2/2, HIGH 1/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | [QwenLM/qwen-code](https://github.com/QwenLM/qwen-code) | [#12215 — Fix sed --quiet/--silent classified as 'unknown' (SAFE_SED_OPTION whitelist unreachable)](https://github.com/QwenLM/qwen-code/issues/12215) | The sed classifier rejects --quiet/--silent despite listing them as safe aliases. | Fix the unreachable whitelist branch and add safe/unsafe argument regressions. | **25–80** | Automated triage is supportive, not human reservation; confirm nobody has started the patch. |
+| LOW | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | [QwenLM/qwen-code](https://github.com/QwenLM/qwen-code) | [#12216 — bug(lsp): MCP workspace-discovery config starts a second, unused LSP server set per ACP process (inherits --experimental-lsp)](https://github.com/QwenLM/qwen-code/issues/12216) | MCP discovery creates a second unused set of LSP processes. | Avoid starting unrelated LSP services in discovery config and test process cleanup. | **100–240** | Run a real ACP child and count process lifetimes; do not rely only on automated source triage. |
+| MEDIUM | [QwenLM/qwen-code](https://github.com/QwenLM/qwen-code) | [#12044 — review run: --timeout-minutes does not propagate to the review plan deadline](https://github.com/QwenLM/qwen-code/issues/12044) | The hard runtime timeout and captured review-plan deadline disagree. | Propagate the agreed deadline/precedence into plan capture with CLI tests. | **90–230** | need-discussion: behavior is documented as a carve-out, so maintainers must choose the contract first. |
+| HIGH | [QwenLM/qwen-code](https://github.com/QwenLM/qwen-code) | [#12176 — bug(cli): a saved workflow launched as a slash command never reports back — empty result, nothing shown in chat](https://github.com/QwenLM/qwen-code/issues/12176) | A saved workflow launched as a slash command finishes without displaying or returning its result. | Connect completion through command scheduling and UI/model notification paths. | **180–450** | need-discussion: agree what should be shown and sent to the model; test foreground and background workflows. |
+| HIGH | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [QwenLM/Qwen3-TTS #365](https://github.com/QwenLM/Qwen3-TTS/issues/365): Reporter has offered to open the checkpoint fix; preserve their intent-to-work.
+- [QwenLM/qwen-code #12113](https://github.com/QwenLM/qwen-code/issues/12113): A contributor explicitly says they are working on a reproduced fix.
+- [QwenLM/qwen-code #12021](https://github.com/QwenLM/qwen-code/issues/12021): Discussion says the core failure has already been substantially remediated on main.
 
 #### QwenLM/Qwen-Agent
 
@@ -1132,9 +1566,7 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### QwenLM/qwen-code
 
@@ -1148,18 +1580,54 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#12215](https://github.com/QwenLM/qwen-code/issues/12215): checked 2026-09-18T19:58:12 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: priority/P3, type/bug, category/core, scope/shell, status/ready-for-agent. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 3 comments fetched (maximum 100).
+- [#12216](https://github.com/QwenLM/qwen-code/issues/12216): checked 2026-09-18T19:58:12 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: priority/P2, type/bug, category/core, scope/mcp, scope/core. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 3 comments fetched (maximum 100).
+- [#12044](https://github.com/QwenLM/qwen-code/issues/12044): checked 2026-09-18T19:58:13 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: priority/P2, type/bug, category/cli, scope/commands, need-discussion. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 3 comments fetched (maximum 100).
+- [#12176](https://github.com/QwenLM/qwen-code/issues/12176): checked 2026-09-18T19:58:12 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: priority/P2, type/bug, category/cli, scope/commands, scope/interactive, roadmap/background-automation, need-discussion. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 3 comments fetched (maximum 100).
+
+#### QwenLM/Qwen3-TTS
+
+**Sample:** N=1, bots=0, human/unresolved=1, candidate external=1; merges 2026-01-24 to 2026-01-24. Exact most-recent cohort recovered. Snapshot 2026-09-18T19:52:29 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
+**Recent candidate-external examples:** [#15: [`FA`] Fixup wrong flags and loading logic](https://github.com/QwenLM/Qwen3-TTS/pull/15).
+**Oldest observed external queue entries:** [#8](https://github.com/QwenLM/Qwen3-TTS/pull/8) (238 d; opened 2026-01-23); [#30](https://github.com/QwenLM/Qwen3-TTS/pull/30) (238 d; opened 2026-01-23); [#42](https://github.com/QwenLM/Qwen3-TTS/pull/42) (237 d; opened 2026-01-23).
+
+**Policy sources at pinned commit:** [README.md](https://github.com/QwenLM/Qwen3-TTS/blob/022e286b98fbec7e1e916cb940cdf532cd9f488e/README.md).
+No CONTRIBUTING file found in the inspected tree; missing policy is not permission.
+No repository-local PR template found; inherited organization templates were not fully audited.
+**CI inspected:** [.github/workflows/inactive.yaml](https://github.com/QwenLM/Qwen3-TTS/blob/022e286b98fbec7e1e916cb940cdf532cd9f488e/.github/workflows/inactive.yaml); [.github/workflows/translate.yaml](https://github.com/QwenLM/Qwen3-TTS/blob/022e286b98fbec7e1e916cb940cdf532cd9f488e/.github/workflows/translate.yaml).
+
+**Issue candidates — re-check within hours:**
+
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 ### Unsloth
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
-| [unslothai/unsloth](https://github.com/unslothai/unsloth) · **DISCOVERY ONLY** | 76,367 · Python | 0/99 = 0.0% | N/A | [480](https://github.com/unslothai/unsloth/pulls) · [188 d](https://github.com/unslothai/unsloth/pull/4278) | CLA/DCO not established in inspected files. Guide welcomes bug fixes; observed sample does not establish a recent outsider path. Validate GPU/Colab-specific behavior on that runtime. **Fit:** Python fine-tuning relevant, but current merge sample was internal-heavy. |
-| [unslothai/unsloth-zoo](https://github.com/unslothai/unsloth-zoo) · **DISCOVERY ONLY** | 333 · Python | 11/97 = 11.3% | 24.1 d | [106](https://github.com/unslothai/unsloth-zoo/pulls) · [627 d](https://github.com/unslothai/unsloth-zoo/pull/31) | CLA/DCO not established in inspected files. Bugfix path exists; lower observed outsider share and slow queue. Provide exact model, versions and runtime. **Fit:** Python shared training utilities. |
+| [unslothai/unsloth](https://github.com/unslothai/unsloth) · **ISSUE LEAD** | 76,367 · Python | 0/99 = 0.0% | N/A | [480](https://github.com/unslothai/unsloth/pulls) · [188 d](https://github.com/unslothai/unsloth/pull/4278) | CLA/DCO not established in inspected files. Guide welcomes bug fixes; observed sample does not establish a recent outsider path. Validate GPU/Colab-specific behavior on that runtime. **Fit:** Python fine-tuning relevant, but current merge sample was internal-heavy. |
+| [unslothai/unsloth-zoo](https://github.com/unslothai/unsloth-zoo) · **ISSUE LEAD** | 333 · Python | 11/97 = 11.3% | 24.1 d | [106](https://github.com/unslothai/unsloth-zoo/pulls) · [627 d](https://github.com/unslothai/unsloth-zoo/pull/31) | CLA/DCO not established in inspected files. Bugfix path exists; lower observed outsider share and slow queue. Provide exact model, versions and runtime. **Fit:** Python shared training utilities. |
+
+**Six issue slots across this group:** LOW 0/2, MEDIUM 2/2, HIGH 2/2. Only two suitable implementation repositories were retained; third slot unfilled.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | [unslothai/unsloth](https://github.com/unslothai/unsloth) | [#10859 — [Bug] Installer ignores chosen folder and installs dependencies in ~/.unsloth](https://github.com/unslothai/unsloth/issues/10859) | The selected Windows app folder does not control the large runtime download location. | Expose or clearly honor the supported runtime-home setting in the installer flow. | **100–260** | Two distinct roots are intentional; confirm the desired UI/config contract before changing paths. Clean Windows test. |
+| MEDIUM | [unslothai/unsloth](https://github.com/unslothai/unsloth) | [#10768 — [Bug] CUDA error: CUBLAS_STATUS_NOT_INITIALIZED during FLUX.2 Klein VAE decoding in pipeline_flux2_klein](https://github.com/unslothai/unsloth/issues/10768) | FLUX VAE decoding fails after denoising on a mixed two-GPU setup. | Correct a demonstrated device/offload mismatch with explicit placement tests. | **100–280** | Run the requested one-visible-GPU versus two-visible-GPU A/B; do not infer a fix from the CUDA error alone. |
+| HIGH | [unslothai/unsloth-zoo](https://github.com/unslothai/unsloth-zoo) | [#1251 — MXFP4 gpt-oss: dead dequantize import, inert env flag, and an unreachable training path](https://github.com/unslothai/unsloth-zoo/issues/1251) | The MXFP4 loading/training path contains a removed Transformers import and inactive controls. | Repair one agreed supported MXFP4 path and exercise a real model load/train step. | **200–500** | Resolve kernels/Transformers compatibility and use matching GPU hardware; reporter could not run a patch. |
+| HIGH | [unslothai/unsloth-zoo](https://github.com/unslothai/unsloth-zoo) | [#668 — FastModel + use_rslora=True causes gradient explosion at block_size=384 (stable at 1024, workaround: pure HF PEFT)](https://github.com/unslothai/unsloth-zoo/issues/668) | RS-LoRA training explodes at short block size while the equivalent HF/PEFT run stays stable. | Isolate the FastModel-specific numerical path and compare gradients/loss against the reference. | **220–550** | Controlled same-seed model/GPU experiment required; this is a report, not a confirmed implementation cause. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [unslothai/unsloth #3550](https://github.com/unslothai/unsloth/issues/3550): Latest discussion reports a successful current-release model load; unresolved current failure not established.
 
 #### unslothai/unsloth
 
@@ -1173,9 +1641,8 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#10859](https://github.com/unslothai/unsloth/issues/10859): checked 2026-09-18T19:58:14 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: feature request, bug. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+- [#10768](https://github.com/unslothai/unsloth/issues/10768): checked 2026-09-18T19:58:15 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: feature request, bug. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
 
 #### unslothai/unsloth-zoo
 
@@ -1190,19 +1657,34 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#1251](https://github.com/unslothai/unsloth-zoo/issues/1251): checked 2026-09-18T19:58:16 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#668](https://github.com/unslothai/unsloth-zoo/issues/668): checked 2026-09-18T19:58:16 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: bug. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 ### Sakana AI
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [SakanaAI/ShinkaEvolve](https://github.com/SakanaAI/ShinkaEvolve) · **DISCOVERY ONLY** | 1,396 · Python | 37/85 = 43.5% | 0.99 d | [5](https://github.com/SakanaAI/ShinkaEvolve/pulls) · [19 d](https://github.com/SakanaAI/ShinkaEvolve/pull/189) | CLA/DCO not established in inspected files. Small active surface but no open issues in snapshot. Start with a genuinely reproduced issue and ask about scope. **Fit:** Python evolutionary optimization, strong research adjacency. |
 | [SakanaAI/treequest](https://github.com/SakanaAI/treequest) · **DISCOVERY ONLY** | 568 · Python | 1/14 = 7.1% | 0.72 d | [0](https://github.com/SakanaAI/treequest/pulls) · none identified in scanned set | CLA/DCO not established in inspected files. No open issues found; no sufficient evidence of predictable outsider review. **Fit:** Python search algorithms, attractive but tiny external sample. |
 | [SakanaAI/AI-Scientist](https://github.com/SakanaAI/AI-Scientist) · **ISSUE LEAD** | 14,576 · Jupyter Notebook | 23/24 = 95.8% | 4.33 d | [27](https://github.com/SakanaAI/AI-Scientist/pulls) · [765 d](https://github.com/SakanaAI/AI-Scientist/pull/11) | CLA/DCO not established in inspected files. Small historical merge sample and old queue. Check whether the requested work belongs in v2/current projects. **Fit:** Python research automation; research-release maintenance risk. |
+
+**Six issue slots across this group:** LOW 0/2, MEDIUM 1/2, HIGH 0/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | [SakanaAI/AI-Scientist](https://github.com/SakanaAI/AI-Scientist) | [#251 — Unquoted `writeup_file` in `os.popen("chktex ...")` runs shell metacharacters from `idea['Name']`](https://github.com/SakanaAI/AI-Scientist/issues/251) | A generated writeup path is interpolated into a shell command. | Use argument-based process execution and test paths with spaces/metacharacters. | **60–160** | Follow the project security process and confirm active version ownership; keep v2 as separate coordinated work. |
+| MEDIUM | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| HIGH | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
 
 #### SakanaAI/ShinkaEvolve
 
@@ -1216,9 +1698,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### SakanaAI/treequest
 
@@ -1232,9 +1712,7 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### SakanaAI/AI-Scientist
 
@@ -1249,19 +1727,36 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** [#251 — Unquoted `writeup_file` in `os.popen("chktex ...")` runs shell metacharacters from `idea['Name']`](https://github.com/SakanaAI/AI-Scientist/issues/251). **Failure:** Unquoted writeup_file lets shell metacharacters change the chktex command. **Evidence:** REPORTED code defect; no exploitation or full scientist run performed. **Before proposing a PR:** Use harmless local path fixtures; pass arguments without shell interpolation and verify spaces/metacharacters remain literal. Checked 2026-09-18T19:29:57 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#251](https://github.com/SakanaAI/AI-Scientist/issues/251): checked 2026-09-18T19:58:16 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 ### Perplexity
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [perplexityai/modelcontextprotocol](https://github.com/perplexityai/modelcontextprotocol) · **DISCOVERY ONLY** | 2,530 · TypeScript | 35/47 = 74.5% | 0.0 d | [16](https://github.com/perplexityai/modelcontextprotocol/pulls) · [171 d](https://github.com/perplexityai/modelcontextprotocol/pull/97) | CLA/DCO not established in inspected files. Good narrow surface; validate API behavior using an allowed test account. Public profiles leave affiliation uncertainty in the small sample. **Fit:** TypeScript MCP client/server integration. |
 | [perplexityai/search_evals](https://github.com/perplexityai/search_evals) · **DISCOVERY ONLY** | 267 · Python | 5/9 = 55.6% | 0.6 d | [8](https://github.com/perplexityai/search_evals/pulls) · [188 d](https://github.com/perplexityai/search_evals/pull/10) | CLA/DCO not established in inspected files. Only a small historical sample; no clean unclaimed issue survived screening. Ask for maintainership interest. **Fit:** Python search evaluation matches your ML role. |
 | [perplexityai/bumblebee](https://github.com/perplexityai/bumblebee) · **DISCOVERY ONLY** | 5,025 · Go | 2/14 = 14.3% | 3.26 d | [24](https://github.com/perplexityai/bumblebee/pulls) · [118 d](https://github.com/perplexityai/bumblebee/pull/4) | CLA/DCO not established in inspected files. Read contribution/tests; distinguish threat-intel data requests from code work. Small external sample. **Fit:** Go scanning and dependency tooling is a strong language fit. |
+
+**Six issue slots across this group:** LOW 0/2, MEDIUM 0/2, HIGH 0/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| HIGH | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [perplexityai/modelcontextprotocol #143](https://github.com/perplexityai/modelcontextprotocol/issues/143): Report is explicitly for an external docs site and duplicated from another repo; no editable implementation in this repo established.
+No PR option survived this pass. This is a queue/ownership/policy finding within the inspected evidence, not proof that future contributions are impossible. Start with the repo issue links and current intake rules below; do not spend an implementation week here without an accepted problem.
 
 #### perplexityai/modelcontextprotocol
 
@@ -1277,9 +1772,7 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### perplexityai/search_evals
 
@@ -1295,9 +1788,7 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### perplexityai/bumblebee
 
@@ -1311,18 +1802,39 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 ### Nous Research
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
-| [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) · **DISCOVERY ONLY** | 246,796 · Python | 9/100 = 9.0% | 0.88 d | [29,903](https://github.com/NousResearch/hermes-agent/pulls) · [179 d](https://github.com/NousResearch/hermes-agent/pull/2637) | CLA/DCO not established in inspected files. Search source plus open/merged PRs first. Larger work needs issue coordination. New memory providers and third-party product absorption are restricted; use standalone plugins. **Fit:** Python agent reliability, but an exceptionally large queue. |
-| [NousResearch/tinker-atropos](https://github.com/NousResearch/tinker-atropos) · **ISSUE LEAD** | 100 · Python | 0/23 = 0.0% | N/A | [6](https://github.com/NousResearch/tinker-atropos/pulls) · [155 d](https://github.com/NousResearch/tinker-atropos/pull/28) | CLA/DCO not established in inspected files. Observed merges were core-associated; few issues. Archived Atropos is a separate repo and should not be targeted. **Fit:** Python RL environment plumbing. |
+| [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) · **ISSUE LEAD** | 246,796 · Python | 9/100 = 9.0% | 0.88 d | [29,903](https://github.com/NousResearch/hermes-agent/pulls) · [179 d](https://github.com/NousResearch/hermes-agent/pull/2637) | CLA/DCO not established in inspected files. Search source plus open/merged PRs first. Larger work needs issue coordination. New memory providers and third-party product absorption are restricted; use standalone plugins. **Fit:** Python agent reliability, but an exceptionally large queue. |
+| [NousResearch/hermes-agent-self-evolution](https://github.com/NousResearch/hermes-agent-self-evolution) · **ISSUE LEAD** | 5,367 · Python | 3/3 = 100.0% | 0.29 d | [94](https://github.com/NousResearch/hermes-agent-self-evolution/pulls) · [172 d](https://github.com/NousResearch/hermes-agent-self-evolution/pull/5) | CLA/DCO not established in inspected files. README requires the full pytest suite and constraint gates for evolved changes; no dedicated external contribution guide/PR template found. Small sample; ask about the specific reported migration bug. **Fit:** Python persistence and evaluation logic is more focused than the main agent queue. |
+| [NousResearch/tinker-atropos](https://github.com/NousResearch/tinker-atropos) · **DISCOVERY ONLY** | 100 · Python | 0/23 = 0.0% | N/A | [6](https://github.com/NousResearch/tinker-atropos/pulls) · [155 d](https://github.com/NousResearch/tinker-atropos/pull/28) | CLA/DCO not established in inspected files. Observed merges were core-associated; few issues. Archived Atropos is a separate repo and should not be targeted. **Fit:** Python RL environment plumbing. |
+
+**Six issue slots across this group:** LOW 2/2, MEDIUM 2/2, HIGH 1/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | [#115341 — Nix dev shell exports a read-only VIRTUAL_ENV to uv pip; writable .venv docs are misleading](https://github.com/NousResearch/hermes-agent/issues/115341) | Nix development instructions imply a writable venv while uv targets the immutable store. | Correct the editable-install instructions for the supported Nix development route. | **20–70** | Sealed environment is intentional; verify the documented alternative with Nix before proposing changes. |
+| LOW | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | [#115310 — [Bug]: Matrix: TTS audio (MEDIA delivery) silently fails — send_voice() rejects is_voice kwarg](https://github.com/NousResearch/hermes-agent/issues/115310) | Matrix voice delivery passes is_voice to a method that rejects it, silently losing audio. | Align the adapter signature/forwarding contract and test voice plus ordinary audio. | **40–100** | Run a Matrix delivery fixture and check error notification; huge repo queue makes collision search essential. |
+| MEDIUM | [NousResearch/hermes-agent-self-evolution](https://github.com/NousResearch/hermes-agent-self-evolution) | [#82 — Bug: evolution_self_monitor fails with JSON parse error due to column order mismatch in _row_to_experience](https://github.com/NousResearch/hermes-agent-self-evolution/issues/82) | Schema migration changes column positions, causing JSON parse errors in experience loading. | Use named/explicit columns and test fresh and migrated databases. | **80–200** | Confirm the reported migration layout on current source and existing migration compatibility. |
+| MEDIUM | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | [#115246 — Fresh Windows install: 31 platform/provider plugins fail to load (missing orjson/pybase64; also nonexistent `agent.re_compat`)](https://github.com/NousResearch/hermes-agent/issues/115246) | A fresh Windows install cannot load numerous plugins due to missing dependencies/imports. | Repair the actual plugin packaging/import contract and add clean-install smoke checks. | **100–260** | Windows environment required; distinguish optional plugins from core dependencies and avoid bulk dependency additions. |
+| HIGH | [NousResearch/hermes-agent](https://github.com/NousResearch/hermes-agent) | [#115304 — hermes dashboard /chat: multiple tabs on the same PTY-registry attach token collapse into one session, leaking model/context between tabs](https://github.com/NousResearch/hermes-agent/issues/115304) | Dashboard tabs share an attach token and unexpectedly share conversation/model state. | Give intended independent tabs safe session identity and lifecycle handling. | **200–450** | Test new tab, duplicate tab, reconnect and deliberate reattach semantics; agree expected sharing first. |
+| HIGH | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [NousResearch/hermes-agent #115325](https://github.com/NousResearch/hermes-agent/issues/115325): Reporter is deliberately waiting on existing resume-path rewrites; competing implementation would collide.
+- [NousResearch/hermes-agent #113578](https://github.com/NousResearch/hermes-agent/issues/113578): Comments map both parts to existing open PRs.
 
 #### NousResearch/hermes-agent
 
@@ -1336,9 +1848,25 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#115341](https://github.com/NousResearch/hermes-agent/issues/115341): checked 2026-09-18T19:58:17 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: type/docs, area/nix, P3, python:uv. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+- [#115310](https://github.com/NousResearch/hermes-agent/issues/115310): checked 2026-09-18T20:06:57 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: type/bug, duplicate, comp/gateway, comp/plugins, platform/matrix, P3, sweeper:risk-message-delivery, bug. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#115246](https://github.com/NousResearch/hermes-agent/issues/115246): checked 2026-09-18T19:58:17 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: type/bug, comp/cli, comp/plugins, P2, dependencies, sweeper:risk-platform-windows, platform/windows, area/install-update. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#115304](https://github.com/NousResearch/hermes-agent/issues/115304): checked 2026-09-18T19:58:17 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: type/bug, comp/cli, P2, sweeper:risk-session-state, sweeper:risk-message-delivery, comp/dashboard, area/sessions. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+
+#### NousResearch/hermes-agent-self-evolution
+
+**Sample:** N=3, bots=0, human/unresolved=3, candidate external=3; merges 2026-03-29 to 2026-06-17. Exact most-recent cohort recovered. Snapshot 2026-09-18T19:52:31 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
+**Recent candidate-external examples:** [#122: fix(config): honor explicit --hermes-repo and make config construction non-fatal](https://github.com/NousResearch/hermes-agent-self-evolution/pull/122); [#4: feat: add Hermes session importer + fix short skill name matching](https://github.com/NousResearch/hermes-agent-self-evolution/pull/4); [#2: feat: external session importers for Claude Code, Copilot, and Hermes](https://github.com/NousResearch/hermes-agent-self-evolution/pull/2).
+**Oldest observed external queue entries:** [#5](https://github.com/NousResearch/hermes-agent-self-evolution/pull/5) (172 d; opened 2026-03-30); [#7](https://github.com/NousResearch/hermes-agent-self-evolution/pull/7) (168 d; opened 2026-04-03); [#8](https://github.com/NousResearch/hermes-agent-self-evolution/pull/8) (168 d; opened 2026-04-03).
+
+**Policy sources at pinned commit:** [README.md](https://github.com/NousResearch/hermes-agent-self-evolution/blob/0a929e3aa20e15cf04dc7c28492a7d41a5139125/README.md).
+No CONTRIBUTING file found in the inspected tree; missing policy is not permission.
+No repository-local PR template found; inherited organization templates were not fully audited.
+**CI inspected:** No GitHub Actions workflow found in the inspected tree; other/private CI is unverified..
+
+**Issue candidates — re-check within hours:**
+
+- [#82](https://github.com/NousResearch/hermes-agent-self-evolution/issues/82): checked 2026-09-18T19:58:18 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 #### NousResearch/tinker-atropos
 
@@ -1352,19 +1880,40 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** [#30 — tinker-atropos installation Error](https://github.com/NousResearch/tinker-atropos/issues/30). **Failure:** Installation fails in the reported environment. **Evidence:** REPORTED only; exact current package/environment support must be checked. **Before proposing a PR:** Create a clean environment with the reporter versions; trace the first dependency error and confirm which package owns the fix. Checked 2026-09-18T19:29:57 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 ### NVIDIA
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
-| [NVIDIA/NeMo](https://github.com/NVIDIA-NeMo/Speech) · **ISSUE LEAD** | 18,473 · Python | 39/98 = 39.8% | 5.76 d | [181](https://github.com/NVIDIA-NeMo/Speech/pulls) · [357 d](https://github.com/NVIDIA-NeMo/Speech/pull/14810) | [DCO/sign-off documented](https://github.com/NVIDIA/NeMo/blob/058046ecdbf9b6e5a1589b5e429328988520413f/.github/workflows/claude-fix.yml). DCO/sign-off. External CI may need maintainer approval via the documented test command. CPU tests and downloaded/GPU tests are distinct. **Fit:** Python speech/training infrastructure; repo redirects to NVIDIA-NeMo/Speech. |
+| [NVIDIA/NeMo](https://github.com/NVIDIA-NeMo/Speech) · **DISCOVERY ONLY** | 18,473 · Python | 39/98 = 39.8% | 5.76 d | [181](https://github.com/NVIDIA-NeMo/Speech/pulls) · [357 d](https://github.com/NVIDIA-NeMo/Speech/pull/14810) | [DCO/sign-off documented](https://github.com/NVIDIA/NeMo/blob/058046ecdbf9b6e5a1589b5e429328988520413f/.github/workflows/claude-fix.yml). DCO/sign-off. External CI may need maintainer approval via the documented test command. CPU tests and downloaded/GPU tests are distinct. **Fit:** Python speech/training infrastructure; repo redirects to NVIDIA-NeMo/Speech. |
 | [NVIDIA/garak](https://github.com/NVIDIA/garak) · **DISCOVERY ONLY** | 9,297 · Python | 69/100 = 69.0% | 10.5 d | [189](https://github.com/NVIDIA/garak/pulls) · [764 d](https://github.com/NVIDIA/garak/pull/833) | [DCO/sign-off documented](https://github.com/NVIDIA/garak/blob/8d1259ef310e4803cf5a4cc77267fdfdc24434ec/CONTRIBUTING.md). CA/DCO bot plus commit sign-off. needs-triage is not ready; prefer bug-verified or good-first-issue. Comment before work; avoid for-maintainers items. **Fit:** Python evaluation and regression tests; good fit. |
 | [NVIDIA/TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM) · **ISSUE LEAD** | 14,651 · Python | 5/100 = 5.0% | 5.97 d | [913](https://github.com/NVIDIA/TensorRT-LLM/pulls) · [433 d](https://github.com/NVIDIA/TensorRT-LLM/pull/5972) | [DCO/sign-off documented](https://github.com/NVIDIA/TensorRT-LLM/blob/da7e141302b7c52fd4eb609419a7eeb7b77ac945/CONTRIBUTING.md). Approved issue required before code review; DCO/sign-off. Build and benchmark the actual GPU path. **Fit:** C++/Python inference systems; hardware-heavy. |
+
+**Six issue slots across this group:** LOW 0/2, MEDIUM 2/2, HIGH 2/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | [NVIDIA/TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM) | [#17909 — SimplePool orphans already-created items when preallocation fails partway](https://github.com/NVIDIA/TensorRT-LLM/issues/17909) | Partial SimplePool preallocation failure leaks already-created resources. | Clean up successfully-created items on failure and test exception paths. | **90–220** | Approved issue and DCO required; ensure cleanup preserves original errors and resource ownership. |
+| MEDIUM | [NVIDIA/TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM) | [#17914 — TemporaryCudaStream leaks its borrowed stream when setup or exit fails](https://github.com/NVIDIA/TensorRT-LLM/issues/17914) | Temporary CUDA stream setup/exit failures lose a borrowed stream. | Make acquisition/release exception-safe with lifecycle regressions. | **100–250** | Approved issue and DCO; mocks plus actual CUDA stream reuse validation. |
+| HIGH | [NVIDIA/TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM) | [#19435 — [Bug] Attention-DP fill-gate fail-fast can skip the model-parallel status gather on a post-fill rank](https://github.com/NVIDIA/TensorRT-LLM/issues/19435) | Rank-local fill-gate state can make only some ranks enter a collective status gather. | Synchronize the decision so all required ranks execute compatible collectives. | **200–450** | Approved issue; multi-rank GPU run with skewed fill state and timeout detection. |
+| HIGH | [NVIDIA/TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM) | [#17477 — Fully-masked softmax rows exponentiate to 1 in the FMHA no-loop kernel](https://github.com/NVIDIA/TensorRT-LLM/issues/17477) | Fully masked attention rows can exponentiate to one in the no-loop FMHA kernel. | Correct masking/normalization for empty rows and compare to a reference kernel. | **180–450** | Approved issue, DCO, native GPU build and precision/mask matrix; hardware mandatory. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [NVIDIA/NeMo #16099](https://github.com/NVIDIA/NeMo/issues/16099): Issue explicitly waits on open PR #15186, which deletes the affected function.
+- [NVIDIA/NeMo #16142](https://github.com/NVIDIA/NeMo/issues/16142): Report concerns a legacy branch and says the corresponding main implementation is already corrected; active-branch demand unverified.
+- [NVIDIA/TensorRT-LLM #18115](https://github.com/NVIDIA/TensorRT-LLM/issues/18115): Multiple contributors already have implementation/testing work pending approval.
+- [NVIDIA/TensorRT-LLM #18380](https://github.com/NVIDIA/TensorRT-LLM/issues/18380): Another contributor has asked to take the issue.
 
 #### NVIDIA/NeMo
 
@@ -1380,9 +1929,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** [#16278 — Sortformer splits one speaker into two when their distance to the mic changes](https://github.com/NVIDIA-NeMo/Speech/issues/16278). **Failure:** Sortformer splits one speaker when microphone distance changes. **Evidence:** REPORTED model behavior; no evidence yet that a small source patch is appropriate. **Before proposing a PR:** Obtain permitted audio and model/version settings; quantify diarization error and distinguish model limitation from implementation defect before proposing code. Checked 2026-09-18T19:29:57 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: community-request. Scope and maintainer acceptance still need confirmation.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### NVIDIA/garak
 
@@ -1396,9 +1943,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### NVIDIA/TensorRT-LLM
 
@@ -1412,19 +1957,42 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** [#18662 — [Bug]: MTP accepts no draft tokens with use_kv_cache_manager_v2=false on DSA models (acceptance length 1.0)](https://github.com/NVIDIA/TensorRT-LLM/issues/18662). **Failure:** DSA MTP accepts no draft tokens with the v2 KV cache manager disabled. **Evidence:** REPORTED inference defect; GPU path not exercised. **Before proposing a PR:** Reproduce the exact cache-manager/model configuration, isolate correctness versus configuration, and obtain an approved issue plus DCO before code review. Checked 2026-09-18T19:29:57 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: Speculative Decoding. Scope and maintainer acceptance still need confirmation.
+- [#17909](https://github.com/NVIDIA/TensorRT-LLM/issues/17909): checked 2026-09-18T19:58:21 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: Memory. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#17914](https://github.com/NVIDIA/TensorRT-LLM/issues/17914): checked 2026-09-18T19:58:21 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: Pytorch. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#19435](https://github.com/NVIDIA/TensorRT-LLM/issues/19435): checked 2026-09-18T19:58:20 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: Disaggregated serving. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#17477](https://github.com/NVIDIA/TensorRT-LLM/issues/17477): checked 2026-09-18T19:58:22 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: Customized kernels. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 ### vLLM
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
-| [vllm-project/vllm](https://github.com/vllm-project/vllm) · **DISCOVERY ONLY** | 92,102 · Python | 73/100 = 73.0% | 5.18 d | [5,661](https://github.com/vllm-project/vllm/pulls) · [512 d](https://github.com/vllm-project/vllm/pull/17074) | [DCO/sign-off documented](https://github.com/vllm-project/vllm/blob/dbf4b89cf229fa52869aa36744d2e0ec0c8997ed/DCO). DCO and contribution guide; huge queue. Favor independently testable scheduling/API cases over hardware-specific kernels as a first contribution. **Fit:** Python serving logic plus CUDA; major ML-infrastructure signal. |
-| [vllm-project/semantic-router](https://github.com/vllm-project/semantic-router) · **DISCOVERY ONLY** | 5,858 · Go | 30/99 = 30.3% | 2.05 d | [153](https://github.com/vllm-project/semantic-router/pulls) · [164 d](https://github.com/vllm-project/semantic-router/pull/1718) | [DCO/sign-off documented](https://github.com/vllm-project/semantic-router/blob/3ff520b61223b0fd86e84ab02baa176d4787c4c6/.github/PULL_REQUEST_TEMPLATE.md). Accepted issue with exactly one recognized workgroup/governance owner; ready-for-dev then assignment. DCO; at least two authorized approvals plus checks for queue entry. **Fit:** Go routing/evaluation is an especially good skill match. |
-| [vllm-project/production-stack](https://github.com/vllm-project/production-stack) · **DISCOVERY ONLY** | 2,608 · Python | 87/100 = 87.0% | 7.64 d | [117](https://github.com/vllm-project/production-stack/pulls) · [596 d](https://github.com/vllm-project/production-stack/pull/45) | [DCO/sign-off documented](https://github.com/vllm-project/production-stack/blob/72902404edfed8267111cc05ce66a99754e3b1fa/.github/PULL_REQUEST_TEMPLATE.md). DCO; small fixes may go directly to PR. Significant features need a proposal. Router E2E/Helm tests; guide allows a targeted ping after five days. **Fit:** Python router/Helm operations; useful serving signal without kernel expertise. |
+| [vllm-project/vllm](https://github.com/vllm-project/vllm) · **ISSUE LEAD** | 92,102 · Python | 73/100 = 73.0% | 5.18 d | [5,661](https://github.com/vllm-project/vllm/pulls) · [512 d](https://github.com/vllm-project/vllm/pull/17074) | [DCO/sign-off documented](https://github.com/vllm-project/vllm/blob/dbf4b89cf229fa52869aa36744d2e0ec0c8997ed/DCO). DCO and contribution guide; huge queue. Favor independently testable scheduling/API cases over hardware-specific kernels as a first contribution. **Fit:** Python serving logic plus CUDA; major ML-infrastructure signal. |
+| [vllm-project/semantic-router](https://github.com/vllm-project/semantic-router) · **ISSUE LEAD** | 5,858 · Go | 30/99 = 30.3% | 2.05 d | [153](https://github.com/vllm-project/semantic-router/pulls) · [164 d](https://github.com/vllm-project/semantic-router/pull/1718) | [DCO/sign-off documented](https://github.com/vllm-project/semantic-router/blob/3ff520b61223b0fd86e84ab02baa176d4787c4c6/.github/PULL_REQUEST_TEMPLATE.md). Accepted issue with exactly one recognized workgroup/governance owner; ready-for-dev then assignment. DCO; at least two authorized approvals plus checks for queue entry. **Fit:** Go routing/evaluation is an especially good skill match. |
+| [vllm-project/production-stack](https://github.com/vllm-project/production-stack) · **ISSUE LEAD** | 2,608 · Python | 87/100 = 87.0% | 7.64 d | [117](https://github.com/vllm-project/production-stack/pulls) · [596 d](https://github.com/vllm-project/production-stack/pull/45) | [DCO/sign-off documented](https://github.com/vllm-project/production-stack/blob/72902404edfed8267111cc05ce66a99754e3b1fa/.github/PULL_REQUEST_TEMPLATE.md). DCO; small fixes may go directly to PR. Significant features need a proposal. Router E2E/Helm tests; guide allows a targeted ping after five days. **Fit:** Python router/Helm operations; useful serving signal without kernel expertise. |
+
+**Six issue slots across this group:** LOW 1/2, MEDIUM 1/2, HIGH 1/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | [vllm-project/semantic-router](https://github.com/vllm-project/semantic-router) | [#3923 — [Bug] The missing DSL-compiler WASM hides its prerequisite instead of naming it](https://github.com/vllm-project/semantic-router/issues/3923) | A missing compiler WASM asset returns HTML and an opaque MIME error instead of naming the prerequisite. | Detect the missing build artifact and report the specific build prerequisite. | **40–110** | Accepted workgroup/ready-for-dev/assignment gates and DCO; test absent, valid and corrupt assets. |
+| LOW | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | [vllm-project/production-stack](https://github.com/vllm-project/production-stack) | [#723 — bug: lmcache remote server consistently disconnected from client side](https://github.com/vllm-project/production-stack/issues/723) | The shared-cache deployment fails in its wait-for-cache-server init container. | Repair a confirmed chart/image protocol mismatch with a reproducible deployment test. | **80–220** | Old nightly-image report; establish current supported image pair and whether the fix belongs in LMCache. |
+| MEDIUM | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| HIGH | [vllm-project/vllm](https://github.com/vllm-project/vllm) | [#56564 — [Performance]: GLM-5.3-Flash on H100: auto-selected FLASHINFER_MLA_SPARSE_SM90 is 36-70% slower than FLASH_ATTN_MLA_SPARSE](https://github.com/vllm-project/vllm/issues/56564) | Auto-selected sparse MLA is reported 36–70% slower than an alternative on H100. | Benchmark the supported backend-selection cases and adjust only a justified selection rule. | **180–450** | Matching H100/TP workload required; confirm ownership with the existing investigator and avoid a one-workload default change. |
+| HIGH | — | **1 slot unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [vllm-project/production-stack #1049](https://github.com/vllm-project/production-stack/issues/1049): Reporter explicitly has a working patch and tests ready.
+- [vllm-project/vllm #55279](https://github.com/vllm-project/vllm/issues/55279): Another contributor is already qualifying and investigating the failure.
 
 #### vllm-project/vllm
 
@@ -1437,9 +2005,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#56564](https://github.com/vllm-project/vllm/issues/56564): checked 2026-09-18T19:58:22 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: glm. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
 
 #### vllm-project/semantic-router
 
@@ -1452,9 +2018,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#3923](https://github.com/vllm-project/semantic-router/issues/3923): checked 2026-09-18T19:58:23 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: needs-acceptance, wg/developer-experience-ecosystem. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 #### vllm-project/production-stack
 
@@ -1467,19 +2031,37 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#723](https://github.com/vllm-project/production-stack/issues/723): checked 2026-09-18T19:58:23 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: bug. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 ### SGLang
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
-| [sgl-project/sglang](https://github.com/sgl-project/sglang) · **DISCOVERY ONLY** | 36,137 · Python | 39/100 = 39.0% | 2.72 d | [4,534](https://github.com/sgl-project/sglang/pulls) · [521 d](https://github.com/sgl-project/sglang/pull/5413) | CLA/DCO not established in inspected files. Follow contributor guide and CI checks; DCO requirement not established in fetched material. Large queue; GPU validation often required. Python boundary tests are the lowest-cost entry. **Fit:** Python inference orchestration; high-value but competitive. |
+| [sgl-project/sglang](https://github.com/sgl-project/sglang) · **ISSUE LEAD** | 36,137 · Python | 39/100 = 39.0% | 2.72 d | [4,534](https://github.com/sgl-project/sglang/pulls) · [521 d](https://github.com/sgl-project/sglang/pull/5413) | CLA/DCO not established in inspected files. Follow contributor guide and CI checks; DCO requirement not established in fetched material. Large queue; GPU validation often required. Python boundary tests are the lowest-cost entry. **Fit:** Python inference orchestration; high-value but competitive. |
 | [sgl-project/sglang-omni](https://github.com/sgl-project/sglang-omni) · **DISCOVERY ONLY** | 1,227 · Python | 31/100 = 31.0% | 2.78 d | [438](https://github.com/sgl-project/sglang-omni/pulls) · [192 d](https://github.com/sgl-project/sglang-omni/pull/145) | CLA/DCO not established in inspected files. Check model/accelerator requirements and design scope before committing to a feature. **Fit:** Python multimodal serving, smaller but still substantial queue. |
-| [sgl-project/sglang-jax](https://github.com/sgl-project/sglang-jax) · **DISCOVERY ONLY** | 352 · Python | 31/100 = 31.0% | 5.31 d | [89](https://github.com/sgl-project/sglang-jax/pulls) · [306 d](https://github.com/sgl-project/sglang-jax/pull/411) | CLA/DCO not established in inspected files. Pick a small correctness or tooling issue first; TPU/GPU claims need actual execution. **Fit:** Python/JAX serving; requires relevant accelerator access for deep work. |
+| [sgl-project/sglang-jax](https://github.com/sgl-project/sglang-jax) · **ISSUE LEAD** | 352 · Python | 31/100 = 31.0% | 5.31 d | [89](https://github.com/sgl-project/sglang-jax/pulls) · [306 d](https://github.com/sgl-project/sglang-jax/pull/411) | CLA/DCO not established in inspected files. Pick a small correctness or tooling issue first; TPU/GPU claims need actual execution. **Fit:** Python/JAX serving; requires relevant accelerator access for deep work. |
+
+**Six issue slots across this group:** LOW 0/2, MEDIUM 0/2, HIGH 2/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| MEDIUM | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+| HIGH | [sgl-project/sglang](https://github.com/sgl-project/sglang) | [#39597 — Greedy decoding is not reproducible across server restarts when FlashInfer autotune is enabled (DFLASH speculative decoding)](https://github.com/sgl-project/sglang/issues/39597) | Greedy DFLASH output varies across server restarts when FlashInfer autotune is enabled. | Isolate the kernel/selection nondeterminism and honor the agreed deterministic contract. | **180–450** | Repeated restart A/B with model/GPU required; root cause may belong in FlashInfer. |
+| HIGH | [sgl-project/sglang-jax](https://github.com/sgl-project/sglang-jax) | [#306 — [Bug] FA has poor performance when head_dim > 128](https://github.com/sgl-project/sglang-jax/issues/306) | Flash attention performs poorly when head dimension exceeds 128. | Profile the affected shapes and improve dispatch/tiling with correctness and speed measurements. | **200–600** | Relevant accelerator required; check current kernel/version and maintenance before implementation. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [sgl-project/sglang-omni #1542](https://github.com/sgl-project/sglang-omni/issues/1542): Two contributors are actively investigating the same reproduction.
+- [sgl-project/sglang-omni #1936](https://github.com/sgl-project/sglang-omni/issues/1936): First fault has an existing PR; another contributor has offered to investigate the second.
 
 #### sgl-project/sglang
 
@@ -1493,9 +2075,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#39597](https://github.com/sgl-project/sglang/issues/39597): checked 2026-09-18T19:58:25 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 #### sgl-project/sglang-omni
 
@@ -1509,9 +2089,7 @@ No CONTRIBUTING file found in the inspected tree; missing policy is not permissi
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### sgl-project/sglang-jax
 
@@ -1525,18 +2103,39 @@ No CONTRIBUTING file found in the inspected tree; missing policy is not permissi
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#306](https://github.com/sgl-project/sglang-jax/issues/306): checked 2026-09-18T19:58:26 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 ### OpenHands
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [OpenHands/OpenHands](https://github.com/OpenHands/OpenHands) · **DISCOVERY ONLY** | 88,411 · TypeScript | 79/97 = 81.4% | 2.04 d | [391](https://github.com/OpenHands/OpenHands/pulls) · [52 d](https://github.com/OpenHands/OpenHands/pull/16102) | CLA/DCO not established in inspected files. PR template requires a linked ready-for-dev issue with acceptance criteria. Stay on the active architecture; old CLI is no longer maintained. **Fit:** Python/TypeScript full-stack agent reliability. |
 | [OpenHands/software-agent-sdk](https://github.com/OpenHands/software-agent-sdk) · **ISSUE LEAD** | 1,132 · Python | 5/63 = 7.9% | 14.58 d | [295](https://github.com/OpenHands/software-agent-sdk/pulls) · [239 d](https://github.com/OpenHands/software-agent-sdk/pull/1780) | CLA/DCO not established in inspected files. Stable Python and REST/WebSocket contracts. Issue-readiness automation is active. Nontrivial design doc encouraged, not universally required. Low external share means review risk remains despite ready issues. **Fit:** Python lifecycle, persistence and typed contracts closely match your experience. |
+| [OpenHands/benchmarks](https://github.com/OpenHands/benchmarks) · **ISSUE LEAD** | 123 · Python | 6/99 = 6.1% | 3.54 d | [23](https://github.com/OpenHands/benchmarks/pulls) · [284 d](https://github.com/OpenHands/benchmarks/pull/141) | CLA/DCO not established in inspected files. Contribution guide: pytest/pre-commit, shared utilities only for cross-benchmark benefits. CI/image publishing may require maintainer labels or credentials; keep local fixes benchmark-specific when appropriate. **Fit:** Python evaluation orchestration and result integrity suit your experience. |
+
+**Six issue slots across this group:** LOW 2/2, MEDIUM 2/2, HIGH 2/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | [OpenHands/benchmarks](https://github.com/OpenHands/benchmarks) | [#581 — orchestrate_eval.py crashes when benchmarks_branch is a commit SHA instead of a branch name](https://github.com/OpenHands/benchmarks/issues/581) | The orchestration script treats a commit SHA as a branch ref and gets a 404. | Resolve supported branch/tag/commit inputs correctly with mocked GitHub API tests. | **35–100** | Confirm the accepted ref contract and run an authorized evaluation smoke after unit tests. |
+| LOW | [OpenHands/benchmarks](https://github.com/OpenHands/benchmarks) | [#636 — ACP Codex GPT-5.4 swebenchmultimodal: missing output.report.json](https://github.com/OpenHands/benchmarks/issues/636) | A benchmark run emits per-instance reports but omits the expected aggregate output.report.json. | Restore or explicitly reconcile aggregate report generation with a tiny results fixture. | **40–110** | Verify this remains an intended artifact in the active runner; distinguish harness failure from a one-off run. |
+| MEDIUM | [OpenHands/software-agent-sdk](https://github.com/OpenHands/software-agent-sdk) | [#4670 — WebSocketCallbackClient.stop() does not close a silent WebSocket and leaves its worker thread running](https://github.com/OpenHands/software-agent-sdk/issues/4670) | Stopping a silent WebSocket leaves its worker thread and connection alive. | Wake/close the pending receive, join the worker, and preserve truthful lifecycle state. | **100–240** | Issue-readiness gate is not met; deterministic silent-server test and maintainer acceptance first. |
+| MEDIUM | [OpenHands/software-agent-sdk](https://github.com/OpenHands/software-agent-sdk) | [#4731 — Fix WebSocket client require('ws') breaking bundlers](https://github.com/OpenHands/software-agent-sdk/issues/4731) | A WebSocket client uses require(ws), breaking some ESM/browser bundles. | Use the approved runtime-specific import boundary with Node/browser bundler tests. | **80–200** | Provisional: verify the cited TS package is editable here; issue-readiness not met. No PR if ownership is elsewhere. |
+| HIGH | [OpenHands/software-agent-sdk](https://github.com/OpenHands/software-agent-sdk) | [#5074 — TaskTool child remains running and task mapping is lost after Agent Server process restart](https://github.com/OpenHands/software-agent-sdk/issues/5074) | Server restart recovers a parent but leaves its child running in persisted state with no task mapping. | Reconcile child lifecycle and parent observations during recovery. | **220–500** | Issue-readiness and recovery semantics approval first; real kill/restart/reload test. |
+| HIGH | [OpenHands/software-agent-sdk](https://github.com/OpenHands/software-agent-sdk) | [#4990 — [Bug]: /pause reports PAUSED while an ACP agent keeps executing tool calls](https://github.com/OpenHands/software-agent-sdk/issues/4990) | Pause reports PAUSED while an ACP agent continues executing tools. | Make reported pause state match the accepted execution/cancellation semantics. | **180–420** | Issue-readiness not met; agree pause versus interrupt behavior and test an in-flight tool. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [OpenHands/OpenHands #17470](https://github.com/OpenHands/OpenHands/issues/17470): Another contributor has claimed the runtime investigation.
+- [OpenHands/benchmarks #598](https://github.com/OpenHands/benchmarks/issues/598): SWE-bench maintainers are already working on bundling the images.
 
 #### OpenHands/OpenHands
 
@@ -1550,9 +2149,7 @@ No CONTRIBUTING file found in the inspected tree; missing policy is not permissi
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### OpenHands/software-agent-sdk
 
@@ -1565,21 +2162,58 @@ No CONTRIBUTING file found in the inspected tree; missing policy is not permissi
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** [#4670 — WebSocketCallbackClient.stop() does not close a silent WebSocket and leaves its worker thread running](https://github.com/OpenHands/software-agent-sdk/issues/4670). **Failure:** Stopping a silent WebSocket leaks its worker and clears the live thread reference. **Evidence:** REPORTED with a deterministic local-peer reproducer; current issue readiness gate remains unsatisfied. **Before proposing a PR:** Reproduce with a silent local peer; test stop races, repeated start/stop and timeout cleanup. Ask triage to settle readiness before implementation. Checked 2026-09-18T19:29:58 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: bug, priority:medium, sdk. Scope and maintainer acceptance still need confirmation.
-- **MEDIUM:** [#4731 — Fix WebSocket client require('ws') breaking bundlers](https://github.com/OpenHands/software-agent-sdk/issues/4731). **Failure:** TypeScript WebSocket initialization breaks ESM bundlers. **Evidence:** REPORTED: source exists in the SDK snapshot; current client ownership and readiness must be confirmed. **Before proposing a PR:** Build a minimal supported browser and Node consumer; identify the active TypeScript repository before choosing a fix. Do not silently raise the Node minimum. Checked 2026-09-18T19:29:58 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: bug. Scope and maintainer acceptance still need confirmation.
-- **HIGH:** [#5074 — TaskTool child remains running and task mapping is lost after Agent Server process restart](https://github.com/OpenHands/software-agent-sdk/issues/5074). **Failure:** Restart loses child-task mappings and leaves persisted children permanently running. **Evidence:** REPORTED with TestLLM/process-death reproduction; readiness and recovery semantics require triage. **Before proposing a PR:** Prefer an agreed minimal interrupted/error recovery path over inventing durable orchestration. Kill/restart a local test server; check child terminal state and parent result exactly once. Checked 2026-09-18T19:29:58 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: bug, agent-execution, priority:high, tools. Scope and maintainer acceptance still need confirmation.
-- **HIGH:** [#4990 — [Bug]: /pause reports PAUSED while an ACP agent keeps executing tool calls](https://github.com/OpenHands/software-agent-sdk/issues/4990). **Failure:** Pause reports PAUSED while ACP tools continue modifying the workspace. **Evidence:** REPORTED with timed observations; pause-versus-interrupt semantics need maintainer agreement. **Before proposing a PR:** Use a deterministic local ACP peer; establish when PAUSED becomes truthful, then test ongoing work, cancellation, resume and state reporting. Checked 2026-09-18T19:29:58 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: bug, agent-execution, priority:medium, acp. Scope and maintainer acceptance still need confirmation.
+- [#4670](https://github.com/OpenHands/software-agent-sdk/issues/4670): checked 2026-09-18T19:58:28 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: bug, priority:medium, sdk. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+- [#4731](https://github.com/OpenHands/software-agent-sdk/issues/4731): checked 2026-09-18T19:58:28 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: bug. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+- [#5074](https://github.com/OpenHands/software-agent-sdk/issues/5074): checked 2026-09-18T19:58:28 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: bug, agent-execution, priority:high, tools. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+- [#4990](https://github.com/OpenHands/software-agent-sdk/issues/4990): checked 2026-09-18T19:58:28 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: bug, agent-execution, priority:medium, acp. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+
+#### OpenHands/benchmarks
+
+**Sample:** N=100, bots=1, human/unresolved=99, candidate external=6; merges 2026-03-12 to 2026-09-02. Exact most-recent cohort recovered. Snapshot 2026-09-18T19:52:30 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
+**Recent candidate-external examples:** [#766: PLTF-3363: Upgrade LiteLLM to 1.93.0](https://github.com/OpenHands/benchmarks/pull/766); [#641: feat/add SkillsBench benchmark integration](https://github.com/OpenHands/benchmarks/pull/641); [#428: feat(swesmith): add SWE-Smith benchmark evaluation scaffold](https://github.com/OpenHands/benchmarks/pull/428).
+**Oldest observed external queue entries:** [#141](https://github.com/OpenHands/benchmarks/pull/141) (284 d; opened 2025-12-08); [#361](https://github.com/OpenHands/benchmarks/pull/361) (235 d; opened 2026-01-26); [#649](https://github.com/OpenHands/benchmarks/pull/649) (162 d; opened 2026-04-09).
+
+**Policy sources at pinned commit:** [CONTRIBUTING.md](https://github.com/OpenHands/benchmarks/blob/405bae7140d7e961a75f4910a0b2e7069731db96/CONTRIBUTING.md); [README.md](https://github.com/OpenHands/benchmarks/blob/405bae7140d7e961a75f4910a0b2e7069731db96/README.md).
+No repository-local PR template found; inherited organization templates were not fully audited.
+**CI inspected:** [.github/workflows/build-commit0-images.yml](https://github.com/OpenHands/benchmarks/blob/405bae7140d7e961a75f4910a0b2e7069731db96/.github/workflows/build-commit0-images.yml); [.github/workflows/build-gaia-images.yml](https://github.com/OpenHands/benchmarks/blob/405bae7140d7e961a75f4910a0b2e7069731db96/.github/workflows/build-gaia-images.yml); [.github/workflows/build-multiswebench-images.yml](https://github.com/OpenHands/benchmarks/blob/405bae7140d7e961a75f4910a0b2e7069731db96/.github/workflows/build-multiswebench-images.yml); [.github/workflows/build-programbench-images.yml](https://github.com/OpenHands/benchmarks/blob/405bae7140d7e961a75f4910a0b2e7069731db96/.github/workflows/build-programbench-images.yml); [.github/workflows/build-swebench-images.yml](https://github.com/OpenHands/benchmarks/blob/405bae7140d7e961a75f4910a0b2e7069731db96/.github/workflows/build-swebench-images.yml); [.github/workflows/build-swebenchmultimodal-images.yml](https://github.com/OpenHands/benchmarks/blob/405bae7140d7e961a75f4910a0b2e7069731db96/.github/workflows/build-swebenchmultimodal-images.yml); [.github/workflows/build-swebenchpro-images.yml](https://github.com/OpenHands/benchmarks/blob/405bae7140d7e961a75f4910a0b2e7069731db96/.github/workflows/build-swebenchpro-images.yml); [.github/workflows/build-swegym-images.yml](https://github.com/OpenHands/benchmarks/blob/405bae7140d7e961a75f4910a0b2e7069731db96/.github/workflows/build-swegym-images.yml); [.github/workflows/build-swesmith-images.yml](https://github.com/OpenHands/benchmarks/blob/405bae7140d7e961a75f4910a0b2e7069731db96/.github/workflows/build-swesmith-images.yml); [.github/workflows/build-swtbench-images.yml](https://github.com/OpenHands/benchmarks/blob/405bae7140d7e961a75f4910a0b2e7069731db96/.github/workflows/build-swtbench-images.yml); [.github/workflows/ghcr-retention.yml](https://github.com/OpenHands/benchmarks/blob/405bae7140d7e961a75f4910a0b2e7069731db96/.github/workflows/ghcr-retention.yml); [.github/workflows/precommit.yml](https://github.com/OpenHands/benchmarks/blob/405bae7140d7e961a75f4910a0b2e7069731db96/.github/workflows/precommit.yml); [.github/workflows/tests.yml](https://github.com/OpenHands/benchmarks/blob/405bae7140d7e961a75f4910a0b2e7069731db96/.github/workflows/tests.yml).
+**Affiliation adjustments:** [xingyaoww](https://github.com/xingyaoww) — public company: OpenHands / All Hands AI. Evidence is public profile/core-role information at collection time, not proof of employment when each PR merged.
+
+**Issue candidates — re-check within hours:**
+
+- [#581](https://github.com/OpenHands/benchmarks/issues/581): checked 2026-09-18T19:58:30 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#636](https://github.com/OpenHands/benchmarks/issues/636): checked 2026-09-18T19:58:30 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 ### Goose
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [block/goose](https://github.com/aaif-goose/goose) · **DISCOVERY ONLY** | 54,428 · Rust | 23/76 = 30.3% | 2.88 d | [123](https://github.com/aaif-goose/goose/pulls) · [29 d](https://github.com/aaif-goose/goose/pull/11374) | CLA/DCO not established in inspected files. Issue must be Ready on the project board before implementation/PR; Accepted/design is insufficient. Do not open many PRs in succession. **Fit:** Rust/TypeScript agent infrastructure; now aaif-goose/goose. |
 | [block/buzz](https://github.com/block/buzz) · **ISSUE LEAD** | 33,593 · Rust | 28/100 = 28.0% | 2.09 d | [2,053](https://github.com/block/buzz/pulls) · [83 d](https://github.com/block/buzz/pull/1316) | [CLA/agreement documented](https://github.com/block/buzz/blob/8953cbfff58ed768d996677fed3af0e3bac64a20/CONTRIBUTING.md); [DCO/sign-off documented](https://github.com/block/buzz/blob/8953cbfff58ed768d996677fed3af0e3bac64a20/CONTRIBUTING.md). DCO; discuss more than a small fix, search duplicates. Review and own AI-assisted code. Large queue; lower near-term fit than Python work. **Fit:** Rust/TypeScript agent platform adjacent to Goose. |
 | [block/agent-task-queue](https://github.com/block/agent-task-queue) · **DISCOVERY ONLY** | 68 · Python | 8/13 = 61.5% | 0.01 d | [3](https://github.com/block/agent-task-queue/pulls) · [10 d](https://github.com/block/agent-task-queue/pull/37) | CLA/DCO not established in inspected files. Very small merge sample; not Goose itself. Confirm active owner and an unclaimed issue. **Fit:** Small TypeScript task queue, potentially tractable. |
+
+**Six issue slots across this group:** LOW 2/2, MEDIUM 2/2, HIGH 2/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | [block/buzz](https://github.com/block/buzz) | [#7743 — Fix the unexpected gap underneath the composer](https://github.com/block/buzz/issues/7743) | A gap below the composer breaks the dark-mode background. | Fix the reported container/background boundary and verify themes and window sizes. | **15–60** | Use the affected desktop build; a reported visual defect, not unsolicited cosmetic churn. DCO. |
+| LOW | [block/buzz](https://github.com/block/buzz) | [#7729 — Windows: `.cmd`/`.bat` backend providers pass discovery and `info` but always fail deploy — `stage_provider` renames the staged copy to `provider.exe`](https://github.com/block/buzz/issues/7729) | Windows provider staging renames .cmd/.bat scripts to .exe and deployment fails. | Preserve the supported executable type and test staged provider launch. | **40–110** | Run Windows script and executable providers; maintain safe argument handling. DCO. |
+| MEDIUM | [block/buzz](https://github.com/block/buzz) | [#7725 — Global agent env vars are silently dropped when the `launch` block is present](https://github.com/block/buzz/issues/7725) | Supplying a launch block silently discards global agent environment variables. | Merge environment layers with explicit precedence and test actual pod payloads. | **70–180** | Agree precedence; never include real credentials in fixtures. DCO. |
+| MEDIUM | [block/buzz](https://github.com/block/buzz) | [#7730 — Replying to an agent's message never reaches the agent: Reply omits the `p` tag the harness filters on](https://github.com/block/buzz/issues/7730) | Replies to an agent omit the mention tag needed for delivery. | Include the intended recipient metadata and test reply routing without duplicate notifications. | **80–200** | Confirm protocol semantics for threads, mentions and ordinary user replies. DCO. |
+| HIGH | [block/buzz](https://github.com/block/buzz) | [#7720 — buzz-acp: idle-pool teardown race silently swallows a concurrently arriving message (no log trace beyond routine steer ack)](https://github.com/block/buzz/issues/7720) | Idle pool teardown can swallow a concurrently arriving agent message. | Serialize wake/teardown ownership and retain or replay the message exactly once. | **200–450** | Deterministic race test plus integration stress; agree delivery guarantees. DCO. |
+| HIGH | [block/buzz](https://github.com/block/buzz) | [#7733 — Mobile startup issues a burst of ~106 relay /query requests, 27 of them empty](https://github.com/block/buzz/issues/7733) | Mobile startup generates a burst of relay queries, including empty ones. | Remove demonstrated duplicate/empty subscriptions and measure startup requests. | **180–420** | Dart/mobile stretch work; real device/network traces and subscription correctness required. DCO. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [block/goose #11688](https://github.com/block/goose/issues/11688): Original reporter stepped aside after another contributor offered to take the approved fix.
+- [block/buzz #7701](https://github.com/block/buzz/issues/7701): Another contributor is investigating and could not reproduce the claimed client-side path.
 
 #### block/goose
 
@@ -1594,9 +2228,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### block/buzz
 
@@ -1610,9 +2242,12 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** [#7737 — [Bug] macOS notification banners show generic app icon — no sender profile picture/avatar](https://github.com/block/buzz/issues/7737). **Failure:** macOS notification banners show a generic icon instead of the sender avatar. **Evidence:** REPORTED product failure; desired platform capability and renderer ownership unverified. **Before proposing a PR:** Reproduce on supported macOS; verify OS notification limitations before a renderer/packaging patch. Lower ML relevance than the portfolio anchors. Checked 2026-09-18T19:29:58 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#7743](https://github.com/block/buzz/issues/7743): checked 2026-09-18T19:58:30 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: bug. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#7729](https://github.com/block/buzz/issues/7729): checked 2026-09-18T19:58:32 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#7725](https://github.com/block/buzz/issues/7725): checked 2026-09-18T19:58:32 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#7730](https://github.com/block/buzz/issues/7730): checked 2026-09-18T19:58:31 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#7720](https://github.com/block/buzz/issues/7720): checked 2026-09-18T19:58:32 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#7733](https://github.com/block/buzz/issues/7733): checked 2026-09-18T19:58:31 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 #### block/agent-task-queue
 
@@ -1628,19 +2263,37 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 ### Aider
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [Aider-AI/aider](https://github.com/Aider-AI/aider) · **ISSUE LEAD** | 49,039 · Python | 99/99 = 100.0% | 0.26 d | [500](https://github.com/Aider-AI/aider/pulls) · [807 d](https://github.com/Aider-AI/aider/pull/777) | [CLA/agreement documented](https://github.com/Aider-AI/aider/blob/5dc9490bb35f9729ef2c95d00a19ccd30c26339c/CONTRIBUTING.md). Individual CLA; small changes allowed directly, significant changes need discussion. pytest and platform CI. Follow its no-type-hints convention. **Fit:** Python coding-agent ergonomics and provider behavior. |
 | [Aider-AI/polyglot-benchmark](https://github.com/Aider-AI/polyglot-benchmark) · **ISSUE LEAD** | 223 · C++ | N/A (no human sample) | N/A | [6](https://github.com/Aider-AI/polyglot-benchmark/pulls) · [630 d](https://github.com/Aider-AI/polyglot-benchmark/pull/2) | CLA/DCO not established in inspected files. No merged sample and old queue. Confirm the benchmark still accepts changes before investing. **Fit:** Benchmark integrity; meaningful evaluation work if maintained. |
 | [Aider-AI/grep-ast](https://github.com/Aider-AI/grep-ast) · **DISCOVERY ONLY** | 365 · Python | 5/5 = 100.0% | 0.19 d | [8](https://github.com/Aider-AI/grep-ast/pulls) · [1025 d](https://github.com/Aider-AI/grep-ast/pull/1) | CLA/DCO not established in inspected files. Five historical merges are too few; ask about current maintenance and parser compatibility. **Fit:** Small Python syntax-aware tooling. |
+
+**Six issue slots across this group:** LOW 2/2, MEDIUM 2/2, HIGH 0/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | [Aider-AI/polyglot-benchmark](https://github.com/Aider-AI/polyglot-benchmark) | [#11 — tests implmentation affects pass@1 in polyglot-benchmark](https://github.com/Aider-AI/polyglot-benchmark/issues/11) | The grep exercise mocks open but rejects implementations that first check file existence. | Make the fixture represent the documented filesystem contract. | **30–100** | Confirm benchmark maintenance and expected exercise semantics; changing scores requires disclosed baseline comparison. |
+| LOW | [Aider-AI/polyglot-benchmark](https://github.com/Aider-AI/polyglot-benchmark) | [#14 — Go counter receives a passing grade with zero tests executed](https://github.com/Aider-AI/polyglot-benchmark/issues/14) | The Go counter exercise can pass with zero tests executed. | Require the intended tests to execute and reject an empty successful test run. | **40–110** | Confirm whether grading belongs here or in the Harbor adapter; no PR until correct ownership is established. |
+| MEDIUM | [Aider-AI/aider](https://github.com/Aider-AI/aider) | [#5735 — Uncaught UnicodeEncodeError in cp1252.py line 19](https://github.com/Aider-AI/aider/issues/5735) | Windows cp1252 output raises UnicodeEncodeError while showing the assistant response. | Handle the unsupported output encoding at the correct I/O boundary. | **60–180** | Reproduce on Windows with the reported encoding; preserve existing strictness and output behavior. Individual CLA. |
+| MEDIUM | [Aider-AI/aider](https://github.com/Aider-AI/aider) | [#5707 — Uncaught OSError in pathlib.py line 1313](https://github.com/Aider-AI/aider/issues/5707) | Startup raises an uncaught filesystem error while creating the cache directory. | Validate/recover or report the cache-path failure according to maintainer policy. | **60–180** | Get the full path/permission reproduction; do not silently relocate user data. Individual CLA. |
+| HIGH | — | **2 slots unfilled** | No additional suitable unclaimed failure verified in this pass. | Re-check the three queues or use the documented complaint-discovery process. | Not estimated | No invented bug or speculative feature to fill the quota. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
+**Examples deliberately excluded after reading the discussion/body:**
+
+- [Aider-AI/aider #5715](https://github.com/Aider-AI/aider/issues/5715): Discussion traces the crash to a locally modified file absent from upstream.
 
 #### Aider-AI/aider
 
@@ -1654,9 +2307,8 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** [#5729 — Uncaught ImportError in _svdp.py line 23](https://github.com/Aider-AI/aider/issues/5729). **Failure:** ImportError in scipy _svdp prevents startup. **Evidence:** REPORTED installation failure; environment or dependency issue may be outside Aider. **Before proposing a PR:** Recreate exact Python/NumPy/SciPy versions and locate packaging responsibility. Do not submit an arbitrary dependency bump. Checked 2026-09-18T19:29:59 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#5735](https://github.com/Aider-AI/aider/issues/5735): checked 2026-09-18T19:58:33 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#5707](https://github.com/Aider-AI/aider/issues/5707): checked 2026-09-18T19:58:34 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
 
 #### Aider-AI/polyglot-benchmark
 
@@ -1670,9 +2322,8 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** [#11 — tests implmentation affects pass@1 in polyglot-benchmark](https://github.com/Aider-AI/polyglot-benchmark/issues/11). **Failure:** Test implementation reportedly changes measured pass@1. **Evidence:** REPORTED evaluation-validity concern; root cause and desired methodology unverified. **Before proposing a PR:** Use fixed solutions and isolated runner conditions; prove which test behavior changes correctness outcomes before altering benchmark methodology. Checked 2026-09-18T19:29:59 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
+- [#11](https://github.com/Aider-AI/polyglot-benchmark/issues/11): checked 2026-09-18T19:58:34 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#14](https://github.com/Aider-AI/polyglot-benchmark/issues/14): checked 2026-09-18T19:58:34 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
 
 #### Aider-AI/grep-ast
 
@@ -1687,19 +2338,35 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 ### Cline
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
-| [cline/cline](https://github.com/cline/cline) · **DISCOVERY ONLY** | 68,674 · TypeScript | 23/100 = 23.0% | 6.76 d | [574](https://github.com/cline/cline/pulls) · [317 d](https://github.com/cline/cline/pull/7272) | [CLA/agreement documented](https://github.com/cline/cline/blob/8872d81661ff65bc91edb302824d924d698e57e2/CONTRIBUTING.md). Approved issue for substantive changes; trivial-fix exception. Feature discussion approval first. Run extension in VS Code and relevant tests. **Fit:** TypeScript coding-agent UI/runtime. |
+| [cline/cline](https://github.com/cline/cline) · **ISSUE LEAD** | 68,674 · TypeScript | 23/100 = 23.0% | 6.76 d | [574](https://github.com/cline/cline/pulls) · [317 d](https://github.com/cline/cline/pull/7272) | [CLA/agreement documented](https://github.com/cline/cline/blob/8872d81661ff65bc91edb302824d924d698e57e2/CONTRIBUTING.md). Approved issue for substantive changes; trivial-fix exception. Feature discussion approval first. Run extension in VS Code and relevant tests. **Fit:** TypeScript coding-agent UI/runtime. |
 | [cline/cline-bench](https://github.com/cline/cline-bench) · **DISCOVERY ONLY** | 38 · Python | N/A (no human sample) | N/A | [0](https://github.com/cline/cline-bench/pulls) · none identified in scanned set | CLA/DCO not established in inspected files. No merged sample or open issue found. Do not manufacture a PR just for the org name. **Fit:** Evaluation tooling, potentially useful but sparse. |
 | [cline/kanban](https://github.com/cline/kanban) · **ISSUE LEAD** | 1,322 · TypeScript | 54/99 = 54.5% | 1.12 d | [103](https://github.com/cline/kanban/pulls) · [185 d](https://github.com/cline/kanban/pull/15) | CLA/DCO not established in inspected files. Currently refuses feature PRs; bug/compatibility work needs an issue except trivial fixes. npm run check/build. Do not pitch a new feature as a bug. **Fit:** TypeScript agent compatibility and lifecycle bugs. |
+
+**Six issue slots across this group:** LOW 2/2, MEDIUM 2/2, HIGH 2/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | [cline/cline](https://github.com/cline/cline) | [#14226 — Cline: Repo list opened in main screen keep showing up when user navigated to Account page.](https://github.com/cline/cline/issues/14226) | The repository dropdown remains visible after navigating to Account. | Close/reset the overlay on navigation and add a UI regression. | **25–90** | Approved issue or applicable trivial-fix exception; verify in VS Code, not just a component test. |
+| LOW | [cline/cline](https://github.com/cline/cline) | [#14238 — [WIndows specific] Cline: Usage history and payments history overlaps with Cline environment drop down](https://github.com/cline/cline/issues/14238) | Account history headings overlap the environment dropdown on Windows. | Correct the reported layout at narrow extension-panel widths. | **20–70** | Windows VS Code render test and contribution gate; keep the fix scoped to the overlap. |
+| MEDIUM | [cline/cline](https://github.com/cline/cline) | [#14264 — [Desktop] Reasoning effort resets from Medium to Low when reopening a session](https://github.com/cline/cline/issues/14264) | Restoring a session changes reasoning effort from Medium to Low and may persist it. | Restore the actual session setting without overwriting it with a default. | **90–220** | Approved issue; test switching sessions and subsequent outbound settings. |
+| MEDIUM | [cline/kanban](https://github.com/cline/kanban) | [#590 — Bug: `kanban` daemon fails to start — missing `dist/entry.js`, then `ReferenceError: AI is not defined`](https://github.com/cline/kanban/issues/590) | The published daemon points at a missing entry file and may contain an undefined bundled symbol. | Repair the source build/entry configuration and test the packed npm artifact. | **100–260** | Bug-fix issue route; reproduce with current package on Windows. Never patch generated dist files by hand. |
+| HIGH | [cline/kanban](https://github.com/cline/kanban) | [#648 — Perf: a single card with ~100KB prompt (pasted runtime logs) makes the whole board extremely slow to open and laggy](https://github.com/cline/kanban/issues/648) | One large card prompt makes a small board slow to open and interact with. | Profile rendering/serialization and avoid unnecessary work for large prompt bodies. | **180–450** | Measure the supplied ~100KB shape and preserve full content; no broad UI rewrite. |
+| HIGH | [cline/kanban](https://github.com/cline/kanban) | [#586 — cline-agent/claude-model: Permission-approval dialog never renders in chat UI — Write/Bash/WebFetch/gh calls silently rejected despite working Claude auth](https://github.com/cline/kanban/issues/586) | Tool permission requests are rejected because the approval dialog never reaches the chat UI. | Connect the existing permission request/response lifecycle end to end. | **180–450** | Confirm active agent architecture; maintain explicit user approval and test cancel/deny/reconnect. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
 
 #### cline/cline
 
@@ -1713,9 +2380,9 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#14226](https://github.com/cline/cline/issues/14226): checked 2026-09-18T19:58:36 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: QA, VS Code. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+- [#14238](https://github.com/cline/cline/issues/14238): checked 2026-09-18T19:58:35 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: QA, VS Code. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+- [#14264](https://github.com/cline/cline/issues/14264): checked 2026-09-18T19:58:35 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
 
 #### cline/cline-bench
 
@@ -1728,9 +2395,7 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### cline/kanban
 
@@ -1745,43 +2410,37 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** [#644 — "Enable bypass permissions flag" launches Claude Code with --permission-mode auto, not a bypass — cards stall when the auto-mode classifier refuses](https://github.com/cline/kanban/issues/644). **Failure:** Bypass-permissions setting launches auto mode, leaving cards stalled. **Evidence:** REPORTED flag translation bug; local code path and version must be reproduced. **Before proposing a PR:** Assert the spawned arguments for each supported setting and verify resulting mode with a local safe fixture; preserve explicit user choices. Checked 2026-09-18T19:29:59 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-
-### Continue
-
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
-
-| Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
-|---|---|---|---|---|---|
-| [continuedev/continue](https://github.com/continuedev/continue) · **AVOID** | 35,950 · TypeScript | 11/78 = 14.1% | 10.73 d | [511](https://github.com/continuedev/continue/pulls) · [248 d](https://github.com/continuedev/continue/pull/9490) | [CLA/agreement documented](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/cla.yaml). README states no longer actively maintained and read-only. Historical merges do not override this. **Fit:** Previously relevant TypeScript agent tooling; no current implementation target. |
-
-#### continuedev/continue
-
-**Sample:** N=100, bots=22, human/unresolved=78, candidate external=11; merges 2026-03-24 to 2026-07-21. Exact most-recent cohort recovered. Snapshot 2026-09-18T15:04:40 UTC. [Saved metrics](metrics.json) and [raw API evidence + collector](evidence.zip).
-**Recent candidate-external examples:** [#13004: docs: serve docs site at docs.continue.dev (custom domain)](https://github.com/continuedev/continue/pull/13004); [#11813: feat: filter session history by workspace directory](https://github.com/continuedev/continue/pull/11813); [#11474: fix(intellij): handle square brackets in file paths for autocomplete](https://github.com/continuedev/continue/pull/11474).
-**Oldest observed external queue entries:** [#9490](https://github.com/continuedev/continue/pull/9490) (248 d; opened 2026-01-12); [#9809](https://github.com/continuedev/continue/pull/9809) (238 d; opened 2026-01-23); [#10183](https://github.com/continuedev/continue/pull/10183) (226 d; opened 2026-02-04).
-
-**Policy sources at pinned commit:** [.github/CODEOWNERS](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/CODEOWNERS); [.github/pull_request_template.md](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/pull_request_template.md); [CLA.md](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/CLA.md); [CONTRIBUTING.md](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/CONTRIBUTING.md); [README.md](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/README.md); [extensions/intellij/CONTRIBUTING.md](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/extensions/intellij/CONTRIBUTING.md); [extensions/vscode/CONTRIBUTING.md](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/extensions/vscode/CONTRIBUTING.md).
-**CI inspected:** [.github/workflows/auto-assign-issue.yaml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/auto-assign-issue.yaml); [.github/workflows/auto-fix-failed-tests.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/auto-fix-failed-tests.yml); [.github/workflows/auto-release.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/auto-release.yml); [.github/workflows/cla.yaml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/cla.yaml); [.github/workflows/cli-pr-checks.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/cli-pr-checks.yml); [.github/workflows/continue-agents.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/continue-agents.yml); [.github/workflows/delete-stale-branches.yaml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/delete-stale-branches.yaml); [.github/workflows/docs-gh-pages.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/docs-gh-pages.yml); [.github/workflows/jetbrains-release.yaml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/jetbrains-release.yaml); [.github/workflows/label-merged-prs.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/label-merged-prs.yml); [.github/workflows/main-build.yaml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/main-build.yaml); [.github/workflows/main.yaml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/main.yaml); [.github/workflows/metrics.yaml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/metrics.yaml); [.github/workflows/pr-build-upload-vsix.yaml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/pr-build-upload-vsix.yaml); [.github/workflows/pr-checks.yaml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/pr-checks.yaml); [.github/workflows/preview.yaml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/preview.yaml); [.github/workflows/release-config-yaml.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/release-config-yaml.yml); [.github/workflows/release-fetch.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/release-fetch.yml); [.github/workflows/release-llm-info.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/release-llm-info.yml); [.github/workflows/release-openai-adapters.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/release-openai-adapters.yml); [.github/workflows/reusable-release.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/reusable-release.yml); [.github/workflows/run-continue-agent.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/run-continue-agent.yml); [.github/workflows/similar-issues.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/similar-issues.yml); [.github/workflows/snyk-agent.yaml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/snyk-agent.yaml); [.github/workflows/stable-release.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/stable-release.yml); [.github/workflows/stale-issue-helper.yaml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/stale-issue-helper.yaml); [.github/workflows/submit-github-dependency-graph.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/submit-github-dependency-graph.yml); [.github/workflows/tidy-up-codebase.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/tidy-up-codebase.yml); [.github/workflows/upload-runloop-blueprint.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/upload-runloop-blueprint.yml); [.github/workflows/vscode-prerelease.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/vscode-prerelease.yml); [.github/workflows/vscode-version-bump.yml](https://github.com/continuedev/continue/blob/5522c6f44ca0ac3528b37244818fbfa39b5af470/.github/workflows/vscode-version-bump.yml).
-**Affiliation adjustments:** [sestinj](https://github.com/sestinj) — public company: Continue. Evidence is public profile/core-role information at collection time, not proof of employment when each PR merged.
-
-**Issue candidates — re-check within hours:**
-
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#590](https://github.com/cline/kanban/issues/590): checked 2026-09-18T19:58:37 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: bug. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 3 comments fetched (maximum 100).
+- [#648](https://github.com/cline/kanban/issues/648): checked 2026-09-18T19:58:36 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: bug. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+- [#586](https://github.com/cline/kanban/issues/586): checked 2026-09-18T19:58:37 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: bug. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
 
 ### SWE-agent
 
-Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires further reproduction/approval; DISCOVERY ONLY has no suitable issue verified in this pass. Neither is permission to start a PR.
+Three screened implementation surfaces where available. ISSUE LEAD has a reported failure worth qualifying; DISCOVERY ONLY has no suitable unclaimed issue verified. Rows are not unconditional endorsements or permission to start a PR.
 
 | Repo / verdict | Stars · language | External merged share | External median | Open PRs · oldest candidate external | CLA / policy and fit |
 |---|---|---|---|---|---|
 | [SWE-agent/SWE-agent](https://github.com/SWE-agent/SWE-agent) · **DISCOVERY ONLY** | 20,351 · Python | 37/64 = 57.8% | 3.24 d | [70](https://github.com/SWE-agent/SWE-agent/pulls) · [81 d](https://github.com/SWE-agent/SWE-agent/pull/1436) | CLA/DCO not established in inspected files. Check active project direction and benchmark validation. Research adjacency is not ownership by Anthropic/OpenAI. **Fit:** Python coding-agent evaluation and runtime. |
 | [SWE-agent/mini-swe-agent](https://github.com/SWE-agent/mini-swe-agent) · **DISCOVERY ONLY** | 7,743 · Python | 31/75 = 41.3% | 0.52 d | [42](https://github.com/SWE-agent/mini-swe-agent/pulls) · [178 d](https://github.com/SWE-agent/mini-swe-agent/pull/792) | CLA/DCO not established in inspected files. Keep the minimal architecture; discuss larger additions. Current screened issues were mostly questions or already active. **Fit:** Small Python agent, good code-reading target. |
 | [SWE-agent/SWE-ReX](https://github.com/SWE-agent/SWE-ReX) · **ISSUE LEAD** | 593 · Python | 16/78 = 20.5% | 5.16 d | [22](https://github.com/SWE-agent/SWE-ReX/pulls) · [392 d](https://github.com/SWE-agent/SWE-ReX/pull/246) | CLA/DCO not established in inspected files. Small useful surface. No repository-local CONTRIBUTING found in the tree; inspect docs/testing workflow and confirm ownership on old issues. **Fit:** Python execution environments, documentation and lifecycle tests. |
+
+**Six issue slots across this group:** LOW 2/2, MEDIUM 2/2, HIGH 2/2.
+
+**LOC is an estimate of additions + deletions including tests, excluding generated/lockfile/vendor churn.** Scope and effort are judgments, not measured patches. All leads still require the stated gates. A larger diff is not automatically more important.
+
+<!-- COMPANY_ISSUES -->
+| Level | Repository | Issue | What fails | Proposed resolution | Approx. changed LOC | Before opening a PR |
+|---|---|---|---|---|---|---|
+| LOW | [SWE-agent/SWE-ReX](https://github.com/SWE-agent/SWE-ReX) | [#241 — Modal deployment test is flakey](https://github.com/SWE-agent/SWE-ReX/issues/241) | The Modal deployment construction test fails intermittently. | Remove the demonstrated uncontrolled setup dependency and retain a meaningful deployment contract test. | **30–100** | Old report: reproduce its exact failure and confirm supported Modal version before changing tests. |
+| LOW | [SWE-agent/SWE-ReX](https://github.com/SWE-agent/SWE-ReX) | [#175 — [rare bug] utf-8 issues](https://github.com/SWE-agent/SWE-ReX/issues/175) | A rare UTF-8 decoding failure interrupts an evaluation run. | Handle the specific partial/invalid stream boundary with a deterministic byte fixture. | **40–110** | Read full traceback and establish intended decoding semantics; do not blanket-ignore invalid bytes. |
+| MEDIUM | [SWE-agent/SWE-ReX](https://github.com/SWE-agent/SWE-ReX) | [#279 — bug: on some rare occasion SWE-ReX error (because of bashlex) on SWE-agent start](https://github.com/SWE-agent/SWE-ReX/issues/279) | bashlex parsing intermittently breaks shell session startup. | Isolate the startup input and repair the parser/session boundary. | **80–200** | Reproduce with supported shell/image; changing the image alone did not resolve the report. |
+| MEDIUM | [SWE-agent/SWE-ReX](https://github.com/SWE-agent/SWE-ReX) | [#245 — asyncio timeouts for RemoteRuntime](https://github.com/SWE-agent/SWE-ReX/issues/245) | Remote runtime requests time out under heavy evaluation workloads. | Expose/propagate the accepted timeout contract and test slow-but-live requests. | **70–180** | Keep bounded defaults and distinguish dead server from heavy workload; scope agreement first. |
+| HIGH | [SWE-agent/SWE-ReX](https://github.com/SWE-agent/SWE-ReX) | [#176 — [rare bug] pexpect: Could not terminate child](https://github.com/SWE-agent/SWE-ReX/issues/176) | Rare pexpect cleanup failures leave child-process termination incomplete. | Make teardown robust under the demonstrated process state and verify resource release. | **160–380** | A deterministic process-lifecycle reproduction is required; avoid merely swallowing termination errors. |
+| HIGH | [SWE-agent/SWE-ReX](https://github.com/SWE-agent/SWE-ReX) | [#287 — Wrong output when interactive with python](https://github.com/SWE-agent/SWE-ReX/issues/287) | Interactive Python returns incorrect or incomplete output through the shell protocol. | Repair prompt/output framing while preserving ordinary shell execution. | **160–380** | Reproduce on supported Python/shell and test multiple prompts, timeouts and continuation input. |
+
+<!-- END_COMPANY_ISSUES -->
+The table is a selection menu, not a request to open all six PRs. Slots may cluster in one repository when its siblings lack suitable issues.
+
 
 #### SWE-agent/SWE-agent
 
@@ -1794,9 +2453,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### SWE-agent/mini-swe-agent
 
@@ -1809,9 +2466,7 @@ Code surfaces ranked for skill fit and intake evidence. ISSUE LEAD requires furt
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **MEDIUM:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+No option from this repository was retained in the company table. Its issue queue remains a discovery surface, not an implementation recommendation.
 
 #### SWE-agent/SWE-ReX
 
@@ -1826,10 +2481,12 @@ No repository-local PR template found; inherited organization templates were not
 
 **Issue candidates — re-check within hours:**
 
-- **LOW:** [#241 — Modal deployment test is flakey](https://github.com/SWE-agent/SWE-ReX/issues/241). **Failure:** Modal deployment unit test unexpectedly requires external credentials. **Evidence:** SOURCE INSPECTED: factory test constructs ModalDeployment, whose constructor calls modal.App.lookup; reported failure not executed here. **Before proposing a PR:** Reproduce in a clean credential-free environment; isolate the unit factory test from Modal lookup and preserve separately marked integration coverage. Checked 2026-09-18T19:29:59 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **MEDIUM:** [#279 — bug: on some rare occasion SWE-ReX error (because of bashlex) on SWE-agent start](https://github.com/SWE-agent/SWE-ReX/issues/279). **Failure:** Bash parsing failure is obscured by a ParsingError constructor failure. **Evidence:** REPORTED: Python 3.11 retry did not resolve it; exact failing command/transport path still needed. **Before proposing a PR:** Capture the smallest failing shell input, trace exception serialization, and add a regression preserving the original parser error. Checked 2026-09-18T19:30:01 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: none. Scope and maintainer acceptance still need confirmation.
-- **MEDIUM:** [#175 — [rare bug] utf-8 issues](https://github.com/SWE-agent/SWE-ReX/issues/175). **Failure:** Invalid UTF-8 in file content aborts an agent workflow. **Evidence:** REPORTED: old traceback; current behavior and intended decoding contract not verified. **Before proposing a PR:** Use a local invalid-byte fixture; agree on strict/replacement behavior rather than assuming permissive decoding is desired. Checked 2026-09-18T19:30:01 UTC: OPEN, 0 assignees, 0 linked PRs in complete timeline. Labels: bug. Scope and maintainer acceptance still need confirmation.
-- **HIGH:** No suitable failure-resolution issue verified in this pass. Do not invent work to fill this bucket.
+- [#241](https://github.com/SWE-agent/SWE-ReX/issues/241): checked 2026-09-18T19:58:39 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#175](https://github.com/SWE-agent/SWE-ReX/issues/175): checked 2026-09-18T19:58:39 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: bug. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#279](https://github.com/SWE-agent/SWE-ReX/issues/279): checked 2026-09-18T19:58:39 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+- [#245](https://github.com/SWE-agent/SWE-ReX/issues/245): checked 2026-09-18T19:58:41 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
+- [#176](https://github.com/SWE-agent/SWE-ReX/issues/176): checked 2026-09-18T19:58:40 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: bug. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 0 comments fetched (maximum 100).
+- [#287](https://github.com/SWE-agent/SWE-ReX/issues/287): checked 2026-09-18T19:58:40 UTC, OPEN, 0 assignees, 0 linked PRs in the complete reference timeline. Labels: none. Discussion/body and PR-body search were screened for competing work. **Evidence level: reported failure**, unless the local checks section explicitly says otherwise. 1 comments fetched (maximum 100).
 
 ## Complete authored external PR inventory
 
@@ -1934,7 +2591,7 @@ All 47 results from the stated public query, checked using individual PR metadat
 
 ## Measurement method and evidence limits
 
-- **Repository inventory:** Originally 32 lab/project groups and 96 screened surfaces, plus explicit avoidance checks; the 19 September revision retains 81 code surfaces after excluding 15 cookbook/example/content-only repositories. These are a screened universe, not 81 actionable PR recommendations. Some groups have only one or two retained rows. GitHub repository metadata supplies canonical owner, stars, primary language, archived state and branch SHA. Ownership categories matter: Microsoft/NVIDIA ecosystems are broader than their research labs; MCP, PyTorch, vLLM, SGLang and SWE-agent are community/foundation/research-adjacent projects, not subsidiaries of OpenAI or Anthropic. Goose currently redirects to `aaif-goose/goose`.
+- **Repository inventory:** The current editorial shortlist covers 30 established company/project groups and 89 implementation repositories, with three per group except Unsloth (two). Cookbook/example/catalog/documentation-only repos are excluded. The previous broader 32-group audit and removed surfaces remain in raw evidence, not in the current suggested universe. GitHub metadata supplies canonical owner, stars, language, archive state and SHA. Microsoft/NVIDIA ecosystems are broader than their labs; MCP, PyTorch, vLLM, SGLang and SWE-agent are ecosystem/foundation/research projects, not subsidiaries of OpenAI/Anthropic. Goose redirects to `aaif-goose/goose`.
 - **Merged cohort:** start with the most recently updated 100 merged PRs; find the earliest merge date in that seed; query all merged PRs since that date, paginate, sort by actual `mergedAt`, then retain the newest 100. Repositories with fewer than 100 merges use all available merges. The downloadable metrics record whether the search exhausted; incomplete samples must not be described as exact last-100 samples. Cohort date windows are shown because a tiny dormant repository's “last 100” can cover years.
 - **Bots:** exclude GraphQL Bot authors, deleted/unknown authors from outsider classification, and identifiable automation accounts such as dependabot, copybara/copyberry, Stainless/Fern bots and PEFT's jambot. Human-controlled bot accounts that do not advertise their purpose can remain; this is a limitation.
 - **External estimate E/H:** E is human merged PRs with no detected owning-org/core-project affiliation; H is all non-bot authors in the sample, including unresolved author identities. Exclude MEMBER/OWNER, public owning-org membership, current company/job evidence and officially listed MCP maintainers. COLLABORATOR authors without resolved employment and former Continue founding-engineer history are conservatively excluded from E; Anthropic/OpenAI account suffixes are explicitly marked inferred. The report records every profile-based correction. A public profile cannot establish non-employment, so E/H is an **affiliation-adjusted proxy**, not a verified employment census or confidence interval.
@@ -1943,12 +2600,12 @@ All 47 results from the stated public query, checked using individual PR metadat
 - **Latency:** median calendar days from createdAt to mergedAt for the E subset only. This is survivor-biased and excludes pending/closed work. Tiny values may reflect pre-agreed/imported changes and are not an SLA.
 - **Backlog:** open PR total includes bots and internal authors. Oldest external ages use the same affiliation heuristic on the 100 oldest open PRs. Finding a candidate there identifies the oldest candidate under that classifier; if none exists and more pages remain, the oldest external is unverified, not zero.
 - **Policies:** fetch CONTRIBUTING files, PR templates, CODEOWNERS and all `.github/workflows/*.yml/.yaml` found in a recursive tree at a pinned SHA. Read relevant README status/generation notes. Per-repo evidence links identify inspected files. “Not specified/found” means no requirement found in this inspected repository-local material; organization defaults, external CLA apps, private required checks and off-GitHub CI may still apply. CI source was inspected; upstream CI suites were not executed.
-- **Issue availability:** candidate discovery inspected up to 40–60 recently updated open issues per repo, expanded to as many as 400 in selected portfolio repositories. Thus “none verified” is a research gap, not proof that no suitable issue exists. Selected issues were individually re-fetched with fully paginated cross-reference/connection timelines; portfolio issues also received PR-body competition searches. The last 100 comments were fetched for each selected issue; counts above that would be flagged. The 19 September revision re-fetched 31 selected issue leads. Portfolio issues also have PR-body searches; numeric hits were inspected and can be image UUIDs, timings or dependency changelog references. Two narrowly scoped source checks are recorded in revision/local-checks.json: the MGSM template-tag collision and isolated RegexFilter whitespace stripping. No full upstream test, native/GPU suite, Windows run or cloud integration was executed in this research task.
+- **Issue availability:** This company-menu revision fetched up to 100 recently updated open issues for each of 89 repositories, plus targeted unassigned-issue searches (up to 100 results per search) and 301 individual issue audits. Older portfolio discovery also remains in the archive. Selected issues have fully paginated cross-reference/connection timelines, last 100 comments and PR-body numeric searches. Search hits were checked for actual competition versus dependency changelogs/log numbers. A final manual body/comment pass removed explicit offers/ready patches even when GitHub showed no assignee or linked PR. The 93 retained leads are not independently reproduced as a set; their unresolved gates are explicit. “None verified” is a bounded research result, not an exhaustive absence claim. Two local source checks are recorded: current MGSM tag collision and isolated RegexFilter whitespace stripping. No full upstream/native/GPU suite, Windows run or cloud integration was executed.
 - **Unverified areas:** hidden/historical employment; maintainer willingness and response probability; legal agreement status on your account; exact reason for unexplained closures; unlinked competing branches; hardware/cloud prerequisites not exercised; private organization intake rules. No stars-to-hiring conversion or personal hiring probability is claimed.
 
 ### Reproduce or refresh
 
-Metrics, affiliation corrections, policies and your PR-history counts remain the **18 September 2026 snapshot**; they were not all recollected for this revision. Issue-lead checks and selected source inspection were refreshed on **19 September IST (18 September UTC)**. The source scripts and JSON evidence are included in the downloadable evidence bundle. They call authenticated `gh api` and save public response data, not credentials. The snapshot is collected over an interval rather than a single transaction; each record carries its own collection time.
+Original metrics, affiliation corrections, policies and PR-history counts remain the **18 September snapshot**; new repository rows and the company issue menu were collected on **19 September IST (18 September UTC)**. Existing repository metrics were not all recollected. Each row carries its own timestamp; this is not a simultaneous live census. The source scripts and JSON evidence are included in the downloadable evidence bundle. They call authenticated `gh api` and save public response data, not credentials. The snapshot is collected over an interval rather than a single transaction; each record carries its own collection time.
 
 ```bash
 # Authored external public PR inventory (GET matters when passing fields)
@@ -1982,4 +2639,4 @@ Scripts in the evidence bundle provide the complete executable collection logic;
 
 ## Evidence downloads
 
-[Refined add-on prompt](refined-prompt.md) · [Repository metrics, 18 September snapshot](metrics.json) · [Refreshed issue leads with evidence and validation gates](issues.json) · [Public API snapshots, pinned policy/source files and executable collectors](evidence.zip). All factual findings are tied to the linked upstream record or these command results; recommendations and effort estimates are editorial judgments. The archive preserves excluded/earlier evidence for auditability; only this revised report defines the current shortlist.
+[Refined add-on prompt](refined-prompt.md) · [Repository metrics, per-record dated snapshots](metrics.json) · [Company issue choices with LOC and validation gates](issues.json) · [Public API snapshots, pinned policy/source files and executable collectors](evidence.zip). All factual findings are tied to the linked upstream record or these command results; recommendations and effort estimates are editorial judgments. The archive preserves excluded/earlier evidence for auditability; only this revised report defines the current shortlist.

@@ -8475,5 +8475,911 @@
     ],
     "issuesTotal": 0,
     "collectedAt": "2026-09-18T15:04:46.739593+00:00"
+  },
+  {
+    "slug": "anthropics/claude-code-action",
+    "canonical": "anthropics/claude-code-action",
+    "url": "https://github.com/anthropics/claude-code-action",
+    "stars": 8903,
+    "language": "TypeScript",
+    "archived": false,
+    "description": null,
+    "pushedAt": "2026-09-18T18:09:18Z",
+    "sample": 100,
+    "human": 100,
+    "bots": 0,
+    "counts": {
+      "external_candidate": 72,
+      "unknown": 2,
+      "affiliated": 20,
+      "privileged": 3,
+      "inferred_affiliated": 3
+    },
+    "external": 72,
+    "share": 72.0,
+    "allShare": 72.0,
+    "medianDays": 6.93,
+    "openPRs": 327,
+    "oldestExternal": [
+      {
+        "url": "https://github.com/anthropics/claude-code-action/pull/11",
+        "title": "docs(auth + vertex): configure GitHub App token and required env vars for Claude on Vertex AI",
+        "createdAt": "2025-05-20T13:16:57Z",
+        "ageDays": 486
+      },
+      {
+        "url": "https://github.com/anthropics/claude-code-action/pull/16",
+        "title": "feat: Add comment_id as output to the Action",
+        "createdAt": "2025-05-21T15:24:47Z",
+        "ageDays": 485
+      },
+      {
+        "url": "https://github.com/anthropics/claude-code-action/pull/48",
+        "title": "Add OpenTelemetry environment variable support",
+        "createdAt": "2025-05-25T22:57:22Z",
+        "ageDays": 480
+      }
+    ],
+    "oldestCensored": false,
+    "sampleComplete": true,
+    "sampleStart": "2026-04-28T17:01:49Z",
+    "sampleEnd": "2026-08-25T18:02:50Z",
+    "examples": [
+      {
+        "url": "https://github.com/anthropics/claude-code-action/pull/1713",
+        "title": "fix: encode branch names in GitHub links",
+        "author": "Abdullah-Builds"
+      },
+      {
+        "url": "https://github.com/anthropics/claude-code-action/pull/1719",
+        "title": "fix: bound download_job_log against a stalled log fetch",
+        "author": "shoemoney"
+      },
+      {
+        "url": "https://github.com/anthropics/claude-code-action/pull/1710",
+        "title": "fix: allow parentheses in valid branch names",
+        "author": "YauheniPo"
+      }
+    ],
+    "corrections": [
+      {
+        "login": "ashwin-ant",
+        "profile": "https://github.com/ashwin-ant",
+        "reason": "public company: Anthropic",
+        "pr": "https://github.com/anthropics/claude-code-action/pull/1312"
+      },
+      {
+        "login": "chsmc-ant",
+        "profile": "https://github.com/chsmc-ant",
+        "reason": "Anthropic-style account suffix/prefix; employment unverified",
+        "pr": "https://github.com/anthropics/claude-code-action/pull/1315"
+      },
+      {
+        "login": "ant-kurt",
+        "profile": "https://github.com/ant-kurt",
+        "reason": "Anthropic-style account suffix/prefix; employment unverified",
+        "pr": "https://github.com/anthropics/claude-code-action/pull/1377"
+      },
+      {
+        "login": "JustinBis",
+        "profile": "https://github.com/JustinBis",
+        "reason": "public company: Anthropic",
+        "pr": "https://github.com/anthropics/claude-code-action/pull/1279"
+      }
+    ],
+    "issuesTotal": 467,
+    "collectedAt": "2026-09-18T19:53:42.446951+00:00"
+  },
+  {
+    "slug": "anthropics/sandbox-runtime",
+    "canonical": "anthropics/sandbox-runtime",
+    "url": "https://github.com/anthropics/sandbox-runtime",
+    "stars": 5269,
+    "language": "TypeScript",
+    "archived": false,
+    "description": "A lightweight sandboxing tool for enforcing filesystem and network restrictions on arbitrary processes at the OS level, without requiring a container.",
+    "pushedAt": "2026-09-18T19:26:33Z",
+    "sample": 100,
+    "human": 100,
+    "bots": 0,
+    "counts": {
+      "affiliated": 20,
+      "inferred_affiliated": 57,
+      "external_candidate": 2,
+      "privileged": 21
+    },
+    "external": 2,
+    "share": 2.0,
+    "allShare": 2.0,
+    "medianDays": 0.89,
+    "openPRs": 109,
+    "oldestExternal": [
+      {
+        "url": "https://github.com/anthropics/sandbox-runtime/pull/32",
+        "title": "Pin Bun 1.3.1 to fix CI on Linux",
+        "createdAt": "2025-11-10T18:49:26Z",
+        "ageDays": 312
+      },
+      {
+        "url": "https://github.com/anthropics/sandbox-runtime/pull/47",
+        "title": "Respect XDG Base Directory specification",
+        "createdAt": "2025-11-24T16:10:27Z",
+        "ageDays": 298
+      },
+      {
+        "url": "https://github.com/anthropics/sandbox-runtime/pull/77",
+        "title": "feat: add --tty flag for interactive terminal applications",
+        "createdAt": "2025-12-22T09:33:29Z",
+        "ageDays": 270
+      }
+    ],
+    "oldestCensored": false,
+    "sampleComplete": true,
+    "sampleStart": "2026-07-01T16:12:19Z",
+    "sampleEnd": "2026-09-18T19:20:45Z",
+    "examples": [
+      {
+        "url": "https://github.com/anthropics/sandbox-runtime/pull/550",
+        "title": "perf: resolve the global npm root off the event loop",
+        "author": "sosukesuzuki"
+      },
+      {
+        "url": "https://github.com/anthropics/sandbox-runtime/pull/423",
+        "title": "proxy: survive client aborts and keep abort semantics end-to-end",
+        "author": "sa3eed3ed"
+      }
+    ],
+    "corrections": [
+      {
+        "login": "dylan-conway",
+        "profile": "https://github.com/dylan-conway",
+        "reason": "public company: @anthropics",
+        "pr": "https://github.com/anthropics/sandbox-runtime/pull/448"
+      },
+      {
+        "login": "ronleizrowice-ant",
+        "profile": "https://github.com/ronleizrowice-ant",
+        "reason": "Anthropic-style account suffix/prefix; employment unverified",
+        "pr": "https://github.com/anthropics/sandbox-runtime/pull/435"
+      },
+      {
+        "login": "ig-ant",
+        "profile": "https://github.com/ig-ant",
+        "reason": "Anthropic-style account suffix/prefix; employment unverified",
+        "pr": "https://github.com/anthropics/sandbox-runtime/pull/369"
+      },
+      {
+        "login": "MarshallOfSound",
+        "profile": "https://github.com/MarshallOfSound",
+        "reason": "public company: @anthropics",
+        "pr": "https://github.com/anthropics/sandbox-runtime/pull/426"
+      },
+      {
+        "login": "ant-kurt",
+        "profile": "https://github.com/ant-kurt",
+        "reason": "Anthropic-style account suffix/prefix; employment unverified",
+        "pr": "https://github.com/anthropics/sandbox-runtime/pull/438"
+      },
+      {
+        "login": "elhajjj",
+        "profile": "https://github.com/elhajjj",
+        "reason": "public company: Anthropic",
+        "pr": "https://github.com/anthropics/sandbox-runtime/pull/333"
+      },
+      {
+        "login": "seanyeoh-ant",
+        "profile": "https://github.com/seanyeoh-ant",
+        "reason": "Anthropic-style account suffix/prefix; employment unverified",
+        "pr": "https://github.com/anthropics/sandbox-runtime/pull/390"
+      }
+    ],
+    "issuesTotal": 98,
+    "collectedAt": "2026-09-18T19:52:27.097242+00:00"
+  },
+  {
+    "slug": "xai-org/x-algorithm",
+    "canonical": "xai-org/x-algorithm",
+    "url": "https://github.com/xai-org/x-algorithm",
+    "stars": 33240,
+    "language": "Rust",
+    "archived": false,
+    "description": "Algorithm powering the For You feed on X",
+    "pushedAt": "2026-09-18T01:07:15Z",
+    "sample": 1,
+    "human": 1,
+    "bots": 0,
+    "counts": {
+      "external_candidate": 1
+    },
+    "external": 1,
+    "share": 100.0,
+    "allShare": 100.0,
+    "medianDays": 1.72,
+    "openPRs": 74,
+    "oldestExternal": [
+      {
+        "url": "https://github.com/xai-org/x-algorithm/pull/7",
+        "title": "Fail closed when safety hydration fails",
+        "createdAt": "2026-08-13T20:56:58Z",
+        "ageDays": 35
+      },
+      {
+        "url": "https://github.com/xai-org/x-algorithm/pull/9",
+        "title": "Fix muted authors resurfacing through retweets",
+        "createdAt": "2026-08-13T21:02:41Z",
+        "ageDays": 35
+      },
+      {
+        "url": "https://github.com/xai-org/x-algorithm/pull/10",
+        "title": "Require expiry for recommendation restrictions",
+        "createdAt": "2026-08-13T21:27:50Z",
+        "ageDays": 35
+      }
+    ],
+    "oldestCensored": false,
+    "sampleComplete": true,
+    "sampleStart": "2026-09-03T20:28:53Z",
+    "sampleEnd": "2026-09-03T20:28:53Z",
+    "examples": [
+      {
+        "url": "https://github.com/xai-org/x-algorithm/pull/88",
+        "title": "Deduplicate in_network_ids before VF lookup",
+        "author": "joshs1017dev"
+      }
+    ],
+    "corrections": [],
+    "issuesTotal": 35,
+    "collectedAt": "2026-09-18T19:52:23.662090+00:00"
+  },
+  {
+    "slug": "xai-org/grok-build-plugin-cc",
+    "canonical": "xai-org/grok-build-plugin-cc",
+    "url": "https://github.com/xai-org/grok-build-plugin-cc",
+    "stars": 249,
+    "language": "JavaScript",
+    "archived": false,
+    "description": "Claude Code plugin that delegates reviews, rescue tasks, and session transfer to the Grok Build CLI",
+    "pushedAt": "2026-08-04T20:29:49Z",
+    "sample": 3,
+    "human": 3,
+    "bots": 0,
+    "counts": {
+      "external_candidate": 3
+    },
+    "external": 3,
+    "share": 100.0,
+    "allShare": 100.0,
+    "medianDays": 5.49,
+    "openPRs": 14,
+    "oldestExternal": [
+      {
+        "url": "https://github.com/xai-org/grok-build-plugin-cc/pull/10",
+        "title": "fix: untracked-symlink review context can leak out-of-repo file contents",
+        "createdAt": "2026-07-29T07:29:53Z",
+        "ageDays": 51
+      },
+      {
+        "url": "https://github.com/xai-org/grok-build-plugin-cc/pull/11",
+        "title": "fix: stop signals a job's pre-claim pids before confirming it won the cancel claim",
+        "createdAt": "2026-07-29T08:12:21Z",
+        "ageDays": 51
+      },
+      {
+        "url": "https://github.com/xai-org/grok-build-plugin-cc/pull/15",
+        "title": "fix: pass --prompt-file through to the grok CLI instead of inlining the prompt",
+        "createdAt": "2026-08-05T23:18:54Z",
+        "ageDays": 43
+      }
+    ],
+    "oldestCensored": false,
+    "sampleComplete": true,
+    "sampleStart": "2026-08-04T20:25:57Z",
+    "sampleEnd": "2026-08-04T20:29:50Z",
+    "examples": [
+      {
+        "url": "https://github.com/xai-org/grok-build-plugin-cc/pull/12",
+        "title": "fix: headless read-only runs can't auto-approve within their own sandbox",
+        "author": "mittalpk"
+      },
+      {
+        "url": "https://github.com/xai-org/grok-build-plugin-cc/pull/13",
+        "title": "fix: disable shell for git commands on Windows (EXSECRE-1190)",
+        "author": "raghavagrawal-x"
+      },
+      {
+        "url": "https://github.com/xai-org/grok-build-plugin-cc/pull/8",
+        "title": "Document GitHub marketplace install in README",
+        "author": "railapex"
+      }
+    ],
+    "corrections": [],
+    "issuesTotal": 24,
+    "collectedAt": "2026-09-18T19:52:22.068843+00:00"
+  },
+  {
+    "slug": "cursor/minisqlite",
+    "canonical": "cursor/minisqlite",
+    "url": "https://github.com/cursor/minisqlite",
+    "stars": 279,
+    "language": "Rust",
+    "archived": false,
+    "description": null,
+    "pushedAt": "2026-07-17T08:45:53Z",
+    "sample": 0,
+    "human": 0,
+    "bots": 0,
+    "counts": {},
+    "external": 0,
+    "share": null,
+    "allShare": null,
+    "medianDays": null,
+    "openPRs": 0,
+    "oldestExternal": [],
+    "oldestCensored": false,
+    "sampleComplete": true,
+    "sampleStart": null,
+    "sampleEnd": null,
+    "examples": [],
+    "corrections": [],
+    "issuesTotal": 4,
+    "collectedAt": "2026-09-18T19:52:22.971160+00:00"
+  },
+  {
+    "slug": "cursor/mixture-of-kittens",
+    "canonical": "cursor/mixture-of-kittens",
+    "url": "https://github.com/cursor/mixture-of-kittens",
+    "stars": 588,
+    "language": "Python",
+    "archived": false,
+    "description": "Mixture-of-experts (MoE) training megakernel for NVL72s",
+    "pushedAt": "2026-08-14T03:44:18Z",
+    "sample": 1,
+    "human": 1,
+    "bots": 0,
+    "counts": {
+      "external_candidate": 1
+    },
+    "external": 1,
+    "share": 100.0,
+    "allShare": 100.0,
+    "medianDays": 1.17,
+    "openPRs": 5,
+    "oldestExternal": [
+      {
+        "url": "https://github.com/cursor/mixture-of-kittens/pull/2",
+        "title": "build: use the validated NVCC compiler",
+        "createdAt": "2026-08-04T20:33:23Z",
+        "ageDays": 44
+      },
+      {
+        "url": "https://github.com/cursor/mixture-of-kittens/pull/4",
+        "title": "ops: reject non-contiguous MoE weights",
+        "createdAt": "2026-08-04T20:43:02Z",
+        "ageDays": 44
+      },
+      {
+        "url": "https://github.com/cursor/mixture-of-kittens/pull/8",
+        "title": "ops: add selectable SiTU-GLU activation",
+        "createdAt": "2026-08-06T04:13:48Z",
+        "ageDays": 43
+      }
+    ],
+    "oldestCensored": false,
+    "sampleComplete": true,
+    "sampleStart": "2026-08-10T04:55:57Z",
+    "sampleEnd": "2026-08-10T04:55:57Z",
+    "examples": [
+      {
+        "url": "https://github.com/cursor/mixture-of-kittens/pull/11",
+        "title": "Support DSV4-style clamped SwiGLU in the megakernel",
+        "author": "HuiyingLi"
+      }
+    ],
+    "corrections": [],
+    "issuesTotal": 4,
+    "collectedAt": "2026-09-18T19:52:24.581533+00:00"
+  },
+  {
+    "slug": "togethercomputer/together-py",
+    "canonical": "togethercomputer/together-py",
+    "url": "https://github.com/togethercomputer/together-py",
+    "stars": 10,
+    "language": "Python",
+    "archived": false,
+    "description": "The Official Python Client for Together's API",
+    "pushedAt": "2026-09-18T19:43:59Z",
+    "sample": 100,
+    "human": 31,
+    "bots": 69,
+    "counts": {
+      "bot": 69,
+      "affiliated": 25,
+      "external_candidate": 6
+    },
+    "external": 6,
+    "share": 19.4,
+    "allShare": 6.0,
+    "medianDays": 4.13,
+    "openPRs": 20,
+    "oldestExternal": [
+      {
+        "url": "https://github.com/togethercomputer/together-py/pull/380",
+        "title": "feat(jig): jig deploy --image",
+        "createdAt": "2026-05-21T11:55:46Z",
+        "ageDays": 120
+      },
+      {
+        "url": "https://github.com/togethercomputer/together-py/pull/516",
+        "title": "feat(cli): add beta clusters recreate command",
+        "createdAt": "2026-08-07T18:57:37Z",
+        "ageDays": 42
+      },
+      {
+        "url": "https://github.com/togethercomputer/together-py/pull/556",
+        "title": "feat(cli): pin Hugging Face revisions on remote-uploads create",
+        "createdAt": "2026-09-03T18:02:53Z",
+        "ageDays": 15
+      }
+    ],
+    "oldestCensored": false,
+    "sampleComplete": true,
+    "sampleStart": "2026-07-18T03:10:57Z",
+    "sampleEnd": "2026-09-17T20:24:04Z",
+    "examples": [
+      {
+        "url": "https://github.com/togethercomputer/together-py/pull/558",
+        "title": "Fix oversized Parquet file validation",
+        "author": "avinashgola"
+      },
+      {
+        "url": "https://github.com/togethercomputer/together-py/pull/530",
+        "title": "fix(Endpoints CLI): Rename models output label 'Inference Name' to 'Endpoint string'",
+        "author": "muhsinking"
+      },
+      {
+        "url": "https://github.com/togethercomputer/together-py/pull/509",
+        "title": "DX-881: pass language at session start via the connection URL",
+        "author": "yadavsahil197"
+      }
+    ],
+    "corrections": [
+      {
+        "login": "blainekasten",
+        "profile": "https://github.com/blainekasten",
+        "reason": "public company: @togetherai",
+        "pr": "https://github.com/togethercomputer/together-py/pull/457"
+      },
+      {
+        "login": "fredred375",
+        "profile": "https://github.com/fredred375",
+        "reason": "current-work profile: SWE at @togethercomputer ",
+        "pr": "https://github.com/togethercomputer/together-py/pull/543"
+      },
+      {
+        "login": "narasul",
+        "profile": "https://github.com/narasul",
+        "reason": "public company: Together AI",
+        "pr": "https://github.com/togethercomputer/together-py/pull/521"
+      }
+    ],
+    "issuesTotal": 2,
+    "collectedAt": "2026-09-18T19:52:25.178913+00:00"
+  },
+  {
+    "slug": "togethercomputer/together-typescript",
+    "canonical": "togethercomputer/together-typescript",
+    "url": "https://github.com/togethercomputer/together-typescript",
+    "stars": 71,
+    "language": "TypeScript",
+    "archived": false,
+    "description": "The official Together AI TypeScript library.",
+    "pushedAt": "2026-09-18T19:43:35Z",
+    "sample": 100,
+    "human": 12,
+    "bots": 88,
+    "counts": {
+      "bot": 88,
+      "affiliated": 8,
+      "external_candidate": 2,
+      "privileged": 2
+    },
+    "external": 2,
+    "share": 16.7,
+    "allShare": 2.0,
+    "medianDays": 47.45,
+    "openPRs": 6,
+    "oldestExternal": [
+      {
+        "url": "https://github.com/togethercomputer/together-typescript/pull/66",
+        "title": "Adding linear ticket requirement to PRs",
+        "createdAt": "2024-10-17T20:41:15Z",
+        "ageDays": 700
+      },
+      {
+        "url": "https://github.com/togethercomputer/together-typescript/pull/105",
+        "title": "Replace parquet.js with hyparquet",
+        "createdAt": "2024-12-09T23:01:28Z",
+        "ageDays": 647
+      },
+      {
+        "url": "https://github.com/togethercomputer/together-typescript/pull/248",
+        "title": "fix(lib): stop chat runners from hanging when a request fails",
+        "createdAt": "2026-09-15T20:32:00Z",
+        "ageDays": 2
+      }
+    ],
+    "oldestCensored": false,
+    "sampleComplete": true,
+    "sampleStart": "2025-02-18T17:59:41Z",
+    "sampleEnd": "2026-09-17T17:58:20Z",
+    "examples": [
+      {
+        "url": "https://github.com/togethercomputer/together-typescript/pull/223",
+        "title": "Add npm support metadata",
+        "author": "yanziwei"
+      },
+      {
+        "url": "https://github.com/togethercomputer/together-typescript/pull/130",
+        "title": "when uploading file to signed url, content-length is required unless \u2026",
+        "author": "yogishbaliga"
+      }
+    ],
+    "corrections": [
+      {
+        "login": "blainekasten",
+        "profile": "https://github.com/blainekasten",
+        "reason": "public company: @togetherai",
+        "pr": "https://github.com/togethercomputer/together-typescript/pull/198"
+      }
+    ],
+    "issuesTotal": 1,
+    "collectedAt": "2026-09-18T19:52:25.943911+00:00"
+  },
+  {
+    "slug": "mistralai/mistral-evals",
+    "canonical": "mistralai/mistral-evals",
+    "url": "https://github.com/mistralai/mistral-evals",
+    "stars": 92,
+    "language": "Python",
+    "archived": false,
+    "description": null,
+    "pushedAt": "2025-11-21T10:21:09Z",
+    "sample": 6,
+    "human": 6,
+    "bots": 0,
+    "counts": {
+      "external_candidate": 6
+    },
+    "external": 6,
+    "share": 100.0,
+    "allShare": 100.0,
+    "medianDays": 1.05,
+    "openPRs": 7,
+    "oldestExternal": [
+      {
+        "url": "https://github.com/mistralai/mistral-evals/pull/14",
+        "title": "fix: correct judge prompt construction in MM-MT-Bench",
+        "createdAt": "2026-03-03T12:16:31Z",
+        "ageDays": 199
+      },
+      {
+        "url": "https://github.com/mistralai/mistral-evals/pull/15",
+        "title": "fix: reduce memory usage when loading evaluation datasets",
+        "createdAt": "2026-03-03T12:21:20Z",
+        "ageDays": 199
+      },
+      {
+        "url": "https://github.com/mistralai/mistral-evals/pull/16",
+        "title": "test: add unit tests for evaluation metrics",
+        "createdAt": "2026-03-03T12:22:19Z",
+        "ageDays": 199
+      }
+    ],
+    "oldestCensored": false,
+    "sampleComplete": true,
+    "sampleStart": "2024-09-19T06:25:15Z",
+    "sampleEnd": "2025-08-20T09:48:57Z",
+    "examples": [
+      {
+        "url": "https://github.com/mistralai/mistral-evals/pull/13",
+        "title": "[feat] Save raw output from model evaluation",
+        "author": "ywang96"
+      },
+      {
+        "url": "https://github.com/mistralai/mistral-evals/pull/9",
+        "title": "Update README.md",
+        "author": "ywang96"
+      },
+      {
+        "url": "https://github.com/mistralai/mistral-evals/pull/4",
+        "title": "Fix `eval.mm_mt_bench` -> `eval.run` example in README",
+        "author": "mgoin"
+      }
+    ],
+    "corrections": [],
+    "issuesTotal": 4,
+    "collectedAt": "2026-09-18T19:54:22.290170+00:00"
+  },
+  {
+    "slug": "cohere-ai/cohere-typescript",
+    "canonical": "cohere-ai/cohere-typescript",
+    "url": "https://github.com/cohere-ai/cohere-typescript",
+    "stars": 171,
+    "language": "TypeScript",
+    "archived": false,
+    "description": "The Cohere TypeScript SDK",
+    "pushedAt": "2026-08-26T21:35:45Z",
+    "sample": 100,
+    "human": 51,
+    "bots": 49,
+    "counts": {
+      "bot": 49,
+      "privileged": 20,
+      "external_candidate": 25,
+      "affiliated": 6
+    },
+    "external": 25,
+    "share": 49.0,
+    "allShare": 25.0,
+    "medianDays": 0.07,
+    "openPRs": 13,
+    "oldestExternal": [
+      {
+        "url": "https://github.com/cohere-ai/cohere-typescript/pull/286",
+        "title": "Fixed version format issue (v2 inconsistency)",
+        "createdAt": "2026-04-04T16:47:57Z",
+        "ageDays": 167
+      },
+      {
+        "url": "https://github.com/cohere-ai/cohere-typescript/pull/287",
+        "title": "Fix reasoning model issue by updating chat API to v2",
+        "createdAt": "2026-04-04T16:53:49Z",
+        "ageDays": 167
+      },
+      {
+        "url": "https://github.com/cohere-ai/cohere-typescript/pull/289",
+        "title": "fix: throw descriptive error for V2-only models passed to client.chat() / client.chatStream()",
+        "createdAt": "2026-04-04T17:09:09Z",
+        "ageDays": 167
+      }
+    ],
+    "oldestCensored": false,
+    "sampleComplete": true,
+    "sampleStart": "2022-08-24T00:49:22Z",
+    "sampleEnd": "2026-08-26T21:20:15Z",
+    "examples": [
+      {
+        "url": "https://github.com/cohere-ai/cohere-typescript/pull/242",
+        "title": "aws-sdk -> smithy",
+        "author": "billytrend-cohere"
+      },
+      {
+        "url": "https://github.com/cohere-ai/cohere-typescript/pull/224",
+        "title": "Add V2 AWS clients",
+        "author": "billytrend-cohere"
+      },
+      {
+        "url": "https://github.com/cohere-ai/cohere-typescript/pull/208",
+        "title": "Support rerank on aws",
+        "author": "billytrend-cohere"
+      }
+    ],
+    "corrections": [
+      {
+        "login": "tomtobac",
+        "profile": "https://github.com/tomtobac",
+        "reason": "public company: @cohere-ai",
+        "pr": "https://github.com/cohere-ai/cohere-typescript/pull/193"
+      },
+      {
+        "login": "abdullahkady",
+        "profile": "https://github.com/abdullahkady",
+        "reason": "public company: @cohere-ai",
+        "pr": "https://github.com/cohere-ai/cohere-typescript/pull/81"
+      },
+      {
+        "login": "robertkozin",
+        "profile": "https://github.com/robertkozin",
+        "reason": "public company: @cohere-ai ",
+        "pr": "https://github.com/cohere-ai/cohere-typescript/pull/52"
+      }
+    ],
+    "issuesTotal": 1,
+    "collectedAt": "2026-09-18T19:52:27.597794+00:00"
+  },
+  {
+    "slug": "QwenLM/Qwen3-TTS",
+    "canonical": "QwenLM/Qwen3-TTS",
+    "url": "https://github.com/QwenLM/Qwen3-TTS",
+    "stars": 13448,
+    "language": "Python",
+    "archived": false,
+    "description": "Qwen3-TTS is an open-source series of TTS models developed by the Qwen team at Alibaba Cloud, supporting stable, expressive, and streaming speech generation, free-form voice design, and vivid voice cloning.",
+    "pushedAt": "2026-03-17T06:38:41Z",
+    "sample": 1,
+    "human": 1,
+    "bots": 0,
+    "counts": {
+      "external_candidate": 1
+    },
+    "external": 1,
+    "share": 100.0,
+    "allShare": 100.0,
+    "medianDays": 0.97,
+    "openPRs": 40,
+    "oldestExternal": [
+      {
+        "url": "https://github.com/QwenLM/Qwen3-TTS/pull/8",
+        "title": "Initial Rust implementation of Qwen3-TTS inference engine",
+        "createdAt": "2026-01-23T04:54:00Z",
+        "ageDays": 238
+      },
+      {
+        "url": "https://github.com/QwenLM/Qwen3-TTS/pull/30",
+        "title": "chore: Add minimal CI",
+        "createdAt": "2026-01-23T15:41:12Z",
+        "ageDays": 238
+      },
+      {
+        "url": "https://github.com/QwenLM/Qwen3-TTS/pull/42",
+        "title": "docs: add comprehensive CLAUDE.md for AI assistant guidance",
+        "createdAt": "2026-01-23T23:33:26Z",
+        "ageDays": 237
+      }
+    ],
+    "oldestCensored": false,
+    "sampleComplete": true,
+    "sampleStart": "2026-01-24T08:32:32Z",
+    "sampleEnd": "2026-01-24T08:32:32Z",
+    "examples": [
+      {
+        "url": "https://github.com/QwenLM/Qwen3-TTS/pull/15",
+        "title": "[`FA`] Fixup wrong flags and loading logic",
+        "author": "vasqu"
+      }
+    ],
+    "corrections": [],
+    "issuesTotal": 15,
+    "collectedAt": "2026-09-18T19:52:29.147031+00:00"
+  },
+  {
+    "slug": "NousResearch/hermes-agent-self-evolution",
+    "canonical": "NousResearch/hermes-agent-self-evolution",
+    "url": "https://github.com/NousResearch/hermes-agent-self-evolution",
+    "stars": 5367,
+    "language": "Python",
+    "archived": false,
+    "description": "\u2692 Evolutionary self-improvement for Hermes Agent \u2014 optimize skills, prompts, and code using DSPy + GEPA",
+    "pushedAt": "2026-06-17T11:53:04Z",
+    "sample": 3,
+    "human": 3,
+    "bots": 0,
+    "counts": {
+      "external_candidate": 3
+    },
+    "external": 3,
+    "share": 100.0,
+    "allShare": 100.0,
+    "medianDays": 0.29,
+    "openPRs": 94,
+    "oldestExternal": [
+      {
+        "url": "https://github.com/NousResearch/hermes-agent-self-evolution/pull/5",
+        "title": "fix: extract evolved skill text from DSPy signature, not dead instance attr",
+        "createdAt": "2026-03-30T10:20:54Z",
+        "ageDays": 172
+      },
+      {
+        "url": "https://github.com/NousResearch/hermes-agent-self-evolution/pull/7",
+        "title": "fix: skill_structure constraint false positive during evolution",
+        "createdAt": "2026-04-03T04:35:02Z",
+        "ageDays": 168
+      },
+      {
+        "url": "https://github.com/NousResearch/hermes-agent-self-evolution/pull/8",
+        "title": "feat: add CodexLM support via dspy-local for zero-cost evolution",
+        "createdAt": "2026-04-03T04:35:35Z",
+        "ageDays": 168
+      }
+    ],
+    "oldestCensored": false,
+    "sampleComplete": true,
+    "sampleStart": "2026-03-29T15:07:01Z",
+    "sampleEnd": "2026-06-17T11:53:04Z",
+    "examples": [
+      {
+        "url": "https://github.com/NousResearch/hermes-agent-self-evolution/pull/122",
+        "title": "fix(config): honor explicit --hermes-repo and make config construction non-fatal",
+        "author": "MaxFreedomPollard"
+      },
+      {
+        "url": "https://github.com/NousResearch/hermes-agent-self-evolution/pull/4",
+        "title": "feat: add Hermes session importer + fix short skill name matching",
+        "author": "teknium1"
+      },
+      {
+        "url": "https://github.com/NousResearch/hermes-agent-self-evolution/pull/2",
+        "title": "feat: external session importers for Claude Code, Copilot, and Hermes",
+        "author": "tjp2021"
+      }
+    ],
+    "corrections": [],
+    "issuesTotal": 29,
+    "collectedAt": "2026-09-18T19:52:31.237523+00:00"
+  },
+  {
+    "slug": "OpenHands/benchmarks",
+    "canonical": "OpenHands/benchmarks",
+    "url": "https://github.com/OpenHands/benchmarks",
+    "stars": 123,
+    "language": "Python",
+    "archived": false,
+    "description": "Evaluation harness for OpenHands V1.",
+    "pushedAt": "2026-09-04T14:19:40Z",
+    "sample": 100,
+    "human": 99,
+    "bots": 1,
+    "counts": {
+      "affiliated": 71,
+      "external_candidate": 6,
+      "privileged": 22,
+      "bot": 1
+    },
+    "external": 6,
+    "share": 6.1,
+    "allShare": 6.0,
+    "medianDays": 3.54,
+    "openPRs": 23,
+    "oldestExternal": [
+      {
+        "url": "https://github.com/OpenHands/benchmarks/pull/141",
+        "title": "Agentic code search",
+        "createdAt": "2025-12-08T18:41:08Z",
+        "ageDays": 284
+      },
+      {
+        "url": "https://github.com/OpenHands/benchmarks/pull/361",
+        "title": "Add security benchmark with ASTRA",
+        "createdAt": "2026-01-26T07:40:24Z",
+        "ageDays": 235
+      },
+      {
+        "url": "https://github.com/OpenHands/benchmarks/pull/649",
+        "title": "ci: retire Blacksmith from all GitHub Actions workflows",
+        "createdAt": "2026-04-09T12:14:44Z",
+        "ageDays": 162
+      }
+    ],
+    "oldestCensored": false,
+    "sampleComplete": true,
+    "sampleStart": "2026-03-12T22:42:38Z",
+    "sampleEnd": "2026-09-02T19:56:08Z",
+    "examples": [
+      {
+        "url": "https://github.com/OpenHands/benchmarks/pull/766",
+        "title": "PLTF-3363: Upgrade LiteLLM to 1.93.0",
+        "author": "aivong-openhands"
+      },
+      {
+        "url": "https://github.com/OpenHands/benchmarks/pull/641",
+        "title": "feat/add SkillsBench benchmark integration",
+        "author": "AmyTao"
+      },
+      {
+        "url": "https://github.com/OpenHands/benchmarks/pull/428",
+        "title": "feat(swesmith): add SWE-Smith benchmark evaluation scaffold",
+        "author": "mkaramuk"
+      }
+    ],
+    "corrections": [
+      {
+        "login": "xingyaoww",
+        "profile": "https://github.com/xingyaoww",
+        "reason": "public company: OpenHands / All Hands AI",
+        "pr": "https://github.com/OpenHands/benchmarks/pull/717"
+      }
+    ],
+    "issuesTotal": 36,
+    "collectedAt": "2026-09-18T19:52:30.521507+00:00"
   }
 ]
